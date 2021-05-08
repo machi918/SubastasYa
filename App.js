@@ -20,8 +20,8 @@ export default function App(){
 			{/* ACA ARRIBA VA EL POST INICIO ERRONEO / REGISTRO / NO VALIDADO */}
 			{/* <Home></Home> */}
 			{/* <Categorias></Categorias> */}
-			{/* <MisArticulos></MisArticulos> */}
-			<Perfil></Perfil>
+			<MisArticulos></MisArticulos>
+			{/* <Perfil></Perfil> */}
 			
 		</SafeAreaView>
 	);

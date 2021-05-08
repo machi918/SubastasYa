@@ -14,15 +14,13 @@ const styles = StyleSheet.create({
         borderBottomWidth: 2
 	},
 	main: {
-        marginTop:12,
+        marginTop:25,
         width:'90%',
-        height:'100%',
-        alignItems:'center',
-        backgroundColor:'#123123'
+        height:'90%',
 	},
     headerText:{
         fontSize:20,
-    }
+    },
 });
 
 export default styles;
