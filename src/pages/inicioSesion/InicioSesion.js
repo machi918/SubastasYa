@@ -2,7 +2,7 @@ import React from 'react';
 import {SafeAreaView, Text, View, Image, TouchableOpacity, TextInput} from 'react-native';
 import styles from './Styles';
 
-export default function InicioSesion(){
+export default function InicioSesion({navigation}){
 	return (
 		<SafeAreaView style={styles.container}>
             <View style={styles.header}>
@@ -24,11 +24,11 @@ export default function InicioSesion(){
                 placeholder={'Contraseña'}
                 ></TextInput>
 
-                <TouchableOpacity style={styles.buttonWrapper}>
+                <TouchableOpacity style={styles.buttonWrapper} onPress={() => navigation.navigate('HomeMain')}>
                     <Text style={styles.buttonText}>Iniciar Sesion</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.buttonWrapper}>
+                <TouchableOpacity style={styles.buttonWrapper} onPress={() => navigation.navigate('Registro')}>
                     <Text style={styles.buttonText}>Registrarse</Text>
                 </TouchableOpacity>
 

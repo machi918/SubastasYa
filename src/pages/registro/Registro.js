@@ -2,7 +2,7 @@ import React from 'react';
 import {SafeAreaView, Text, View, Image, TouchableOpacity, TextInput} from 'react-native';
 import styles from './Styles';
 
-export default function Registro(){
+export default function Registro({navigation}){
 	return (
 		<SafeAreaView style={styles.container}>
             <View style={styles.header}>
@@ -52,7 +52,7 @@ export default function Registro(){
                 placeholder={'Domicilio'}
                 ></TextInput>
 
-                <TouchableOpacity style={styles.buttonWrapper}>
+                <TouchableOpacity style={styles.buttonWrapper} onPress={() => navigation.navigate('PostRegistro')}>
                     <Text style={styles.buttonText}>Registrarse</Text>
                 </TouchableOpacity>
 
