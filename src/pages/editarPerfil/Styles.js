@@ -3,67 +3,55 @@ import {StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
 	container:{
 		height:'100%',
-        alignItems:'center'
-	},
-	header: {
-        width:'100%',
-        height:'10%',
-        justifyContent:'center',
         alignItems:'center',
-        borderBottomColor:'#4FAFE5',
-        borderBottomWidth: 2
+        backgroundColor:'#FFFFFF'
 	},
     headerText:{
         fontSize:20,
     },
     subHeader:{
-        marginTop:15,
+        justifyContent:'center',
         height:'35%',
         alignItems: 'center',
         borderBottomColor: '#4FAFE5',
         borderBottomWidth: 2,
-        paddingBottom:15
     },
     logo:{
         resizeMode:'contain',
         height:'80%',
     },
-    subHeaderName:{
-        fontSize:20,
-
-    },
-    subHeaderDivision:{
-        fontSize: 16,
-
+    subHeaderText:{
+        textAlign:'center',
+        width:'80%',
+        fontSize:18,
+        color:'#969799'
     },
     main: {
         width:'100%',
         height:'100%',
         alignItems:'center',
 	},
-    buttonWrapper:{
-        justifyContent:'center',
-        paddingLeft:15,
-        height:'10%',
+    input:{
+        paddingLeft:10,
+        marginTop:12,
+        borderColor:'grey',
+        borderWidth:2,
         width:'90%',
-        borderBottomColor:'rgba(33, 33, 33, 0.08)',
-        borderBottomWidth:2
-    },
-    buttonText:{
+        color:'#000000'
 
     },
-    buttonWrapperLogOut:{
-        marginTop:25,
+    buttonWrapper:{
+        marginTop:35,
         justifyContent:'center',
         alignItems:'center',
         paddingLeft:15,
-        height:'10%',
+        height:'8%',
         width:'90%',
-        borderBottomColor:'#EB5757',
-        borderBottomWidth:2,
+        backgroundColor:'#2F80ED'
     },
-    buttonTextLogOut:{
-        color:'#EB5757'
+    buttonText:{
+        color:'#FFFFFF',
+        fontSize: 18
     }
 });
 
