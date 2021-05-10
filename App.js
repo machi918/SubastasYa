@@ -68,8 +68,7 @@ export default function App(){
 				<Stack.Screen name="MisMediosPago" component={MisMediosPago}/>
 				<Stack.Screen name="MisEstadisticas" component={MisEstadisticas}/>
 
-
-
+				
 			</Stack.Navigator>
 		</SafeAreaView>
 		</NavigationContainer>
