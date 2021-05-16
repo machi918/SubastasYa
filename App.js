@@ -5,6 +5,8 @@ import {  SafeAreaView,  ScrollView,  StatusBar,  StyleSheet,  Text,  useColorSc
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 import Categorias from './src/pages/categorias/Categorias';
 import Home from './src/pages/home/Home';
 import Informativa from './src/pages/informativaPage/Informativa';
@@ -20,13 +22,35 @@ import MisMediosPago from './src/pages/misMediosPago/MisMediosPago';
 import MisEstadisticas from './src/pages/misEstadisticas/MisEstadisticas';
 
 export default function App(){
-	const isDarkMode = useColorScheme() === 'dark';
 	const Stack = createStackNavigator();
 	const Tab = createBottomTabNavigator();
 
 	const mainAct = ()=>{
 		return(
-			<Tab.Navigator>
+			<Tab.Navigator
+			screenOptions={({ route }) => ({
+				tabBarIcon: ({ focused, color, size }) => {
+					let iconName;
+					if (route.name === 'Home') {
+						iconName = 'home';
+					} else if (route.name === 'Categorias') {
+						iconName = 'bars';
+					}
+					else if (route.name === 'MisArticulos') {
+						iconName = 'th';
+					}
+					else if (route.name === 'Perfil') {
+						iconName = 'user';
+					}
+					//Retorno el componente Icon acá
+					return <Icon name={iconName} size={size} color={color} />;
+				},
+			})}
+			tabBarOptions={{
+				activeTintColor: '#4FAFE5',
+				inactiveTintColor: 'gray',
+			}}
+			>
 				<Tab.Screen name="Home" component={Home} />
 				<Tab.Screen name="Categorias" component={Categorias}/>
 				<Tab.Screen name="MisArticulos" component={MisArticulos}/>
