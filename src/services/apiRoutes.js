@@ -27,7 +27,7 @@ export const registro = async (data) =>{
         body: JSON.stringify(data)
     }
     try {
-        const response = await fetch(url+'login',options);
+        const response = await fetch(url+'registro',options);
         return response
     } 
     catch (error) {
@@ -35,13 +35,12 @@ export const registro = async (data) =>{
     }
 }
 
-export const prueba = async (data) =>{
+export const prueba = async () =>{
     const options = {
-        method: 'POST',
+        method: 'GET',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(data)
     }
     try {
         const response = await fetch(url+'api/usuario/list',options);
