@@ -18,6 +18,23 @@ export const login = async (data) =>{
     }
 }
 
+export const registro = async (data) =>{
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }
+    try {
+        const response = await fetch(url+'login',options);
+        return response
+    } 
+    catch (error) {
+        console.error(error)
+    }
+}
+
 export const prueba = async (data) =>{
     const options = {
         method: 'POST',
@@ -34,7 +51,6 @@ export const prueba = async (data) =>{
         console.error(error)
     }
 }
-
 //----------------------------------------------------------------------------------
 
 
