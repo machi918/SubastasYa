@@ -6,6 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Categorias from './src/pages/categorias/Categorias';
 import Home from './src/pages/home/Home';
@@ -25,6 +26,12 @@ export default function App(){
 	const Stack = createStackNavigator();
 	const Tab = createBottomTabNavigator();
 
+	const props = {
+		register: 'Gracias por registrarte a SubastaYa. Verificaremos tus datos y una vez aprobados, nos contactaremos por mail para que genere su contraseña.',
+		log:'asdasd'
+	}
+
+	//Main tab---------------------------------
 	const mainAct = ()=>{
 		return(
 			<Tab.Navigator
@@ -58,13 +65,7 @@ export default function App(){
 			</Tab.Navigator>	
 		)
 	}
-
-	const postRegistro = ()=>{
-		return(
-			<Informativa text={'Gracias por registrarte a SubastaYa. Verificaremos tus datos y una vez aprobados, nos contactaremos por mail para que genere su contraseña.'}></Informativa>
-		)
-	}
-
+	//Subasta Act----------------------------
 	const subastaAct = ()=>{
 		return(
 			<Stack.Navigator>
@@ -74,6 +75,7 @@ export default function App(){
 			</Stack.Navigator>
 		)
 	}
+	//---------------------------------------
 
 	return (
 		<NavigationContainer>
@@ -81,27 +83,28 @@ export default function App(){
 			<Stack.Navigator>
 				{/* ----PRUEBAS DIRECTAS--- */}
 				{/* <Stack.Screen name="EditarPerfil" component={EditarPerfil}/> */}
-
 				{/* ----------------------- */}
 				<Stack.Screen name="InicioSesion" component={InicioSesion} options={{headerShown: false}}/>
 				<Stack.Screen name="Registro" component={Registro} options={{headerShown: false}}/>
 				<Stack.Screen name="HomeMain" component={mainAct} options={{headerShown: false}}/>
-				<Stack.Screen name="PostRegistro" component={postRegistro} options={{headerShown: false}}/>
 				<Stack.Screen name="subastaAct" component={subastaAct}/>
 				<Stack.Screen name="EditarPerfil" component={EditarPerfil}/>
 				<Stack.Screen name="MisMediosPago" component={MisMediosPago}/>
 				<Stack.Screen name="MisEstadisticas" component={MisEstadisticas}/>
-
-				
+				<Stack.Screen name="Informativa" component={Informativa} initialParams={{ text:props.register }} options={{headerShown: false}}/>
 			</Stack.Navigator>
 		</SafeAreaView>
 		</NavigationContainer>
 	);
+	//---------------------------------------
 };
 
+//-------------------------------------------
 const styles = StyleSheet.create({
 	backgroundStyle:{
 		flex: 1,
 		backgroundColor:'#FFFFFF'
 	}
 });
+//-------------------------------------------
+

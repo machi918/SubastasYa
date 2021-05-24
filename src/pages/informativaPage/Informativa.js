@@ -2,7 +2,11 @@ import React from 'react';
 import {SafeAreaView, Text, View, Image, TouchableOpacity, TextInput} from 'react-native';
 import styles from './Styles';
 
-export default function Informativa({navigation, text}){
+export default function Informativa({route, navigation}){
+
+    //serían las props
+    const {text} = route.params;
+    
 	return (
 		<SafeAreaView style={styles.container}>
             <View style={styles.header}>

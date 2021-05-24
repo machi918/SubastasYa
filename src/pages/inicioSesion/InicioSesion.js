@@ -1,19 +1,25 @@
 import React from 'react';
 import {SafeAreaView, Text, View, Image, TouchableOpacity, TextInput} from 'react-native';
 import styles from './Styles';
-import {pruebaS} from '../../controllers/UsersController'
-import { useEffect } from 'react';
-
+import {pruebaS, Login} from '../../controllers/UsersController'
+import { useEffect, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function InicioSesion({navigation}){
 
+    const [mail, setMail] = useState('');
+    const [password, setPassword] = useState('');
+
     const home = async ()=>{
-        const response = await pruebaS();
+        const user={
+            usuario: mail,
+            clave: password
+        }
+        //TODO ASYNCSTORAGE
+        const response = await Login(user);
         console.log(response);
         navigation.navigate('HomeMain')
-    }
-
-
+    };
 
 	return (
 		<SafeAreaView style={styles.container}>
@@ -27,6 +33,7 @@ export default function InicioSesion({navigation}){
                 keyboardType={'email-address'}
                 placeholder={'Email'}
                 autoCompleteType={'email'}
+                onChangeText={(text)=>setMail(text)}
                 ></TextInput>
 
                 <TextInput
@@ -34,11 +41,8 @@ export default function InicioSesion({navigation}){
                 keyboardType={'default'}
                 secureTextEntry={true}
                 placeholder={'Contraseña'}
+                onChangeText={(text)=>setPassword(text)}
                 ></TextInput>
-
-                {/* <TouchableOpacity style={styles.buttonWrapper} onPress={() => navigation.navigate('HomeMain')}>
-                    <Text style={styles.buttonText}>Iniciar Sesion</Text>
-                </TouchableOpacity> */}
 
                 <TouchableOpacity style={styles.buttonWrapper} onPress={()=>home()}>
                     <Text style={styles.buttonText}>Iniciar Sesion</Text>
