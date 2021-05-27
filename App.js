@@ -32,7 +32,11 @@ export default function App(){
 	}
 
 	//Main tab---------------------------------
+	// const mainAct = ({identificador,email,nombre,apellido,documento,estado,tel,clave,direccion,foto})=>{
 	const mainAct = ()=>{
+
+		// const {identificador,nombre,email,apellido,documento,estado,tel,clave,direccion,foto} = ruta.params;
+
 		return(
 			<Tab.Navigator
 			screenOptions={({ route }) => ({
@@ -61,7 +65,11 @@ export default function App(){
 				<Tab.Screen name="Home" component={Home} />
 				<Tab.Screen name="Categorias" component={Categorias}/>
 				<Tab.Screen name="MisArticulos" component={MisArticulos}/>
+				{/* <Tab.Screen name="Perfil" component={Perfil} initialParams={{id:identificador,name:nombre,correo:email,surname:apellido,dni:documento,status:estado,telefono:tel, pass: clave, adress: direccion, photo: foto}} /> */}
+
+				{/* <Tab.Screen name="Perfil" component={Perfil} initialParams={{identificador,nombre,email,apellido,documento,estado,tel,clave,direccion,foto}} /> */}
 				<Tab.Screen name="Perfil" component={Perfil}/>
+
 			</Tab.Navigator>	
 		)
 	}

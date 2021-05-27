@@ -10,10 +10,24 @@ export default function InicioSesion({navigation}){
     const [mail, setMail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleStorage = (data)=>{
+    const handleSetStorage = async (data) => {
+        try {
+            const jsonValue = JSON.stringify(data)
+            await AsyncStorage.setItem('userData', jsonValue)
+            console.log('ENTRE');
+        } catch (e) {
+            console.log('Error con la carga al AsyncStorage');
+        }
+    }
 
-
-
+    const handleGetStorage = async () => {
+        try {
+            const jsonValue = await AsyncStorage.getItem('userData')
+            const data = JSON.parse(jsonValue);
+            return jsonValue != null ? data : null;
+        } catch(e) {
+            console.log('Error con la descarga del AsyncStorage');
+        }
     }
 
     const home = async ()=>{
@@ -27,8 +41,25 @@ export default function InicioSesion({navigation}){
             console.log('Error, mail o clave incorrectos');
             //manejar el que esté mal el mail / clave
         }else{
-            handleStorage(data);
+            await handleSetStorage(data);
+            const userData = await handleGetStorage();
+            console.log('ASADSADQASDSA');
+            console.log(userData.categoria);
+            console.log('ZZZZZZZZZZZZZZ');
             navigation.navigate('HomeMain')
+            // navigation.navigate('HomeMain', {
+            //     identificador: userData.identificador ,
+            //     email: userData.email,
+            //     nombre: userData.nombre,
+            //     apellido: userData.apellido,
+            //     documento: userData.documento,
+            //     estado: userData.estado,
+            //     tel: userData.tel,
+            //     clave: userData.clave,
+            //     direccion: userData.direccion,
+            //     foto: userData.foto,
+            //     division: userData.categoria
+            // });
         }
     };
 

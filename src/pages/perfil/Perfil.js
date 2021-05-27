@@ -1,8 +1,36 @@
-import React from 'react';
+import React,{useEffect,useState} from 'react';
 import {SafeAreaView, Text, View, Image, TouchableOpacity, TextInput} from 'react-native';
 import styles from './Styles';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function MisArticulos({navigation}){
+export default function Perfil({navigation}){
+    const [userData, setuserData] = useState({})
+
+    // useEffect(() => {
+    //     handleGetStorage()
+    //     console.log(userData);
+    // }, [])
+
+    // const handleGetStorage = async()=>{
+    //     try {
+    //         const jsonValue = await AsyncStorage.getItem('userData')
+    //         setuserData(JSON.parse(jsonValue))
+    //     } catch(e) {
+    //           // error reading value
+    //     }
+    // }
+
+    useEffect(async() => {
+        try {
+            const jsonValue = await AsyncStorage.getItem('userData')
+            setuserData(JSON.parse(jsonValue))
+            console.log(userData);
+        } catch(e) {
+              // error reading value
+        }
+    }, [])
+
+
 	return (
 		<SafeAreaView style={styles.container}>
             <View style={styles.header}>
@@ -11,8 +39,8 @@ export default function MisArticulos({navigation}){
 
             <View style={styles.subHeader}>
                 <Image source={require('../../assets/Images/perfil2.jpg')} style={styles.logo}></Image>
-                <Text style={styles.subHeaderName}>NOMBRE APELLIDO</Text>
-                <Text style={styles.subHeaderDivision}>Division X</Text>
+                <Text style={styles.subHeaderName}>{userData.nombre}</Text>
+                <Text style={styles.subHeaderDivision}>Division {userData.categoria}</Text>
             </View>
 
             <View style={styles.main}>

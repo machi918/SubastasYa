@@ -4,6 +4,7 @@ import styles from './Styles';
 import Catalogo from '../../components/Catalogo/Catalogo'
 
 export default function Home(){
+
 	return (
 		<SafeAreaView style={styles.container}>
             <View style={styles.header}>
