@@ -10,15 +10,26 @@ export default function InicioSesion({navigation}){
     const [mail, setMail] = useState('');
     const [password, setPassword] = useState('');
 
+    const handleStorage = (data)=>{
+
+
+
+    }
+
     const home = async ()=>{
         const user={
-            usuario: mail,
+            email: mail,
             clave: password
         }
-        //TODO ASYNCSTORAGE
         const response = await Login(user);
-        console.log(response);
-        navigation.navigate('HomeMain')
+        const data = response.recordset[0]
+        if(data === undefined){
+            console.log('Error, mail o clave incorrectos');
+            //manejar el que esté mal el mail / clave
+        }else{
+            handleStorage(data);
+            navigation.navigate('HomeMain')
+        }
     };
 
 	return (

@@ -9,7 +9,7 @@ export const registro = async (data) =>{
         body: JSON.stringify(data)
     }
     try {
-        const response = await fetch(url+'dis/crearUsuario',options);
+        const response = await fetch(url+'CrearUsuario/nombre/'+data.nombre+'/apellido/'+data.apellido+'/email/'+data.email+'/documento/'+data.documento+'/tel/'+data.tel+'/direccion/'+data.direccion,options);
         return response
     } 
     catch (error) {
@@ -19,14 +19,13 @@ export const registro = async (data) =>{
 
 export const login = async (data) =>{
     const options = {
-        method: 'POST',
+        method: 'GET',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(data)
     }
     try {
-        const response = await fetch(url+'dis/iniciarSesion',options);
+        const response = await fetch(url+'IniciarSesion/email/'+data.email+'/clave/'+data.clave,options);
         return response
     } 
     catch (error) {

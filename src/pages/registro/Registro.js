@@ -14,21 +14,16 @@ export default function Registro({navigation}){
     const [domicilio, setDomicilio] = useState('');
 
     const postRegistro = async ()=>{
-        // let user = {
-        //     usuario: mail,
-        //     clave: 'clave de prueba',
-        //     status: 0
-        // }
-        //Lo de arriba hay que modificarlos cuando fran tire la data
         let user = {
-            usuario: mail,
+            email: mail,
             nombre: nombre,
             apellido: apellido,
             documento: documento,
-            telefono: telefono,
-            domicilio: domicilio
+            tel: telefono,
+            direccion: domicilio
         }
         const response = await signup(user);
+        console.log(response);
         navigation.navigate('Informativa')
     }
 
