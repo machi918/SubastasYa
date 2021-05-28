@@ -1,5 +1,6 @@
 const url = 'http://26.120.118.84:8000/'
 
+//Endpoints de login y registro
 export const registro = async (data) =>{
     const options = {
         method: 'POST',
@@ -35,7 +36,25 @@ export const login = async (data) =>{
 //----------------------------------------------------------------------------------
 
 
-//Endpoints de 
+//Endpoints de Subastas
+export const subastas = async () =>{
+    const options = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    }
+    try {
+        const response = await fetch(url+'Subastas',options);
+        console.log('ENTRE 1');
+        return response
+    } 
+    catch (error) {
+        console.error(error)
+    }
+}
+
+
 
 //----------------------------------------------------------------------------------
 

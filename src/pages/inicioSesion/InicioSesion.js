@@ -1,8 +1,8 @@
 import React from 'react';
 import {SafeAreaView, Text, View, Image, TouchableOpacity, TextInput} from 'react-native';
 import styles from './Styles';
-import {pruebaS, Login} from '../../controllers/UsersController'
-import { useEffect, useState } from 'react';
+import {Login} from '../../controllers/UsersController'
+import {useState} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function InicioSesion({navigation}){
@@ -43,23 +43,7 @@ export default function InicioSesion({navigation}){
         }else{
             await handleSetStorage(data);
             const userData = await handleGetStorage();
-            console.log('ASADSADQASDSA');
-            console.log(userData.categoria);
-            console.log('ZZZZZZZZZZZZZZ');
             navigation.navigate('HomeMain')
-            // navigation.navigate('HomeMain', {
-            //     identificador: userData.identificador ,
-            //     email: userData.email,
-            //     nombre: userData.nombre,
-            //     apellido: userData.apellido,
-            //     documento: userData.documento,
-            //     estado: userData.estado,
-            //     tel: userData.tel,
-            //     clave: userData.clave,
-            //     direccion: userData.direccion,
-            //     foto: userData.foto,
-            //     division: userData.categoria
-            // });
         }
     };
 

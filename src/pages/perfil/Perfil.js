@@ -6,25 +6,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export default function Perfil({navigation}){
     const [userData, setuserData] = useState({})
 
-    // useEffect(() => {
-    //     handleGetStorage()
-    //     console.log(userData);
-    // }, [])
-
-    // const handleGetStorage = async()=>{
-    //     try {
-    //         const jsonValue = await AsyncStorage.getItem('userData')
-    //         setuserData(JSON.parse(jsonValue))
-    //     } catch(e) {
-    //           // error reading value
-    //     }
-    // }
-
     useEffect(async() => {
         try {
             const jsonValue = await AsyncStorage.getItem('userData')
             setuserData(JSON.parse(jsonValue))
-            console.log(userData);
         } catch(e) {
               // error reading value
         }

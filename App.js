@@ -22,6 +22,8 @@ import EditarPerfil from './src/pages/editarPerfil/EditarPerfil';
 import MisMediosPago from './src/pages/misMediosPago/MisMediosPago';
 import MisEstadisticas from './src/pages/misEstadisticas/MisEstadisticas';
 
+
+
 export default function App(){
 	const Stack = createStackNavigator();
 	const Tab = createBottomTabNavigator();
@@ -32,10 +34,7 @@ export default function App(){
 	}
 
 	//Main tab---------------------------------
-	// const mainAct = ({identificador,email,nombre,apellido,documento,estado,tel,clave,direccion,foto})=>{
 	const mainAct = ()=>{
-
-		// const {identificador,nombre,email,apellido,documento,estado,tel,clave,direccion,foto} = ruta.params;
 
 		return(
 			<Tab.Navigator
@@ -65,9 +64,6 @@ export default function App(){
 				<Tab.Screen name="Home" component={Home} />
 				<Tab.Screen name="Categorias" component={Categorias}/>
 				<Tab.Screen name="MisArticulos" component={MisArticulos}/>
-				{/* <Tab.Screen name="Perfil" component={Perfil} initialParams={{id:identificador,name:nombre,correo:email,surname:apellido,dni:documento,status:estado,telefono:tel, pass: clave, adress: direccion, photo: foto}} /> */}
-
-				{/* <Tab.Screen name="Perfil" component={Perfil} initialParams={{identificador,nombre,email,apellido,documento,estado,tel,clave,direccion,foto}} /> */}
 				<Tab.Screen name="Perfil" component={Perfil}/>
 
 			</Tab.Navigator>	
