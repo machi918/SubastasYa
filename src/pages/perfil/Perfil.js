@@ -5,16 +5,54 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Perfil({navigation}){
     const [userData, setuserData] = useState({})
+    const [color, setColor] = useState('')
 
     useEffect(async() => {
         try {
             const jsonValue = await AsyncStorage.getItem('userData')
             setuserData(JSON.parse(jsonValue))
+            handleColor();
         } catch(e) {
               // error reading value
         }
     }, [])
 
+    // useEffect(async() => {
+    //     try {
+    //         await handleUserData();
+    //     } catch(e) {
+    //           // error reading value
+    //     }
+    // }, [])
+
+    // const handleUserData = async ()=>{
+    //     try {
+    //         const jsonValue = await AsyncStorage.getItem('userData')
+    //         setuserData(JSON.parse(jsonValue))
+    //         handleColor();
+    //     } catch(e) {
+    //     }
+    // }
+
+    const handleColor = () => {
+        switch(userData.categoria){
+            case 'comun':
+                setColor('#81421F');
+                break;
+            case 'especial':
+                setColor('#8D008F');
+                break;
+            case 'plata':
+                setColor('#E8E8E8');
+                break;
+            case 'oro':
+                setColor('#ECE303');
+                break;
+            case 'platino':
+                setColor('#62FD84');
+                break;
+        }
+    }
 
 	return (
 		<SafeAreaView style={styles.container}>
@@ -24,6 +62,8 @@ export default function Perfil({navigation}){
 
             <View style={styles.subHeader}>
                 <Image source={require('../../assets/Images/perfil2.jpg')} style={styles.logo}></Image>
+                <View style={{backgroundColor:color ,width:170,height:170, borderRadius:100, position:'absolute' }}></View>
+                {/* POR QUE NO SE ACTUALIZ EN EL MOMENTO LPMMMM */}
                 <Text style={styles.subHeaderName}>{userData.nombre}</Text>
                 <Text style={styles.subHeaderDivision}>Division {userData.categoria}</Text>
             </View>

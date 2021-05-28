@@ -1,6 +1,8 @@
 import React from 'react';
 import {SafeAreaView, Text, View, Image, TouchableOpacity, TextInput} from 'react-native';
 import styles from './Styles';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 export default function EditarPerfil({navigation}){
 	return (

@@ -23,7 +23,7 @@ export default function Registro({navigation}){
             direccion: domicilio
         }
         const response = await signup(user);
-        navigation.navigate('Informativa')
+        navigation.navigate('InformativaRegistro')
     }
 
 	return (

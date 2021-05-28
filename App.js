@@ -30,7 +30,8 @@ export default function App(){
 
 	const props = {
 		register: 'Gracias por registrarte a SubastaYa. Verificaremos tus datos y una vez aprobados, nos contactaremos por mail para que genere su contraseña.',
-		log:'asdasd'
+		badlogin:'Correo o contraseña incorrectos, intente denuevo.',
+		notaproved: 'Todavía no has sido aprobado para ingresar a la aplicación. Por favor, espere a su mail de confirmación.'
 	}
 
 	//Main tab---------------------------------
@@ -95,7 +96,9 @@ export default function App(){
 				<Stack.Screen name="EditarPerfil" component={EditarPerfil}/>
 				<Stack.Screen name="MisMediosPago" component={MisMediosPago}/>
 				<Stack.Screen name="MisEstadisticas" component={MisEstadisticas}/>
-				<Stack.Screen name="Informativa" component={Informativa} initialParams={{ text:props.register }} options={{headerShown: false}}/>
+				<Stack.Screen name="InformativaRegistro" component={Informativa} initialParams={{ text:props.register }} options={{headerShown: false}}/>
+				<Stack.Screen name="InformativaBadLogin" component={Informativa} initialParams={{ text:props.badlogin }} options={{headerShown: false}}/>
+				<Stack.Screen name="InformativaNotAproved" component={Informativa} initialParams={{ text:props.notaproved }} options={{headerShown: false}}/>
 			</Stack.Navigator>
 		</SafeAreaView>
 		</NavigationContainer>

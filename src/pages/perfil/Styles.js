@@ -28,6 +28,8 @@ const styles = StyleSheet.create({
     logo:{
         resizeMode:'contain',
         height:'80%',
+        marginBottom:5,
+        // zIndex:10 Si la imagen es redonda, esto se debe descomentar
     },
     subHeaderName:{
         fontSize:20,

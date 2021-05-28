@@ -35,15 +35,19 @@ export default function InicioSesion({navigation}){
             email: mail,
             clave: password
         }
+        if(user.email == null || user.password == null){
+            navigation.navigate('InformativaBadLogin');
+            return
+        }
         const response = await Login(user);
         const data = response.recordset[0]
         if(data === undefined){
             console.log('Error, mail o clave incorrectos');
-            //manejar el que esté mal el mail / clave
+            navigation.navigate('InformativaBadLogin');
         }else{
             await handleSetStorage(data);
             const userData = await handleGetStorage();
-            navigation.navigate('HomeMain')
+            navigation.navigate('HomeMain');
         }
     };
 

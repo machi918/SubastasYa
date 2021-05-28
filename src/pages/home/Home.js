@@ -37,9 +37,9 @@ export default function Home(){
                 <Catalogo/>
                 <Catalogo/>
                 <Catalogo/> */}
-                {subastas.map((key,data)=>{
+                {/* {subastas.map((key,data)=>{
                     return <Catalogo id={data.identificador} cat={data.categoria}/>
-                })}
+                })} */}
 
                 
 
