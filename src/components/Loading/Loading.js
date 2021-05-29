@@ -1,8 +1,7 @@
-import React from 'react';
 import {SafeAreaView, Text, View, Image, TouchableOpacity, TextInput} from 'react-native';
 import styles from './Styles';
 import {useState,useEffect} from 'react';
-import React, {useEffect} from 'react'
+import React from 'react'
 import LottieView from 'lottie-react-native';
 
 
@@ -17,7 +16,7 @@ const LoadingPage = ({navigation})=>{
 
     return(
 		<View style={styles.container}>
-        <LottieView source={require('../assets/logoAnimation.json')} autoPlay loop></LottieView>
+        <LottieView source={require('../../assets/logoAnimation.json')} autoPlay loop></LottieView>
 		</View>
     )
 }

@@ -30,7 +30,7 @@ export default function Home(){
             <ScrollView
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}>
-                {subastas === undefined ? console.log() : subastas.map((key, data ) =>{
+                {subastas === undefined ? null : subastas.map((key, data ) =>{
                     return(
                         <Catalogo key={subastas[data].identificador} titulo={subastas[data].titulo} division={subastas[data].categoria}/>)}
                     )

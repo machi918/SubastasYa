@@ -6,7 +6,6 @@ const styles = StyleSheet.create({
         top: '40%',
 		height:200,
         width:300,
-        backgroundColor:'red',
         zIndex:1000
 	}
 });
