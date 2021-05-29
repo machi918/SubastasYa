@@ -2,12 +2,12 @@ import React from 'react';
 import {SafeAreaView, Text, View, Image, TouchableOpacity, TextInput} from 'react-native';
 import styles from './Styles';
 
-export default function Catalogo({id,}){
+export default function Catalogo({id,titulo,division}){
 	return (
 		<TouchableOpacity style={styles.container}>
             <View style={styles.header}>
-                <Text style={styles.headerText}> {id} </Text>
-                <Text style={styles.subHeaderDivision}>Division X</Text>
+                <Text style={styles.headerText}> {titulo} </Text>
+                <Text style={styles.subHeaderDivision}>Division {division}</Text>
             </View>
 
             <View style={styles.subHeader}>

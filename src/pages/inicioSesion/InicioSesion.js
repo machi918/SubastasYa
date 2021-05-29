@@ -2,7 +2,7 @@ import React from 'react';
 import {SafeAreaView, Text, View, Image, TouchableOpacity, TextInput} from 'react-native';
 import styles from './Styles';
 import {Login} from '../../controllers/UsersController'
-import {useState} from 'react';
+import {useState,useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function InicioSesion({navigation}){
@@ -10,11 +10,18 @@ export default function InicioSesion({navigation}){
     const [mail, setMail] = useState('');
     const [password, setPassword] = useState('');
 
+    useEffect(() => {
+        const data = handleGetStorage();
+        console.log('Data del inicio de sesion: '+ data.identificador);
+        if(data.identificador != undefined){
+            navigation.navigate('HomeMain');
+        }
+    }, [])
+
     const handleSetStorage = async (data) => {
         try {
             const jsonValue = JSON.stringify(data)
             await AsyncStorage.setItem('userData', jsonValue)
-            console.log('ENTRE');
         } catch (e) {
             console.log('Error con la carga al AsyncStorage');
         }
@@ -35,7 +42,7 @@ export default function InicioSesion({navigation}){
             email: mail,
             clave: password
         }
-        if(user.email == null || user.password == null){
+        if(user.email === '' || user.clave === ''){
             navigation.navigate('InformativaBadLogin');
             return
         }
@@ -62,6 +69,7 @@ export default function InicioSesion({navigation}){
                 style={styles.input}
                 keyboardType={'email-address'}
                 placeholder={'Email'}
+                clearButtonMode={'always'}                
                 autoCompleteType={'email'}
                 onChangeText={(text)=>setMail(text)}
                 ></TextInput>
@@ -71,6 +79,7 @@ export default function InicioSesion({navigation}){
                 keyboardType={'default'}
                 secureTextEntry={true}
                 placeholder={'Contraseña'}
+                clearTextOnFocus={true}
                 onChangeText={(text)=>setPassword(text)}
                 ></TextInput>
 

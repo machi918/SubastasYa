@@ -3,27 +3,26 @@ import {SafeAreaView, Text, View, Image, TouchableOpacity, TextInput, ScrollView
 import styles from './Styles';
 import {getSubasta} from '../../controllers/SubastasController'
 import Catalogo from '../../components/Catalogo/Catalogo'
+import Loading from '../../components/Loading/Loading'
 
 export default function Home(){
-    const [subastas, setSubastas] = useState({})
+    const [busy,setBusy] = useState(true);
+    const [subastas, setSubastas] = useState();
+    const [reload,setReload] = useState(true);
 
     useEffect(async() => {
-        try {
-            const response = await getSubasta();
-            const data = response.recordset;
-            if(data === undefined){
-                console.log('Error, no hay subastas');
-            }else{
-                setSubastas(data);
-                console.log('ENTRE 4');
-            }
-        } catch(e) {
-              // error reading value
+        const response = await getSubasta();
+        if(response === undefined){
+            console.log('Error, no hay subastas');
+        }else{
+            setSubastas(response.recordset);
+            setBusy(false);
         }
-    }, [])
+    }, [reload])
 
 	return (
 		<SafeAreaView style={styles.container}>
+            {busy ? <Loading/> : null }
             <View style={styles.header}>
                 <Text style={styles.headerText}>Home</Text>
             </View>
@@ -31,19 +30,11 @@ export default function Home(){
             <ScrollView
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}>
-                {/* <Catalogo/>
-                <Catalogo/>
-                <Catalogo/>
-                <Catalogo/>
-                <Catalogo/>
-                <Catalogo/> */}
-                {/* {subastas.map((key,data)=>{
-                    return <Catalogo id={data.identificador} cat={data.categoria}/>
-                })} */}
-
-                
-
-
+                {subastas === undefined ? console.log() : subastas.map((key, data ) =>{
+                    return(
+                        <Catalogo key={subastas[data].identificador} titulo={subastas[data].titulo} division={subastas[data].categoria}/>)}
+                    )
+                } 
             </ScrollView> 
             </View>
 		</SafeAreaView>

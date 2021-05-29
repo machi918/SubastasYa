@@ -5,10 +5,9 @@ export const getSubasta = async ()=>
     const response = await subastas();
     if(response.status === 200){
         const json = await response.json();
-        console.log('ENTRE 2');
         return json;
     }else{
-        console.log('ERROR');
+        console.log('ERROR EN EL GETSUBASTA');
         console.log(response.status);
     }
 }

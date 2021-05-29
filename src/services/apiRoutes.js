@@ -46,7 +46,6 @@ export const subastas = async () =>{
     }
     try {
         const response = await fetch(url+'Subastas',options);
-        console.log('ENTRE 1');
         return response
     } 
     catch (error) {
