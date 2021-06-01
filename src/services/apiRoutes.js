@@ -53,6 +53,22 @@ export const subastas = async () =>{
     }
 }
 
+//Endpoints de Subastas
+export const articulosSubasta = async () =>{
+    const options = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    }
+    try {
+        const response = await fetch(url+'Subastas',options);
+        return response
+    } 
+    catch (error) {
+        console.error(error)
+    }
+}
 
 
 //----------------------------------------------------------------------------------

@@ -4,7 +4,7 @@ import styles from './Styles';
 
 export default function Articulo({fecha, estado}){
 	return (
-		<TouchableOpacity style={styles.container}>
+		<View style={styles.container}>
             <View style={styles.header}>
                 <Text style={styles.headerText}>Titulo Loren Ipsum</Text>
             </View>
@@ -17,6 +17,6 @@ export default function Articulo({fecha, estado}){
                 <Text style={styles.bottomText}>Estado: {estado}  Fecha: {fecha}</Text>
             </View>
 
-		</TouchableOpacity>
+		</View>
 	);
 };

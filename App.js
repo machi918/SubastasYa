@@ -99,6 +99,9 @@ export default function App(){
 				<Stack.Screen name="InformativaRegistro" component={Informativa} initialParams={{ text:props.register }} options={{headerShown: false}}/>
 				<Stack.Screen name="InformativaBadLogin" component={Informativa} initialParams={{ text:props.badlogin }} options={{headerShown: false}}/>
 				<Stack.Screen name="InformativaNotAproved" component={Informativa} initialParams={{ text:props.notaproved }} options={{headerShown: false}}/>
+				<Stack.Screen name="VerSubasta" component={VerSubasta}/>
+				<Stack.Screen name="VerArticulo" component={VerArticulo}/>
+
 			</Stack.Navigator>
 		</SafeAreaView>
 		</NavigationContainer>

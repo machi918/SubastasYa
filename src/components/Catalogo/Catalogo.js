@@ -4,7 +4,7 @@ import styles from './Styles';
 
 export default function Catalogo({id,titulo,division}){
 	return (
-		<TouchableOpacity style={styles.container}>
+		<View style={styles.container}>
             <View style={styles.header}>
                 <Text style={styles.headerText}> {titulo} </Text>
                 <Text style={styles.subHeaderDivision}>Division {division}</Text>
@@ -18,6 +18,6 @@ export default function Catalogo({id,titulo,division}){
                 <Text style={styles.bottomText}>Fecha: XX/YY/ZZ - II:JJ</Text>
             </View>
 
-		</TouchableOpacity>
+		</View>
 	);
 };

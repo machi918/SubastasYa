@@ -1,4 +1,4 @@
-import {subastas} from '../services/apiRoutes'
+import {subastas,articulosSubasta} from '../services/apiRoutes'
 
 export const getSubasta = async ()=>
 {
@@ -12,14 +12,26 @@ export const getSubasta = async ()=>
     }
 }
 
-// export const signup = async (data)=>
-// {
-//     const response = await registro(data);
-//     if(response.status === 200){
-//         const json = await response.json();
-//         return json;
-//     }else{
-//         console.log('ERROR');
-//         console.log(response.status);
-//     }
-// }
+export const getArticulosSubasta = async (data)=>
+{
+    const response = await articulosSubasta(data);
+    if(response.status === 200){
+        const json = await response.json();
+        return json;
+    }else{
+        console.log('ERROR');
+        console.log(response.status);
+    }
+}
+
+export const getArticulo = async (data)=>
+{
+    const response = await articulosSubasta(data);
+    if(response.status === 200){
+        const json = await response.json();
+        return json;
+    }else{
+        console.log('ERROR');
+        console.log(response.status);
+    }
+}
