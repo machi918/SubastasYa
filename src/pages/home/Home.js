@@ -20,8 +20,8 @@ export default function Home({navigation}){
         }
     }, [reload])
 
-    const handleVerSubasta = () =>{
-        navigation.navigate('VerSubasta');
+    const handleVerSubasta = (data) =>{
+        navigation.navigate('VerSubasta',{identificador: subastas[data].identificador, fecha: subastas[data].fecha, hora: subastas[data].hora, estado: subastas[data].estado, subastador: subastas[data].subastador, ubicacion: subastas[data].ubicacion, capacidadAsistentes: subastas[data].capacidadAsistentes, tieneDeposito: subastas[data].tieneDeposito, seguridadPropia: subastas[data].seguridadPropia, categoria: subastas[data].categoria, titulo: subastas[data].titulo});
     }
 
 	return (
@@ -36,8 +36,8 @@ export default function Home({navigation}){
             showsVerticalScrollIndicator={false}>
                 {subastas === undefined ? null : subastas.map((key, data ) =>{
                     return(
-                        <TouchableOpacity style={styles.buttonWrapper} onPress={() => handleVerSubasta()}>
-                            <Catalogo key={subastas[data].identificador} titulo={subastas[data].titulo} division={subastas[data].categoria}/>
+                        <TouchableOpacity style={styles.buttonWrapper} onPress={() => handleVerSubasta(data)}>
+                            <Catalogo key={subastas[data].identificador} id={subastas[data].identificador} titulo={subastas[data].titulo} division={subastas[data].categoria}/>
                         </TouchableOpacity>
                     )})
                 }

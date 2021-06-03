@@ -7,7 +7,8 @@ const styles = StyleSheet.create({
         backgroundColor:'#FFFFFF'
 	},
 	header: {
-        width:'90%',
+        paddingLeft:20,
+        width:'100%',
         height:'25%',
         justifyContent:'center',
         alignItems:'flex-start',
@@ -19,7 +20,6 @@ const styles = StyleSheet.create({
         marginTop:10,
         width:'90%',
         height:'65%',
-        backgroundColor:'red'
 	},
     headerText:{
         fontSize:18,

@@ -2,12 +2,8 @@ import React from 'react';
 import {SafeAreaView, Text, View, Image, TouchableOpacity, TextInput} from 'react-native';
 import styles from './Styles';
 
-export default function Categoria(){
+export default function Categoria({navigation, nombre, color}){
 
-
-
-
-    
 	return (
 		<TouchableOpacity style={styles.container}>
             <View style={styles.header}>

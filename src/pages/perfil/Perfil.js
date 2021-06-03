@@ -4,15 +4,19 @@ import styles from './Styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Perfil({navigation}){
-    const [userData, setuserData] = useState({})
-    const [color, setColor] = useState('')
+    const [userData, setuserData] = useState({});
+    const [color, setColor] = useState('');
+    const [busy,setBusy] = useState(true);
+    const [reload,setReload] = useState(true);
 
     useEffect(async() => {
         try {
             const jsonValue = await AsyncStorage.getItem('userData')
             setuserData(JSON.parse(jsonValue))
             handleColor();
+            setBusy(false);
         } catch(e) {
+            console.log(e);
               // error reading value
         }
     }, [])

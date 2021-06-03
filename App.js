@@ -93,15 +93,14 @@ export default function App(){
 				<Stack.Screen name="Registro" component={Registro} options={{headerShown: false}}/>
 				<Stack.Screen name="HomeMain" component={mainAct} options={{headerShown: false}}/>
 				<Stack.Screen name="subastaAct" component={subastaAct}/>
-				<Stack.Screen name="EditarPerfil" component={EditarPerfil}/>
-				<Stack.Screen name="MisMediosPago" component={MisMediosPago}/>
-				<Stack.Screen name="MisEstadisticas" component={MisEstadisticas}/>
+				<Stack.Screen name="EditarPerfil" component={EditarPerfil} options={{ title: 'Editar Perfil', headerTitleAlign:'center', headerStyle:{borderBottomColor:'#4FAFE5',borderBottomWidth: 2} }}/>
+				<Stack.Screen name="MisMediosPago" component={MisMediosPago} options={{ title: 'Mis Medios de Pago', headerTitleAlign:'center', headerStyle:{borderBottomColor:'#4FAFE5', borderBottomWidth: 2} }}/>
+				<Stack.Screen name="MisEstadisticas" component={MisEstadisticas} options={{ title: 'Mis Estadisticas', headerTitleAlign:'center', headerStyle:{borderBottomColor:'#4FAFE5', borderBottomWidth: 2} }}/>
 				<Stack.Screen name="InformativaRegistro" component={Informativa} initialParams={{ text:props.register }} options={{headerShown: false}}/>
 				<Stack.Screen name="InformativaBadLogin" component={Informativa} initialParams={{ text:props.badlogin }} options={{headerShown: false}}/>
 				<Stack.Screen name="InformativaNotAproved" component={Informativa} initialParams={{ text:props.notaproved }} options={{headerShown: false}}/>
-				<Stack.Screen name="VerSubasta" component={VerSubasta}/>
-				<Stack.Screen name="VerArticulo" component={VerArticulo}/>
-
+				<Stack.Screen name="VerSubasta" component={VerSubasta} options={{ title: 'Subasta', headerTitleAlign:'center', headerStyle:{borderBottomColor:'#4FAFE5', borderBottomWidth: 2} }}/>
+				<Stack.Screen name="VerArticulo" component={VerArticulo} options={{ title: 'Articulo' , headerTitleAlign:'center', headerStyle:{borderBottomColor:'#4FAFE5', borderBottomWidth: 2}}}/>
 			</Stack.Navigator>
 		</SafeAreaView>
 		</NavigationContainer>
@@ -114,6 +113,9 @@ const styles = StyleSheet.create({
 	backgroundStyle:{
 		flex: 1,
 		backgroundColor:'#FFFFFF'
+	},
+	head:{
+
 	}
 });
 //-------------------------------------------

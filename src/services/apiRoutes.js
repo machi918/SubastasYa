@@ -34,8 +34,6 @@ export const login = async (data) =>{
     }
 }
 //----------------------------------------------------------------------------------
-
-
 //Endpoints de Subastas
 export const subastas = async () =>{
     const options = {
@@ -53,8 +51,23 @@ export const subastas = async () =>{
     }
 }
 
-//Endpoints de Subastas
-export const articulosSubasta = async () =>{
+// export const getItemsSubasta = async (data) =>{
+//     const options = {
+//         method: 'GET',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//     }
+//     try {
+//         const response = await fetch(url+'ProductosCAT/identificador/'+data,options);
+//         return response
+//     } 
+//     catch (error) {
+//         console.error(error)
+//     }
+// }
+
+export const getItemsSubasta = async (data) =>{
     const options = {
         method: 'GET',
         headers: {
@@ -62,7 +75,25 @@ export const articulosSubasta = async () =>{
         },
     }
     try {
-        const response = await fetch(url+'Subastas',options);
+        const response = await fetch(url+'Subasta/Articulos/identificador/'+data,options);
+        return response
+    } 
+    catch (error) {
+        console.error(error)
+    }
+}
+
+//Endpoints de Subastas
+export const getArticulos = async (data) =>{
+    const options = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    }
+    let id = data;
+    try {
+        const response = await fetch(url+'Productos/identificador/'+id,options);
         return response
     } 
     catch (error) {
