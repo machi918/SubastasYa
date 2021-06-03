@@ -16,7 +16,7 @@ export default function Categorias(){
             showsVerticalScrollIndicator={false}>
                 {categorias.map((key, data ) =>{
                     return(
-                        <TouchableOpacity>
+                        <TouchableOpacity key={data}>
                             {/* {TODO: Mejorar nombres, colores y poner imagenes */}
                             <Categoria nombre={categorias[data].titulo} color={categorias[data].color} id={categorias[data].id} />
                         </TouchableOpacity>

@@ -1,4 +1,4 @@
-import {subastas,getItemsSubasta} from '../services/apiRoutes'
+import {subastas,getItemsSubasta,getArticulosSegunID} from '../services/apiRoutes'
 
 export const getSubasta = async ()=>
 {
@@ -28,9 +28,9 @@ export const getArticulosSubasta = async (data)=>
     }
 }
 
-export const getArticulosTotales = async (data)=>
+export const getArticulosPersona = async (data)=>
 {
-    const response = await getArticulos(data);
+    const response = await getArticulosSegunID(data);
     if(response.status === 200){
         const json = await response.json();
         return json;

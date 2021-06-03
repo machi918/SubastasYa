@@ -15,19 +15,16 @@ export default function VerArticulo({navigation, route}){
     const [userData, setuserData] = useState({});
 
     useEffect(async() => {
-        try {
             const jsonValue = await AsyncStorage.getItem('userData');
-            if(jsonValue === undefined){
+            const data = JSON.parse(jsonValue);
+            if(data === undefined){
                 console.log('Error en traer datos del usuario');
             }else{
-                setuserData(JSON.parse(jsonValue));
+                setuserData(data);
                 handleColorChange();
                 setBusy(false);
             }
-        } catch(e) {
-            console.log(e);      // error reading value
-        }
-    }, [reload])
+        },[reload])
 
     const colorData = () => {
         switch(userData.categoria){

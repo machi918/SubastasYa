@@ -83,8 +83,8 @@ export const getItemsSubasta = async (data) =>{
     }
 }
 
-//Endpoints de Subastas
-export const getArticulos = async (data) =>{
+//Endpoints de articulos segun una persona
+export const getArticulosSegunID = async (data) =>{
     const options = {
         method: 'GET',
         headers: {
@@ -93,7 +93,7 @@ export const getArticulos = async (data) =>{
     }
     let id = data;
     try {
-        const response = await fetch(url+'Productos/identificador/'+id,options);
+        const response = await fetch(url+'MisProductos/identificador/'+id,options);
         return response
     } 
     catch (error) {

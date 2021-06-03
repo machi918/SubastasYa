@@ -47,7 +47,7 @@ export default function VerSubasta({navigation, route}){
             showsVerticalScrollIndicator={false}>
                 {articulos === undefined ? null : articulos.map((key, data ) =>{
                     return(
-                        <TouchableOpacity onPress={() => handleVerArticulo(data)}>
+                        <TouchableOpacity key={data} onPress={() => handleVerArticulo(data)}>
                             <Articulo key={articulos[data].identificador} titulo={articulos[data].descripcionCatalogo} division={articulos[data].categoria} estado={articulos[data].disponible} fecha={articulos[data].fecha} descComp={articulos[data].descripcionCompleta}/>
                         </TouchableOpacity>
                     )})

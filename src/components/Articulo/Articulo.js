@@ -2,7 +2,7 @@ import React from 'react';
 import {SafeAreaView, Text, View, Image, TouchableOpacity, TextInput} from 'react-native';
 import styles from './Styles';
 
-export default function Articulo({fecha, estado,division, titulo}){
+export default function Articulo({fecha, estado,division, titulo, id}){
 	return (
 		<View style={styles.container}>
             <View style={styles.header}>

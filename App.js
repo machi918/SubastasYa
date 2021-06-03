@@ -101,6 +101,8 @@ export default function App(){
 				<Stack.Screen name="InformativaNotAproved" component={Informativa} initialParams={{ text:props.notaproved }} options={{headerShown: false}}/>
 				<Stack.Screen name="VerSubasta" component={VerSubasta} options={{ title: 'Subasta', headerTitleAlign:'center', headerStyle:{borderBottomColor:'#4FAFE5', borderBottomWidth: 2} }}/>
 				<Stack.Screen name="VerArticulo" component={VerArticulo} options={{ title: 'Articulo' , headerTitleAlign:'center', headerStyle:{borderBottomColor:'#4FAFE5', borderBottomWidth: 2}}}/>
+				<Stack.Screen name="MisArticulos" component={mainAct} options={{headerShown: false}}/>
+
 			</Stack.Navigator>
 		</SafeAreaView>
 		</NavigationContainer>

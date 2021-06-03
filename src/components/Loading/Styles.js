@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
         top: '40%',
 		height:200,
         width:300,
-        zIndex:1000
+        zIndex:1000,
 	}
 });
 
