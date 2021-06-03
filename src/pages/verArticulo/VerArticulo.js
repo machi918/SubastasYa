@@ -29,18 +29,6 @@ export default function VerArticulo({navigation, route}){
         }
     }, [reload])
 
-    
-    // useEffect(async() => {
-    //     const response = await getArticulosSubasta(identificador);
-    //     if(response === undefined){
-    //         console.log('Error, no hay subastas');
-    //     }else{
-    //         setArticulos(response.recordset);
-    //         console.log(setArticulos);
-    //         setBusy(false);
-    //     }
-    // }, [reload])
-
     const colorData = () => {
         switch(userData.categoria){
             case 'comun':
@@ -61,15 +49,7 @@ export default function VerArticulo({navigation, route}){
         }
     }
 
-    // useEffect(async() => {
-    //     const response = await getSubasta();
-    //     if(response === undefined){
-    //         console.log('Error, no hay subastas');
-    //     }else{
-    //         setSubastas(response.recordset);
-    //         setBusy(false);
-    //     }
-    // }, [reload])
+
     const handleColorChange = async () => {
         if(userData.categoria == 'oro'){ //HAY QUE CAMBIAR ESTO PORQUE ESTÁ HARDCODEADo
             setColorBoton('#4FAFE5');

@@ -1,15 +1,19 @@
 export const categorias = [
-    {deportes:{
+    {
         titulo: 'Deportes',
         id: 0,
-    }},{otaku:{
+        color:'red'
+    },{
         titulo: 'Otaku',
-        id: 1
-    }},{cocina:{
+        color:'green',
+        id: 1,
+    },{
         titulo: 'Cocina',
         id: 2,
-    }},{otros:{
+        color:'yellow'
+    },{
         titulo: 'Otros',
         id: 3,
-    }}
+        color:'blue'
+    }
 ]

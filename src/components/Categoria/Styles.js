@@ -31,10 +31,10 @@ const styles = StyleSheet.create({
         width:'50%',
         height:'100%'
     },
-    color:{
-        backgroundColor:'violet',
-        width:'50%'
-    }
+    // color:{
+    //     backgroundColor:'violet',
+    //     width:'50%'
+    // }
 });
 
 export default styles;

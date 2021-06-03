@@ -5,7 +5,6 @@ import Categoria from '../../components/Categoria/Categoria';
 import {categorias} from '../../assets/Categorias/CategoriasData';
 
 export default function Categorias(){
-    console.log(categorias);
 	return (
 		<SafeAreaView style={styles.container}>
             <View style={styles.header}>
@@ -18,18 +17,11 @@ export default function Categorias(){
                 {categorias.map((key, data ) =>{
                     return(
                         <TouchableOpacity>
-                            {console.log(categorias[data])}
-                            //TODO: Poner nombre y color a los catalogos
-                            <Categoria/>
+                            {/* {TODO: Mejorar nombres, colores y poner imagenes */}
+                            <Categoria nombre={categorias[data].titulo} color={categorias[data].color} id={categorias[data].id} />
                         </TouchableOpacity>
                     )})
                 } 
-                {/* <Categoria/>
-                <Categoria/>
-                <Categoria/>
-                <Categoria/>
-                <Categoria/>
-                <Categoria/> */}
             </ScrollView> 
                 
 
