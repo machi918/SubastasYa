@@ -19,15 +19,12 @@ export default function VerSubasta({navigation, route}){
             console.log('Error, no hay subastas');
         }else{
             setArticulos(response.recordset);
-            console.log(setArticulos);
             setBusy(false);
         }
     }, [reload])
 
     const handleVerArticulo = (data) =>{
-        console.log(articulos[data].descripcionCatalogo);
-        navigation.navigate('VerArticulo', {titulo: articulos[data].descripcionCatalogo, descComp:articulos[data].descripcionCompleta, precio: articulos[data].precioBase});
-        console.log('Me tocaste');
+        navigation.navigate('VerArticulo', {titulo: articulos[data].titulo, descComp:articulos[data].descripcionCompleta, precio: articulos[data].precioBase, descripcionMini:articulos[data].descripcionCatalogo, foto:articulos[data].foto});
     }
 
 	return (
@@ -36,7 +33,7 @@ export default function VerSubasta({navigation, route}){
             <View style={styles.header}>
                 <Text style={styles.headerText}>Fecha: {fecha.slice(0,10)}</Text>
                 <Text style={styles.headerText}>Hora: {hora.slice(11,16)}</Text>
-                <Text style={styles.headerText}>Suabstador: {subastador}</Text>
+                <Text style={styles.headerText}>Subastador: {subastador}</Text>
                 <Text style={styles.headerText}>Lugar: {ubicacion}</Text>
                 <Text style={styles.headerText}>Asistentes: {capacidadAsistentes}</Text>
             </View>
@@ -48,14 +45,12 @@ export default function VerSubasta({navigation, route}){
                 {articulos === undefined ? null : articulos.map((key, data ) =>{
                     return(
                         <TouchableOpacity key={data} onPress={() => handleVerArticulo(data)}>
-                            <Articulo key={articulos[data].identificador} titulo={articulos[data].descripcionCatalogo} division={articulos[data].categoria} estado={articulos[data].disponible} fecha={articulos[data].fecha} descComp={articulos[data].descripcionCompleta}/>
+                            <Articulo key={articulos[data].identificador} titulo={articulos[data].titulo} division={articulos[data].categoria} estado={articulos[data].disponible} fecha={articulos[data].fecha} descComp={articulos[data].descripcionCompleta} foto={articulos[data].foto}/>
                         </TouchableOpacity>
                     )})
                 } 
-                <TouchableOpacity style={styles.buttonWrapper} onPress={() => handleVerArticulo()}>
-                </TouchableOpacity>
-
-
+                {/* <TouchableOpacity style={styles.buttonWrapper} onPress={() => handleVerArticulo()}>
+                </TouchableOpacity> */}
             </ScrollView> 
             </View>
 		</SafeAreaView>

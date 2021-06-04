@@ -37,7 +37,7 @@ export default function Home({navigation}){
                 {subastas === undefined ? null : subastas.map((key, data ) =>{
                     return(
                         <TouchableOpacity key={data} style={styles.buttonWrapper} onPress={() => handleVerSubasta(data)}>
-                            <Catalogo key={data} id={subastas[data].identificador} titulo={subastas[data].titulo} division={subastas[data].categoria}/>
+                            <Catalogo key={data} id={subastas[data].identificador} titulo={subastas[data].titulo} division={subastas[data].categoria} foto={subastas[data].FotoSubasta}/>
                         </TouchableOpacity>
                     )})
                 }

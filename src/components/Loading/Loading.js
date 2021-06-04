@@ -6,10 +6,9 @@ import LottieView from 'lottie-react-native';
 
 
 const LoadingPage = ({navigation})=>{
-
     useEffect(() => {
 		const timer = setTimeout(() => {
-            navigation.navigate('Inicio Sesion')
+            navigation.navigate('InicioSesion')
         }, 2000);
 		return () => clearTimeout(timer);
 	}, []);

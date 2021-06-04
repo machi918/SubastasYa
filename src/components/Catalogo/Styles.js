@@ -27,8 +27,11 @@ const styles = StyleSheet.create({
         width:'100%'
     },
     image:{
+        marginTop:4,
         resizeMode:'contain',
-        height:'100%',
+        height:'90%',
+        width:'100%',
+        zIndex: 100000
     },
     subHeaderName:{
         fontSize:20,

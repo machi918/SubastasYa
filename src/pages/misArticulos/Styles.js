@@ -21,7 +21,21 @@ const styles = StyleSheet.create({
 	},
     headerText:{
         fontSize:20,
-    }
+    },roundedButton:{
+		position: 'absolute',
+		bottom: 40,
+		right:10,
+		backgroundColor:'#4FAFE5',
+		width:90,
+		height:90,
+		borderRadius:100,
+		justifyContent:'center',
+		alignItems:'center'
+	},
+	roundedButtonText:{
+		color: '#FFFFFF',
+		fontSize:48
+	}
 });
 
 export default styles;

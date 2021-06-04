@@ -27,8 +27,12 @@ const styles = StyleSheet.create({
         width:'100%'
     },
     image:{
+        // resizeMode:'contain',
+        // height:'100%',
+        marginTop:4,
         resizeMode:'contain',
-        height:'100%',
+        height:'90%',
+        width:'100%'
     },
     subHeaderName:{
         fontSize:20,

@@ -51,22 +51,6 @@ export const subastas = async () =>{
     }
 }
 
-// export const getItemsSubasta = async (data) =>{
-//     const options = {
-//         method: 'GET',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//     }
-//     try {
-//         const response = await fetch(url+'ProductosCAT/identificador/'+data,options);
-//         return response
-//     } 
-//     catch (error) {
-//         console.error(error)
-//     }
-// }
-
 export const getItemsSubasta = async (data) =>{
     const options = {
         method: 'GET',

@@ -80,6 +80,13 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 20
         
+    },
+    image:{
+        marginTop:4,
+        resizeMode:'contain',
+        height:'90%',
+        width:'100%',
+        zIndex: 100000
     }
 });
 

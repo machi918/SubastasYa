@@ -2,9 +2,9 @@ export const categorias = [
     {
         titulo: 'Deportes',
         id: 0,
-        color:'red'
+        color:'red',
     },{
-        titulo: 'Otaku',
+        titulo: 'Coleccionables',
         color:'green',
         id: 1,
     },{

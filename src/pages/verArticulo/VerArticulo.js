@@ -6,7 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function VerArticulo({navigation, route}){
 
-    const {titulo, descComp, precio, division, estado} = route.params;
+    const {titulo,descripcionMini, descComp, precio, division, estado,foto} = route.params;
 
     const [busy,setBusy] = useState(true);
     const [reload,setReload] = useState(true);
@@ -51,7 +51,6 @@ export default function VerArticulo({navigation, route}){
         if(userData.categoria == 'oro'){ //HAY QUE CAMBIAR ESTO PORQUE ESTÁ HARDCODEADo
             setColorBoton('#4FAFE5');
             handleTextChange();
-            console.log('COLOR: '+ colorBoton);
         }
     }
 
@@ -70,7 +69,7 @@ export default function VerArticulo({navigation, route}){
 		<SafeAreaView style={styles.container}>
             {busy ? <Loading/> : null }
             <View style={styles.header}>
-                <Text style={styles.headerText}>ACA VA UNA IMAGEN</Text>
+                <Image source={{uri:foto}} style={styles.image}></Image>
             </View>
             <View style={styles.subheader}>
                 <Text style={styles.subheaderText}>{titulo}</Text>
@@ -80,12 +79,11 @@ export default function VerArticulo({navigation, route}){
                 <Text style={styles.infoText}>Base ${precio}</Text>
             </View>
             <View style={styles.main}>
-                <Text style={styles.mainText}>{descComp}</Text>
+                <Text style={styles.mainText}>{descripcionMini}</Text>
             </View>
             <TouchableOpacity style={styles.buttonDetail}>
                 <Text style={styles.buttonDetailText}>Detalles</Text>
             </TouchableOpacity>
-            {console.log('Division:' +userData.categoria)}
             <TouchableOpacity style={styles.buttonOffer, {backgroundColor: colorBoton ,
             borderColor: '#4CACE2',
             borderWidth: 2,

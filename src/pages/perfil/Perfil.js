@@ -18,59 +18,57 @@ export default function Perfil({navigation}){
         }else{
             setuserData(data)
             handleColor();
-            setBusy(false);
-
+            setBusy(false)
         }
-
     }, [reload])
 
-    const handleColor = () => {
+    // useEffect(async() => {
+    //     try {
+    //         await getData().then(()=>handleColor(userData.categoria));
+    //         setBusy(false)
+    //     } catch (error) {
+            
+    //     }
+
+        
+    // }, [reload])
+
+    // const getData = async() =>{
+    //     const data = await AsyncStorage.getItem('userData');
+    //     const jsonData = JSON.parse(data);
+    //     setuserData(jsonData)
+    // }
+
+    const handleColor = async () => {
         switch(userData.categoria){
             case 'comun':
-                console.log('ENTRE');
                 setColor('#81421F');
-                setBusy(false);
                 break;
-                // return '#81421F'
             case 'especial':
-                console.log('ENTRE');
                 setColor('#8D008F');
-                setBusy(false);
                 break;
-                // return '#8D008F'
             case 'plata':
-                console.log('ENTRE');
-
                 setColor('#E8E8E8');
-                setBusy(false);
                 break;
-                // return '#E8E8E8'
             case 'oro':
-                console.log('ENTRE');
-
                 setColor('#ECE303');
-                setBusy(false);
                 break;
-                // return '#ECE303'
             case 'platino':
-                console.log('ENTRE');
-
                 setColor('#62FD84');
-                setBusy(false);
                 break;
-                // return '#62FD84'
         }
     }
 
 	return (
 		<SafeAreaView style={styles.container}>
+            {(busy) ? <Loading/> : null }
+            {(busy) ? <Loading/> : null }
+
             <View style={styles.header}>
                 <Text style={styles.headerText}>Perfil</Text>
             </View>
             <View style={styles.subHeader}>
-                <Image source={require('../../assets/Images/perfil2.jpg')} style={styles.logo}></Image>
-                {busy ? <Loading/> : null }
-                <View style={{backgroundColor:color ,width: 170,height: 170, borderRadius:100, position:'absolute', zIndex:100 }}></View>
+                <Image source={{uri:userData.fotoRapida}} style={{resizeMode:'cover', height:170, width: 170,zIndex:100, borderColor: color, borderWidth:4, borderRadius:100}}></Image>
                 <Text style={styles.subHeaderName}>{userData.nombre}</Text>
                 <Text style={styles.subHeaderDivision}>Division {userData.categoria}</Text>
             </View>

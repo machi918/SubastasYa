@@ -26,16 +26,9 @@ export default function MisArticulos({navigation, route}){
         }
     }, [reload])
 
-    // const handleVerArticulos = (data) =>{
-    //     navigation.navigate('VerSubasta',{identificador: articulos[data].identificador, fecha: articulos[data].fecha, hora: articulos[data].hora, estado: articulos[data].estado, subastador: subastas[data].subastador, ubicacion: subastas[data].ubicacion, capacidadAsistentes: subastas[data].capacidadAsistentes, tieneDeposito: subastas[data].tieneDeposito, seguridadPropia: subastas[data].seguridadPropia, categoria: subastas[data].categoria, titulo: subastas[data].titulo});
-    // }
-
     const handleVerArticulo = (data) =>{
-        console.log(articulos[data].descripcionCatalogo);
-        navigation.navigate('VerArticulo', {titulo: articulos[data].descripcionCatalogo, descComp:articulos[data].descripcionCompleta, precio: articulos[data].precioBase});
-        console.log('Me tocaste');
+        navigation.navigate('VerArticulo', {descripcionMini: articulos[data].descripcionCatalogo, descComp:articulos[data].descripcionCompleta, precio: articulos[data].precioBase, titulo: articulos[data].titulo, foto:articulos[data].foto});
     }
-
 
 	return (
 		<SafeAreaView style={styles.container}>
@@ -50,13 +43,14 @@ export default function MisArticulos({navigation, route}){
                 {articulos === undefined ? null : articulos.map((key, data )=>{
                     return(
                         <TouchableOpacity key={data} onPress={()=>handleVerArticulo(data)}>
-                            <Articulo key={data} id={articulos[data].identificador} titulo={articulos[data].descripcionCatalogo} division={articulos[data].categoria} estado={articulos[data].disponible} fecha={articulos[data].fecha} descComp={articulos[data].descripcionCompleta}/>
+                            <Articulo key={data} id={articulos[data].identificador} titulo={articulos[data].titulo} division={articulos[data].categoria} estado={articulos[data].disponible} fecha={articulos[data].fecha} descComp={articulos[data].descripcionCompleta} foto={articulos[data].foto}/>
                         </TouchableOpacity>
                     )})
                 } 
             </ScrollView> 
-                
-
+            <TouchableOpacity style={styles.roundedButton}>
+				<Text style={styles.roundedButtonText}>+</Text>
+			</TouchableOpacity>
 
             </View>
 		</SafeAreaView>

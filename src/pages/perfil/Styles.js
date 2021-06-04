@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
     },
     subHeader:{
         marginTop:15,
+        width:'100%',
         height:'35%',
         alignItems: 'center',
         borderBottomColor: '#4FAFE5',
@@ -26,10 +27,20 @@ const styles = StyleSheet.create({
         paddingBottom:15
     },
     logo:{
+        // resizeMode:'contain',
+        height:170,
+        width:170,
+        marginBottom:5,
+        backgroundColor:'red',
+        zIndex:100, //Si la imagen es redonda, esto se debe descomentar
+        borderRadius:100,
+    },
+    image:{
         resizeMode:'contain',
         height:'80%',
-        marginBottom:5,
-        // zIndex:10 Si la imagen es redonda, esto se debe descomentar
+        width:'100%',
+        borderRadius:1000,
+        zIndex:100,
     },
     subHeaderName:{
         fontSize:20,
