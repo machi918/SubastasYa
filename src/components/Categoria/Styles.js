@@ -1,40 +1,35 @@
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
-	container:{
-		height:150,
-        // height:'100%',
+    container:{
+		height:160,
+        width:160,
         alignItems:'center',
         marginBottom:40,
         borderColor:'#000000',
-        borderWidth:2
+        borderWidth:2,
+        borderRadius:20,
+        justifyContent:'center'
 	},
 	header: {
         width:'100%',
         height:'30%',
         justifyContent:'center',
-        alignItems:'flex-start',
-        backgroundColor:'#9E9E9E',
+        alignItems:'center',
         borderBottomColor:'#9E9E9E',
         borderBottomWidth: 2,
-        paddingLeft: 20
 	},
     headerText:{
-        fontSize:24,
+        fontSize:20,
     },
     main:{
-        flexDirection:'row',
-        height:'70%'
+        height:'70%',
+        justifyContent:'center',
+        alignItems:'center'
     },
-    image:{
-        resizeMode:'contain',
-        width:'50%',
-        height:'100%'
+    icono:{
+        fontSize:50,
     },
-    // color:{
-    //     backgroundColor:'violet',
-    //     width:'50%'
-    // }
 });
 
 export default styles;

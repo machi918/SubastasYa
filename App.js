@@ -63,9 +63,9 @@ export default function App(){
 				inactiveTintColor: 'gray',
 			}}
 			>
-				<Tab.Screen name="Home" component={Home} />
-				<Tab.Screen name="Categorias" component={Categorias}/>
-				<Tab.Screen name="MisArticulos" component={MisArticulos}/>
+				<Tab.Screen name="Home" component={Home} options={{ title: 'Home'}}/>
+				<Tab.Screen name="Categorias" component={Categorias} options={{ title: 'Categorías'}}/>
+				<Tab.Screen name="MisArticulos" component={MisArticulos} options={{ title: 'Mis Artículos'}}/>
 				<Tab.Screen name="Perfil" component={Perfil}/>
 
 			</Tab.Navigator>	
