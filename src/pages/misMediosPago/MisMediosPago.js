@@ -7,7 +7,8 @@ import Cuenta from '../../components/MisMediosDePago/CuentaBancaria'
 
 export default function MisMediosPago({navigation}){
 
-	const jsonTest = [{
+	const jsonTest = [
+	{
 		identificador: 0,
 		nombre: 'MASTERCARD',
 		numero: '1234567890123456',
@@ -51,7 +52,9 @@ export default function MisMediosPago({navigation}){
             {/* TODO -> LINEA QUE DIVIDE AL HEADER EDITARPERFIl */}
 			<View styles={styles.main}>
 
-				<ScrollView>
+				<ScrollView
+					showsHorizontalScrollIndicator={false}
+            		showsVerticalScrollIndicator={false}>
 					{jsonTest.map( (data) => {
 						if (data.numero.length == 16){
 							return(
