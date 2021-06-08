@@ -7,7 +7,8 @@ const styles = StyleSheet.create({
         backgroundColor:'#FFFFFF'
 	},
 	main:{
-		height:'100%'
+		height:'100%',
+		
 	},
 	roundedButton:{
 		position: 'absolute',
@@ -18,11 +19,12 @@ const styles = StyleSheet.create({
 		height:100,
 		borderRadius:100,
 		justifyContent:'center',
-		alignItems:'center'
+		alignItems:'center',
+		zIndex: 100,
 	},
 	roundedButtonText:{
 		color: '#FFFFFF',
-		fontSize:50
+		fontSize: 50
 	}
 });
 
