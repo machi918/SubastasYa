@@ -16,43 +16,60 @@ export default function VerArticulo({navigation, route}){
 
     useEffect(async() => {
             const jsonValue = await AsyncStorage.getItem('userData');
-            const data = JSON.parse(jsonValue);
-            if(data === undefined){
+            const data = await JSON.parse(jsonValue);
+            const auxText = handleTextChange(data.categoria);
+            const auxColor = handleColorChange(data.categoria);
+            if(data === undefined || auxText===undefined || auxColor===undefined){
                 console.log('Error en traer datos del usuario');
             }else{
                 setuserData(data);
-                handleColorChange();
+                setTextoBoton(auxText);
+                setColorBoton(auxColor);
                 setBusy(false);
             }
         },[reload])
 
-    const colorData = () => {
-        switch(userData.categoria){
+        //FALTA TOQUETEAR TODO ACÁ DE CUANDO ME LO HABILITARIA PARA SUBASTA TODO TODO TODO
+
+    const handleColorChange = (data) => {
+        switch(data){
             case 'comun':
-                setColor('#81421F');
+                if(division==data){
+                    return '#4FAFE5'
+                }
                 break;
             case 'especial':
-                setColor('#8D008F');
+                if(division==data){
+                    return '#4FAFE5'
+                }
                 break;
             case 'plata':
-                setColor('#E8E8E8');
+                if(division==data){
+                    return '#4FAFE5'
+                }
                 break;
             case 'oro':
-                setColor('#ECE303');
+                if(division==data){
+                    return '#4FAFE5'
+                }
                 break;
             case 'platino':
-                setColor('#62FD84');
+                if(division==data){
+                    return '#4FAFE5'
+                }
                 break;
+            default:
+                return '#4D7084'
         }
     }
 
 
-    const handleColorChange = async () => {
-        if(userData.categoria == 'oro'){ //HAY QUE CAMBIAR ESTO PORQUE ESTÁ HARDCODEADo
-            setColorBoton('#4FAFE5');
-            handleTextChange();
-        }
-    }
+    // function handleColorChange(data){
+    //     if(data == 'oro'){ //HAY QUE CAMBIAR ESTO PORQUE ESTÁ HARDCODEADo
+    //         setColorBoton('#4FAFE5');
+    //         handleTextChange();
+    //     }
+    // }
 
     const handleTextChange = () => {
         if(userData.categoria == 'oro'){ //HAY QUE CAMBIAR ESTO PORQUE ESTÁ HARDCODEADo

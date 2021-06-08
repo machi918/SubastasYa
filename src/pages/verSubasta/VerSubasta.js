@@ -24,7 +24,7 @@ export default function VerSubasta({navigation, route}){
     }, [reload])
 
     const handleVerArticulo = (data) =>{
-        navigation.navigate('VerArticulo', {titulo: articulos[data].titulo, descComp:articulos[data].descripcionCompleta, precio: articulos[data].precioBase, descripcionMini:articulos[data].descripcionCatalogo, foto:articulos[data].foto});
+        navigation.navigate('VerArticulo', {titulo: articulos[data].titulo, descComp:articulos[data].descripcionCompleta, precio: articulos[data].precioBase, descripcionMini:articulos[data].descripcionCatalogo, foto:articulos[data].foto, division:articulos[data].categoria});
     }
 
 	return (
