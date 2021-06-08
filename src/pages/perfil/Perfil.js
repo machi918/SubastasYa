@@ -6,64 +6,41 @@ import Loading from '../../components/Loading/Loading'
 
 export default function Perfil({navigation}){
     const [userData, setuserData] = useState({});
-    const [color, setColor] = useState('');
+    const [color, setColor] = useState('#81421F');
     const [busy,setBusy] = useState(true);
     const [reload,setReload] = useState(true);
 
     useEffect(async() => {
         const jsonValue = await AsyncStorage.getItem('userData');
-        const data = JSON.parse(jsonValue);
-        if(data === undefined){
+        const data = await JSON.parse(jsonValue);
+        const auxColor = handleColor(data.categoria);
+        if(data === undefined || color=== undefined){
             console.log('Error en la carga del perfil');
         }else{
-            setuserData(data)
-            handleColor();
+            setuserData(data);
+            setColor(auxColor);
             setBusy(false)
         }
     }, [reload])
 
-    // useEffect(async() => {
-    //     try {
-    //         await getData().then(()=>handleColor(userData.categoria));
-    //         setBusy(false)
-    //     } catch (error) {
-            
-    //     }
-
-        
-    // }, [reload])
-
-    // const getData = async() =>{
-    //     const data = await AsyncStorage.getItem('userData');
-    //     const jsonData = JSON.parse(data);
-    //     setuserData(jsonData)
-    // }
-
-    const handleColor = async () => {
-        switch(userData.categoria){
+    function handleColor(cat){
+        switch(cat){
             case 'comun':
-                setColor('#81421F');
-                break;
+                return '#81421F'
             case 'especial':
-                setColor('#8D008F');
-                break;
+                return '#8D008F'
             case 'plata':
-                setColor('#E8E8E8');
-                break;
+                return '#E8E8E8'
             case 'oro':
-                setColor('#ECE303');
-                break;
+                return '#ECE303'
             case 'platino':
-                setColor('#62FD84');
-                break;
+                return '#62FD84'
         }
     }
 
 	return (
 		<SafeAreaView style={styles.container}>
             {(busy) ? <Loading/> : null }
-            {(busy) ? <Loading/> : null }
-
             <View style={styles.header}>
                 <Text style={styles.headerText}>Perfil</Text>
             </View>

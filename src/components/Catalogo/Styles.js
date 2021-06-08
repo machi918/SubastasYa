@@ -10,13 +10,13 @@ const styles = StyleSheet.create({
         borderWidth:2
 	},
 	header: {
-        width:'100%',
-        height:'30%',
-        justifyContent:'center',
-        alignItems:'center',
-        backgroundColor:'#9E9E9E',
-        borderBottomColor:'#9E9E9E',
-        borderBottomWidth: 2
+        // width:'100%',
+        // height:'30%',
+        // justifyContent:'center',
+        // alignItems:'center',
+        // // backgroundColor:'#9E9E9E',
+        // borderBottomColor:'#9E9E9E',
+        // borderBottomWidth: 2
 	},
     headerText:{
         fontSize:20,
