@@ -51,7 +51,7 @@ export const categorias = [
         titulo: 'TV y Cine',
         id: 8,
         foto: require('../../assets/Images/cine.jpg'),
-        color:'black',
+        color:'#008081',
         icono:'film'
     },{
         titulo: 'Misceláneo',

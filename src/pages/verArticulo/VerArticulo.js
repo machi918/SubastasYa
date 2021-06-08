@@ -10,8 +10,8 @@ export default function VerArticulo({navigation, route}){
 
     const [busy,setBusy] = useState(true);
     const [reload,setReload] = useState(true);
-    const [textoBoton,setTextoBoton] = useState('No cumples los requisitos minimos');
-    const [colorBoton,setColorBoton] = useState('#4D7084');
+    const [textoBoton,setTextoBoton] = useState('');
+    const [colorBoton,setColorBoton] = useState('');
     const [userData, setuserData] = useState({});
 
     useEffect(async() => {
@@ -84,6 +84,7 @@ export default function VerArticulo({navigation, route}){
                 return 'No cumples los requisitos minimos'
         }
     }
+    
 
 	return (
 		<SafeAreaView style={styles.container}>
