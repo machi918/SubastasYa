@@ -19,7 +19,7 @@ export default function VerArticulo({navigation, route}){
             const data = await JSON.parse(jsonValue);
             const auxText = handleTextChange(data.categoria);
             const auxColor = handleColorChange(data.categoria);
-            if(data === undefined || auxText===undefined || auxColor===undefined){
+            if(data === undefined){
                 console.log('Error en traer datos del usuario');
             }else{
                 setuserData(data);
@@ -31,56 +31,59 @@ export default function VerArticulo({navigation, route}){
 
         //FALTA TOQUETEAR TODO ACÁ DE CUANDO ME LO HABILITARIA PARA SUBASTA TODO TODO TODO
 
-    const handleColorChange = (data) => {
+    function handleColorChange(data){
         switch(data){
             case 'comun':
                 if(division==data){
                     return '#4FAFE5'
                 }
-                break;
             case 'especial':
                 if(division==data){
                     return '#4FAFE5'
                 }
-                break;
             case 'plata':
                 if(division==data){
                     return '#4FAFE5'
                 }
-                break;
             case 'oro':
                 if(division==data){
                     return '#4FAFE5'
                 }
-                break;
             case 'platino':
                 if(division==data){
                     return '#4FAFE5'
                 }
-                break;
             default:
                 return '#4D7084'
         }
     }
-
-
-    // function handleColorChange(data){
-    //     if(data == 'oro'){ //HAY QUE CAMBIAR ESTO PORQUE ESTÁ HARDCODEADo
-    //         setColorBoton('#4FAFE5');
-    //         handleTextChange();
-    //     }
-    // }
-
-    const handleTextChange = () => {
-        if(userData.categoria == 'oro'){ //HAY QUE CAMBIAR ESTO PORQUE ESTÁ HARDCODEADo
-            setTextoBoton('No cumples los requisitos minimos')
+    
+    function handleTextChange(data){
+        switch(data){
+            case 'comun':
+                if(division==data){
+                    return 'Ofertar'
+                }
+            case 'especial':
+                if(division==data){
+                    return 'Ofertar'
+                }
+            case 'plata':
+                if(division==data){
+                    return 'Ofertar'
+                }
+            case 'oro':
+                if(division==data){
+                    return 'Ofertar'
+                }
+            case 'platino':
+                if(division==data){
+                    return 'Ofertar'
+                }
+            default:
+                return 'No cumples los requisitos minimos'
         }
-        if(userData.categoria === undefined){ //HAY QUE CAMBIAR ESTO PORQUE ESTÁ HARDCODEADo
-            setTextoBoton('Iniciar Sesion')
-        }
-        
     }
-
 
 	return (
 		<SafeAreaView style={styles.container}>

@@ -49,8 +49,6 @@ export default function VerSubasta({navigation, route}){
                         </TouchableOpacity>
                     )})
                 } 
-                {/* <TouchableOpacity style={styles.buttonWrapper} onPress={() => handleVerArticulo()}>
-                </TouchableOpacity> */}
             </ScrollView> 
             </View>
 		</SafeAreaView>
