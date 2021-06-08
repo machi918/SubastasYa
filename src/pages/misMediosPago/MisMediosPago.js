@@ -54,7 +54,7 @@ export default function MisMediosPago({navigation}){
 
 				<ScrollView
 					showsHorizontalScrollIndicator={false}
-            		showsVerticalScrollIndicator={false}>
+					showsVerticalScrollIndicator={false}>
 					{jsonTest.map( (data) => {
 						if (data.numero.length == 16){
 							return(
