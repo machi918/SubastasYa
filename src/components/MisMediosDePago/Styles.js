@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         marginTop: 10,
         padding: 5,
-        borderWidth: 3
+        borderWidth: 5
     },
     bankContainer: {
         backgroundColor: "#006346",
