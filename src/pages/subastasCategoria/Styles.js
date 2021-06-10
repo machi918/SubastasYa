@@ -6,18 +6,10 @@ const styles = StyleSheet.create({
         alignItems:'center',
         backgroundColor:'#FFFFFF'
 	},
-	header: {
-        width:'100%',
-        height:'10%',
-        justifyContent:'center',
-        alignItems:'center',
-        borderBottomColor:'#4FAFE5',
-        borderBottomWidth: 2
-	},
 	main: {
         marginTop:25,
         width:'90%',
-        height:'90%',
+        height:'100%',
 	},
     headerText:{
         fontSize:20,

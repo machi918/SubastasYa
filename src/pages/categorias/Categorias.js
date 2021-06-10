@@ -21,7 +21,7 @@ export default function Categorias({navigation}){
             showsVerticalScrollIndicator={false}>
                 {categorias.map((key, data ) =>{
                     return(
-                        <TouchableOpacity key={data} onPress={()=>handleOnPress(categorias[data].titulo)}>
+                        <TouchableOpacity key={data} onPress={()=>handleOnPress(categorias[data].titulo.toLowerCase())}>
                             <Categoria nombre={categorias[data].titulo} color={categorias[data].color} id={categorias[data].id} foto={categorias[data].foto} icono={categorias[data].icono}  />
                         </TouchableOpacity>
                     )})

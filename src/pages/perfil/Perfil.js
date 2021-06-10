@@ -58,7 +58,8 @@ export default function Perfil({navigation}){
 
     const handleLogOut = async () =>{
         await removeValue();
-        navigation.navigate('InicioSesion');
+        // navigation.navigate('InicioSesion');
+        navigation.popToTop();
     }
 
 	return (
@@ -74,7 +75,6 @@ export default function Perfil({navigation}){
                 <Text style={styles.subHeaderDivision}>Division {userData.categoria}</Text>
             </View>
             <View style={styles.main}>
-                {/* {guest ? <Guest/> : null } */}
                 <TouchableOpacity style={styles.buttonWrapper} onPress={()=>navigation.navigate('EditarPerfil')}>
                     <Text style={styles.buttonText}>Editar Perfil</Text>
                 </TouchableOpacity>

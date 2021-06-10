@@ -1,7 +1,7 @@
 import React,{useEffect, useState} from 'react';
 import {SafeAreaView, Text, View, Image, TouchableOpacity, TextInput, ScrollView} from 'react-native';
 import styles from './Styles';
-import {getSubasta} from '../../controllers/SubastasController'
+import {getSubastasCategoria} from '../../controllers/SubastasController'
 import Catalogo from '../../components/Catalogo/Catalogo'
 import Loading from '../../components/Loading/Loading'
 
@@ -30,9 +30,9 @@ export default function subastasCat({navigation, route}){
 	return (
 		<SafeAreaView style={styles.container}>
             {busy ? <Loading/> : null }
-            <View style={styles.header}>
-                <Text style={styles.headerText}>Home</Text>
-            </View>
+            {/* <View style={styles.header}>
+                <Text style={styles.headerText}>Subastas</Text>
+            </View> */}
             <View style={styles.main}>
             <ScrollView
             showsHorizontalScrollIndicator={false}

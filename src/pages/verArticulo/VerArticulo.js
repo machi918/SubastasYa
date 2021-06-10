@@ -80,7 +80,8 @@ export default function VerArticulo({navigation, route}){
 
     function handleOnPress(){
         if(Object.entries(userData).length === 0){
-            navigation.navigate('InicioSesion');
+            // navigation.navigate('InicioSesion');
+            navigation.popToTop();
         }else{
             if(textoBoton.localeCompare('Ofertar')){
                 // navigation.navigate('Subasta');

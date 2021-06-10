@@ -2,17 +2,24 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
     container:{
-		height:200,
+		height:'90%',
         width:'100%',
+        alignItems:'center',
+        justifyContent:'center',
+        backgroundColor:'#FFFFFF',
+        position: 'absolute',
+        top:'10%',
+        zIndex:100
+	},wrapper:{
+		height:200,
+        width:'90%',
         alignItems:'center',
         borderColor:'#000000',
         borderWidth:2,
         borderRadius:20,
         justifyContent:'center',
-        position: 'absolute',
-        top:'30%',
         backgroundColor:'#FFFFFF',
-	},
+    },
 	header: {
         width:'90%',
         justifyContent:'center',

@@ -75,6 +75,7 @@ const styles = StyleSheet.create({
         width:'90%',
         borderBottomColor:'#EB5757',
         borderBottomWidth:2,
+        zIndex:1000 //SACAR EN CUANTO SE ARREGLE LOS 2 BOTONES
     },
     buttonTextLogOut:{
         color:'#EB5757'

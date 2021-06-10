@@ -93,7 +93,7 @@ export const subastasCategorias = async (data) =>{
         },
     }
     try {
-        const response = await fetch(url+'Subastas',options);
+        const response = await fetch(url+'Categorias/identificador/'+data,options);
         return response
     } 
     catch (error) {
