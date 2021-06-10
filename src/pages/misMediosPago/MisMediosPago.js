@@ -1,11 +1,44 @@
-import React from 'react';
-import {SafeAreaView, Text, View, Image, TouchableOpacity, TextInput, ScrollView} from 'react-native';
+import React, { useState }  from 'react';
+import {SafeAreaView, Text, View, Image, TouchableOpacity, TextInput, ScrollView, Modal} from 'react-native';
 import styles from './Styles';
 
 import Tarjeta from '../../components/MisMediosDePago/Tarjeta'
 import Cuenta from '../../components/MisMediosDePago/CuentaBancaria'
 
 export default function MisMediosPago({navigation}){
+	
+	const [showModal, setShowModal] = useState(false)
+
+	const modalAdd = (
+		<Modal
+			animationType='fade' //Es la animación al abrirse
+			transparent //Hace al Modal transparente
+			visible={showModal} //Si se muestra en la pantalla o no
+			onRequestClose={() => setShowModal(false)} //El botón Back de Android hace algo, en este caso lo cierro
+			onShow={() => console.log('abrir')} //Al abrirse el modal, algo se hace
+			onDismiss={() => console.log('cerrar')} //Al cerrarse el modal, algo se hace
+			>
+				<View style={styles.modalGeneric} onPress={()=>console.log('a')}>
+					<View style={styles.modalView}>
+						<TouchableOpacity style={styles.modalButton} onPress={() => setShowModal(false)}>
+							<Text style={styles.modalButtonText}>X</Text>
+						</TouchableOpacity>
+						<Text>Elija el método de pago a cargar</Text>
+						<Text></Text>
+						<View style={{flexDirection: 'row'}}>
+							<View style={{flexDirection: 'column', alignItems: 'center'}}>
+								<TouchableOpacity><Image style={styles.icons} source={require('../../assets/Images/CreditCard.png')}></Image></TouchableOpacity>
+								<Text>Tarjeta de Crédito</Text>
+							</View>
+							<View style={{flexDirection: 'column', alignItems: 'center'}}>
+								<TouchableOpacity><Image style={styles.icons} source={require('../../assets/Images/Bank.png')}></Image></TouchableOpacity>
+								<Text>Cuenta Bancaria</Text>
+							</View>
+						</View>
+					</View>
+				</View>
+		</Modal>
+	)
 
 	const jsonTest = [
 	{
@@ -44,7 +77,8 @@ export default function MisMediosPago({navigation}){
 		numero: '1234567890123456789012',
 		fechavto: '2025-10-01',
 		cliente: 0
-	},]
+	},
+	]
 
 	return (
 		<SafeAreaView style={styles.container}>
@@ -74,9 +108,12 @@ export default function MisMediosPago({navigation}){
 			</View>
 
 
-			<TouchableOpacity style={styles.roundedButton}>
+
+			<TouchableOpacity style={styles.roundedButton} onPress={() => setShowModal(true)}>
 				<Text style={styles.roundedButtonText}>+</Text>
 			</TouchableOpacity>
+
+			{modalAdd}	
 
 		</SafeAreaView>
 	);
