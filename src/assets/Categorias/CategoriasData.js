@@ -54,7 +54,7 @@ export const categorias = [
         color:'#008081',
         icono:'film'
     },{
-        titulo: 'Misceláneo',
+        titulo: 'Miscelaneo',
         color:'violet',
         foto: require('../../assets/Images/misc.jpg'),
         id: 9,
