@@ -23,6 +23,8 @@ import MisMediosPago from './src/pages/misMediosPago/MisMediosPago';
 import MisEstadisticas from './src/pages/misEstadisticas/MisEstadisticas';
 import Loading from './src/components/Loading/Loading';
 import Guest from './src/components/Guest/Guest';
+import verDetalle from './src/pages/verDetalleArticulo/verDetalle';
+import subastasCat from './src/pages/subastasCategoria/subastasCat';
 
 
 
@@ -88,9 +90,6 @@ export default function App(){
 		<NavigationContainer>
 		<SafeAreaView style={styles.backgroundStyle}>
 			<Stack.Navigator>
-				{/* ----PRUEBAS DIRECTAS--- */}
-				{/* <Stack.Screen name="EditarPerfil" component={EditarPerfil}/> */}
-				{/* ----------------------- */}
 				<Stack.Screen name="InicioSesion" component={InicioSesion} options={{headerShown: false}}/>
 				<Stack.Screen name="Registro" component={Registro} options={{headerShown: false}}/>
 				<Stack.Screen name="HomeMain" component={mainAct} options={{headerShown: false}}/>
@@ -106,6 +105,8 @@ export default function App(){
 				<Stack.Screen name="MisArticulos" component={mainAct} options={{headerShown: false}}/>
 				<Stack.Screen name="Loading" component={Loading} options={{headerShown: false}}/>
 				<Stack.Screen name="Guest" component={Guest} options={{headerShown: false}}/>
+				<Stack.Screen name="verDetalle" component={verDetalle} options={{title: 'Detalles',headerTitleAlign:'center', headerStyle:{borderBottomColor:'#4FAFE5', borderBottomWidth: 2}}}/>
+				<Stack.Screen name="verSubastasCat" component={subastasCat} options={{title: 'Subastas',headerTitleAlign:'center', headerStyle:{borderBottomColor:'#4FAFE5', borderBottomWidth: 2}}}/>
 			</Stack.Navigator>
 		</SafeAreaView>
 		</NavigationContainer>

@@ -3,6 +3,7 @@ import {SafeAreaView, Text, View, Image, TouchableOpacity, TextInput, ScrollView
 import styles from './Styles';
 import Loading from '../../components/Loading/Loading'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import verDetalle from '../../pages/verDetalleArticulo/verDetalle'
 
 export default function VerArticulo({navigation, route}){
 
@@ -87,7 +88,10 @@ export default function VerArticulo({navigation, route}){
             //TODO, EL MANEJO DE MÁS COSAS
         }
     }
-    
+
+    function handleDetails(){
+        navigation.navigate('verDetalle',{descripcion: descComp, titulo: titulo});
+    }
 
 	return (
 		<SafeAreaView style={styles.container}>
@@ -105,7 +109,7 @@ export default function VerArticulo({navigation, route}){
             <View style={styles.main}>
                 <Text style={styles.mainText}>{descripcionMini}</Text>
             </View>
-            <TouchableOpacity style={styles.buttonDetail}>
+            <TouchableOpacity style={styles.buttonDetail} onPress={()=>handleDetails()}>
                 <Text style={styles.buttonDetailText}>Detalles</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.buttonOffer, {backgroundColor: colorBoton ,

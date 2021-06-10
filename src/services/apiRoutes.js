@@ -85,6 +85,21 @@ export const getArticulosSegunID = async (data) =>{
     }
 }
 
+export const subastasCategorias = async (data) =>{
+    const options = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    }
+    try {
+        const response = await fetch(url+'Subastas',options);
+        return response
+    } 
+    catch (error) {
+        console.error(error)
+    }
+}
 
 //----------------------------------------------------------------------------------
 
