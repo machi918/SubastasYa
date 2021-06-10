@@ -18,7 +18,6 @@ export default function VerArticulo({navigation, route}){
     useEffect(async() => {
             const jsonValue = await AsyncStorage.getItem('userData');
             const data = await JSON.parse(jsonValue);
-            console.log(data);
             if(data === undefined || data === null){
                 setPrecioFinal('XXXXX');
                 console.log('Error en traer datos del usuario');
@@ -26,8 +25,9 @@ export default function VerArticulo({navigation, route}){
                 setColorBoton('#4D7084');
                 setBusy(false);
             }else{
-                const auxText = handleTextChange(data.categoria);
-                const auxColor = handleColorChange(data.categoria);
+                const auxCat = data.categoria;
+                const auxText = handleTextChange(auxCat);
+                const auxColor = handleColorChange(auxCat);
                 setuserData(data);
                 setTextoBoton(auxText);
                 setColorBoton(auxColor);
@@ -39,28 +39,21 @@ export default function VerArticulo({navigation, route}){
 
     //TODO FIX EL BUG QUE CON LO QUE DICE EL BOTON
     function handleColorChange(data){
-        if(data != undefined){
+        console.log('DENTRO DE COLOR: '+data);
+        if(data != undefined || data != null){
         switch(data){
             case 'comun':
-                if(division==data){
-                    return '#4FAFE5'
-                }
+                return '#4FAFE5'
             case 'especial':
-                if(division==data){
-                    return '#4FAFE5'
-                }
+                return '#4FAFE5'
             case 'plata':
-                if(division==data){
-                    return '#4FAFE5'
-                }
+                return '#4FAFE5'
             case 'oro':
-                if(division==data){
-                    return '#4FAFE5'
-                }
+                return '#4FAFE5'
+                
             case 'platino':
-                if(division==data){
-                    return '#4FAFE5'
-                }
+                return '#4FAFE5'
+                
             default:
                 return '#4D7084'
         }
@@ -69,27 +62,19 @@ export default function VerArticulo({navigation, route}){
     
     function handleTextChange(data){
         if(data != undefined){
+            console.log('Data: ' + data);
+            console.log('CAT: ' + division);
         switch(data){
             case 'comun':
-                if(division==data){
-                    return 'Ofertar'
-                }
+                return 'Ofertar'
             case 'especial':
-                if(division==data){
                     return 'Ofertar'
-                }
             case 'plata':
-                if(division==data){
                     return 'Ofertar'
-                }
             case 'oro':
-                if(division==data){
                     return 'Ofertar'
-                }
             case 'platino':
-                if(division==data){
                     return 'Ofertar'
-                }
             default:
                 return 'No cumples los requisitos minimos'
         }

@@ -73,7 +73,7 @@ export default function Perfil({navigation}){
                 <Text style={styles.subHeaderName}>{userData.nombre}</Text>
                 <Text style={styles.subHeaderDivision}>Division {userData.categoria}</Text>
             </View>
-            <View style={styles.main} pointerEvents={guest ? 'none' : 'auto'}>
+            <View style={styles.main}>
                 {/* {guest ? <Guest/> : null } */}
                 <TouchableOpacity style={styles.buttonWrapper} onPress={()=>navigation.navigate('EditarPerfil')}>
                     <Text style={styles.buttonText}>Editar Perfil</Text>
