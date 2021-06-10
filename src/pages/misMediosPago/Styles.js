@@ -25,7 +25,38 @@ const styles = StyleSheet.create({
 	roundedButtonText:{
 		color: '#FFFFFF',
 		fontSize: 50
-	}
+	},
+	modalGeneric: {
+		flex: 1,
+		backgroundColor:'rgba(1,1,1,0.3)',
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	modalView: {
+		borderWidth: 1,
+		borderRadius: 25,
+		backgroundColor: 'white',
+		alignItems: 'center',
+		padding: 25,
+	},
+	icons: {
+		height: 75,
+		width: 75,
+		marginHorizontal: 50
+	},
+	modalButton: {
+		position: 'absolute',
+		right: 15,
+		top: 15,
+		height: 25,
+		width: 25,
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	modalButtonText :{
+		color: 'gray',
+		fontSize: 20
+	},
 });
 
 export default styles;
