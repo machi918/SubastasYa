@@ -8,6 +8,7 @@ export default function VerArticulo({navigation, route}){
 
     const {titulo,descripcionMini, descComp, precio, division, estado,foto} = route.params;
 
+    const [precioFinal, setPrecioFinal] = useState(precio);
     const [busy,setBusy] = useState(true);
     const [reload,setReload] = useState(true);
     const [textoBoton,setTextoBoton] = useState('');
@@ -17,11 +18,16 @@ export default function VerArticulo({navigation, route}){
     useEffect(async() => {
             const jsonValue = await AsyncStorage.getItem('userData');
             const data = await JSON.parse(jsonValue);
-            const auxText = handleTextChange(data.categoria);
-            const auxColor = handleColorChange(data.categoria);
-            if(data === undefined){
+            console.log(data);
+            if(data === undefined || data === null){
+                setPrecioFinal('XXXXX');
                 console.log('Error en traer datos del usuario');
+                setTextoBoton('Iniciar Sesion');
+                setColorBoton('#4D7084');
+                setBusy(false);
             }else{
+                const auxText = handleTextChange(data.categoria);
+                const auxColor = handleColorChange(data.categoria);
                 setuserData(data);
                 setTextoBoton(auxText);
                 setColorBoton(auxColor);
@@ -31,7 +37,9 @@ export default function VerArticulo({navigation, route}){
 
         //FALTA TOQUETEAR TODO ACÁ DE CUANDO ME LO HABILITARIA PARA SUBASTA TODO TODO TODO
 
+    //TODO FIX EL BUG QUE CON LO QUE DICE EL BOTON
     function handleColorChange(data){
+        if(data != undefined){
         switch(data){
             case 'comun':
                 if(division==data){
@@ -56,9 +64,11 @@ export default function VerArticulo({navigation, route}){
             default:
                 return '#4D7084'
         }
+        }
     }
     
     function handleTextChange(data){
+        if(data != undefined){
         switch(data){
             case 'comun':
                 if(division==data){
@@ -83,6 +93,18 @@ export default function VerArticulo({navigation, route}){
             default:
                 return 'No cumples los requisitos minimos'
         }
+        }
+    }
+
+    function handleOnPress(){
+        if(Object.entries(userData).length === 0){
+            navigation.navigate('InicioSesion');
+        }else{
+            if(textoBoton.localeCompare('Ofertar')){
+                // navigation.navigate('Subasta');
+            }
+            //TODO, EL MANEJO DE MÁS COSAS
+        }
     }
     
 
@@ -97,7 +119,7 @@ export default function VerArticulo({navigation, route}){
             </View>
             <View style={styles.info}>
                 <Text style={styles.infoText}>VENDEDOR</Text>
-                <Text style={styles.infoText}>Base ${precio}</Text>
+                <Text style={styles.infoText}>Base ${precioFinal}</Text>
             </View>
             <View style={styles.main}>
                 <Text style={styles.mainText}>{descripcionMini}</Text>
@@ -112,7 +134,8 @@ export default function VerArticulo({navigation, route}){
             height:'7%',
             justifyContent: 'center',
             alignItems: 'center',
-            borderRadius: 5}}>
+            borderRadius: 5}}
+            onPress={()=>handleOnPress()}>
                 <Text style={styles.buttonOfferText}>{textoBoton}</Text>
             </TouchableOpacity>
 		</SafeAreaView>

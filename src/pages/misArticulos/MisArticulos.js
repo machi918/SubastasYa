@@ -5,6 +5,7 @@ import Articulo from '../../components/Articulo/Articulo';
 import {getArticulosPersona} from '../../controllers/SubastasController'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Loading from '../../components/Loading/Loading';
+import Guest from '../../components/Guest/Guest';
 
 export default function MisArticulos({navigation, route}){
 
@@ -12,18 +13,25 @@ export default function MisArticulos({navigation, route}){
     const [articulos, setArticulos] = useState();
     const [userData, setUserData] = useState();
     const [reload,setReload] = useState(true);
+    const [guest, setGuest] = useState(false);
 
     useEffect(async() => {
         const jsonValue = await AsyncStorage.getItem('userData');
         const data = JSON.parse(jsonValue);
-        const response = await getArticulosPersona(data.identificador);
-        if(response === undefined || jsonValue === undefined){
-            console.log('Error, no hay subastas');
+        if(data != undefined || data != null){
+            const response = await getArticulosPersona(data.identificador);
+            if(response === undefined || jsonValue === undefined){
+                console.log('Error, no hay subastas');
+            }else{
+                setArticulos(response.recordset);
+                setUserData(data);
+                setBusy(false);
+            }
         }else{
-            setArticulos(response.recordset);
-            setUserData(data);
+            setGuest(true);
             setBusy(false);
         }
+        
     }, [reload])
 
     const handleVerArticulo = (data) =>{
@@ -33,10 +41,11 @@ export default function MisArticulos({navigation, route}){
 	return (
 		<SafeAreaView style={styles.container}>
             {busy ? <Loading/> : null }
+            {guest ? <Guest/> : null }
             <View style={styles.header}>
                 <Text style={styles.headerText}>Mis Artículos</Text>
             </View>
-            <View style={styles.main}>
+            <View style={styles.main} pointerEvents={guest ? 'none' : 'auto'}>
             <ScrollView
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}>

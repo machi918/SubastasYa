@@ -2,26 +2,44 @@ import React,{useEffect,useState} from 'react';
 import {SafeAreaView, Text, View, Image, TouchableOpacity, TextInput} from 'react-native';
 import styles from './Styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Loading from '../../components/Loading/Loading'
+import Loading from '../../components/Loading/Loading';
+import Guest from '../../components/Guest/Guest';
 
 export default function Perfil({navigation}){
     const [userData, setuserData] = useState({});
     const [color, setColor] = useState('#81421F');
     const [busy,setBusy] = useState(true);
     const [reload,setReload] = useState(true);
+    const [guest, setGuest] = useState(false);
 
     useEffect(async() => {
         const jsonValue = await AsyncStorage.getItem('userData');
         const data = await JSON.parse(jsonValue);
-        const auxColor = handleColor(data.categoria);
-        if(data === undefined || color=== undefined){
-            console.log('Error en la carga del perfil');
+        if(data != undefined || data != null){
+            const auxColor = handleColor(data.categoria);
+            if(color === undefined){
+                console.log('Error en el color');
+            }else{
+                setuserData(data);
+                setColor(auxColor);
+                setBusy(false)
+            }
         }else{
-            setuserData(data);
-            setColor(auxColor);
-            setBusy(false)
+            setGuest(true);
+            setBusy(false);
+            console.log('Error en la carga del perfil');
         }
     }, [reload])
+
+    const removeValue = async () => {
+        try {
+            await AsyncStorage.removeItem('userData')
+        } catch(e) {
+          // remove error
+            console.log('ERROR PERRITO MALVADO: '+e);
+        }
+        console.log('Usuario removido del Async Storage.')
+    }
 
     function handleColor(cat){
         switch(cat){
@@ -38,10 +56,16 @@ export default function Perfil({navigation}){
         }
     }
 
+    const handleLogOut = async () =>{
+        await removeValue();
+        navigation.navigate('InicioSesion');
+    }
+
 	return (
-		<SafeAreaView style={styles.container}>
+		<SafeAreaView style={styles.container} >
             {(busy) ? <Loading/> : null }
-            <View style={styles.header}>
+            {guest ? <Guest/> : null }
+            <View style={styles.header} >
                 <Text style={styles.headerText}>Perfil</Text>
             </View>
             <View style={styles.subHeader}>
@@ -49,7 +73,8 @@ export default function Perfil({navigation}){
                 <Text style={styles.subHeaderName}>{userData.nombre}</Text>
                 <Text style={styles.subHeaderDivision}>Division {userData.categoria}</Text>
             </View>
-            <View style={styles.main}>
+            <View style={styles.main} pointerEvents={guest ? 'none' : 'auto'}>
+                {/* {guest ? <Guest/> : null } */}
                 <TouchableOpacity style={styles.buttonWrapper} onPress={()=>navigation.navigate('EditarPerfil')}>
                     <Text style={styles.buttonText}>Editar Perfil</Text>
                 </TouchableOpacity>
@@ -62,7 +87,7 @@ export default function Perfil({navigation}){
                     <Text style={styles.buttonText}>Mis Estadísticas</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.buttonWrapperLogOut} onPress={()=>navigation.navigate('InicioSesion')}>
+                <TouchableOpacity style={styles.buttonWrapperLogOut} onPress={()=>handleLogOut()}>
                     <Text style={styles.buttonTextLogOut}>Cerrar Sesión</Text>
                 </TouchableOpacity>
 

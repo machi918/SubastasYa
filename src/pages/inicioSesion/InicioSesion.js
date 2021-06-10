@@ -4,17 +4,23 @@ import styles from './Styles';
 import {Login} from '../../controllers/UsersController'
 import {useState,useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Loading from '../../components/Loading/Loading'
 
 export default function InicioSesion({navigation}){
 
     const [mail, setMail] = useState('');
     const [password, setPassword] = useState('');
+    const [busy,setBusy] = useState(true);
 
-    useEffect(() => {
-        const data = handleGetStorage();
-        console.log('Data del inicio de sesion: '+ data.identificador);
-        if(data.identificador != undefined){
+    useEffect(async () => {
+        const data = await handleGetStorage();
+        if(data != undefined || data != null){
+            console.log('Data del inicio de sesion: '+ data.identificador);
+            setBusy(false)
             navigation.navigate('HomeMain');
+        }else{
+            console.log("Datos de usuario no encontrados");
+            setBusy(false)
         }
     }, [])
 
@@ -58,8 +64,14 @@ export default function InicioSesion({navigation}){
         }
     };
 
+
+    const handleGuestUser = ()=>{
+        navigation.navigate('HomeMain')
+    }
+
 	return (
 		<SafeAreaView style={styles.container}>
+            {busy ? <Loading/> : null }
             <View style={styles.header}>
                 <Image source={require('../../assets/Images/Logo.png')} style={styles.logo}></Image>
             </View>
@@ -91,7 +103,7 @@ export default function InicioSesion({navigation}){
                     <Text style={styles.buttonText}>Registrarse</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.invitadoButton}>
+                <TouchableOpacity style={styles.invitadoButton} onPress={()=>handleGuestUser()}>
                     <Text style={styles.buttonText}>Ingresar como invitado</Text>
                 </TouchableOpacity>
 

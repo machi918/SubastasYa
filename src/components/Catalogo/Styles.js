@@ -5,9 +5,10 @@ const styles = StyleSheet.create({
 		height:200,
         // height:'100%',
         alignItems:'center',
-        marginBottom:40,
+        marginBottom:30,
         borderColor:'#000000',
-        borderWidth:2
+        borderWidth:2,
+        borderRadius:20,
 	},
 	header: {
         // width:'100%',
@@ -42,12 +43,16 @@ const styles = StyleSheet.create({
 
     },
     footer: {
-        backgroundColor:'#C4C4C4',
+        // backgroundColor:'#C4C4C4',
+        backgroundColor:'#4FAFE5',
         width:'100%',
         height:'10%',
         alignItems:'center',
+        borderBottomRightRadius:20,
+        borderBottomLeftRadius:20,
 	},
     bottomText:{
+        color:'#FFFFFF'
 
     }
 });

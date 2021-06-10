@@ -7,16 +7,18 @@ const styles = StyleSheet.create({
         alignItems:'center',
         marginBottom:40,
         borderColor:'#000000',
-        borderWidth:2
+        borderWidth:2,
+        borderRadius:20,
 	},
 	header: {
         width:'100%',
         height:'30%',
         justifyContent:'center',
         alignItems:'center',
-        backgroundColor:'#9E9E9E',
         borderBottomColor:'#9E9E9E',
-        borderBottomWidth: 2
+        borderBottomWidth: 2,
+        borderTopLeftRadius:20,
+        borderTopRightRadius:20,
 	},
     headerText:{
         fontSize:20,
@@ -40,16 +42,19 @@ const styles = StyleSheet.create({
     },
     subHeaderDivision:{
         fontSize: 16,
-
     },
     footer: {
-        backgroundColor:'#C4C4C4',
+        // backgroundColor:'#C4C4C4',
+        backgroundColor:'#4FAFE5',
         width:'100%',
         height:'10%',
         alignItems:'center',
+        borderBottomLeftRadius:20,
+        borderBottomRightRadius:20
 	},
     bottomText:{
-        fontSize:16
+        fontSize:16,
+        color:'#FFFFFF'
 
     }
 });

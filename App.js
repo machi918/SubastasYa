@@ -22,6 +22,7 @@ import EditarPerfil from './src/pages/editarPerfil/EditarPerfil';
 import MisMediosPago from './src/pages/misMediosPago/MisMediosPago';
 import MisEstadisticas from './src/pages/misEstadisticas/MisEstadisticas';
 import Loading from './src/components/Loading/Loading';
+import Guest from './src/components/Guest/Guest';
 
 
 
@@ -104,8 +105,7 @@ export default function App(){
 				<Stack.Screen name="VerArticulo" component={VerArticulo} options={{ title: 'Articulo' , headerTitleAlign:'center', headerStyle:{borderBottomColor:'#4FAFE5', borderBottomWidth: 2}}}/>
 				<Stack.Screen name="MisArticulos" component={mainAct} options={{headerShown: false}}/>
 				<Stack.Screen name="Loading" component={Loading} options={{headerShown: false}}/>
-
-
+				<Stack.Screen name="Guest" component={Guest} options={{headerShown: false}}/>
 			</Stack.Navigator>
 		</SafeAreaView>
 		</NavigationContainer>

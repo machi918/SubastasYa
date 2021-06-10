@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
 		width:'100%'
 	},
 	dataContainer:{
-		height:'30%',
+		height:'25%',
 		width:'100%',
 		flexDirection: 'row',
 		flexWrap: 'wrap',
@@ -31,6 +31,13 @@ const styles = StyleSheet.create({
 	dataText:{
 		fontSize: 24,
 		color:'black',
+	},
+	bar:{
+		width:'90%'
+
+	},
+	pie:{
+		width:'90%'
 	}
 });
 
