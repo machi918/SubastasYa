@@ -35,11 +35,9 @@ export default function VerArticulo({navigation, route}){
             }
         },[reload])
 
-        //FALTA TOQUETEAR TODO ACÁ DE CUANDO ME LO HABILITARIA PARA SUBASTA TODO TODO TODO
+    //FALTA TOQUETEAR TODO ACÁ DE CUANDO ME LO HABILITARIA PARA SUBASTA TODO TODO TODO
 
-    //TODO FIX EL BUG QUE CON LO QUE DICE EL BOTON
     function handleColorChange(data){
-        console.log('DENTRO DE COLOR: '+data);
         if(data != undefined || data != null){
         switch(data){
             case 'comun':
@@ -62,8 +60,6 @@ export default function VerArticulo({navigation, route}){
     
     function handleTextChange(data){
         if(data != undefined){
-            console.log('Data: ' + data);
-            console.log('CAT: ' + division);
         switch(data){
             case 'comun':
                 return 'Ofertar'
