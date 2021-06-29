@@ -21,7 +21,7 @@ export default function MisArticulos({navigation, route}){
         if(data != undefined || data != null){
             const response = await getArticulosPersona(data.identificador);
             if(response === undefined || jsonValue === undefined){
-                console.log('Error, no hay subastas');
+                console.log('Error, no hay articulos propios');
             }else{
                 setArticulos(response.recordset);
                 setUserData(data);
@@ -35,7 +35,11 @@ export default function MisArticulos({navigation, route}){
     }, [reload])
 
     const handleVerArticulo = (data) =>{
-        navigation.navigate('VerArticulo', {descripcionMini: articulos[data].descripcionCatalogo, descComp:articulos[data].descripcionCompleta, precio: articulos[data].precioBase, titulo: articulos[data].titulo, foto:articulos[data].foto});
+        navigation.navigate('VerArticulo', {descripcionMini: articulos[data].descripcionCatalogo, descComp:articulos[data].descripcionCompleta, precio: articulos[data].precioBase, titulo: articulos[data].titulo, foto:articulos[data].foto, duenio: userData.identificador});
+    }
+
+    const handleAgregarArticulo = () =>{
+        navigation.navigate('agregarArticulo',{});
     }
 
 	return (
@@ -57,7 +61,7 @@ export default function MisArticulos({navigation, route}){
                     )})
                 } 
             </ScrollView> 
-            <TouchableOpacity style={styles.roundedButton}>
+            <TouchableOpacity style={styles.roundedButton} onPress={()=>handleAgregarArticulo()}>
 				<Text style={styles.roundedButtonText}>+</Text>
 			</TouchableOpacity>
 

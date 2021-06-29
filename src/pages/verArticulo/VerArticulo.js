@@ -7,7 +7,7 @@ import verDetalle from '../../pages/verDetalleArticulo/verDetalle'
 
 export default function VerArticulo({navigation, route}){
 
-    const {titulo,descripcionMini, descComp, precio, division, estado,foto} = route.params;
+    const {titulo,descripcionMini, descComp, precio, division, estado,foto, fecha, ownProduct, duenio} = route.params;
 
     const [precioFinal, setPrecioFinal] = useState(precio);
     const [busy,setBusy] = useState(true);
@@ -15,6 +15,7 @@ export default function VerArticulo({navigation, route}){
     const [textoBoton,setTextoBoton] = useState('');
     const [colorBoton,setColorBoton] = useState('');
     const [userData, setuserData] = useState({});
+
 
     useEffect(async() => {
             const jsonValue = await AsyncStorage.getItem('userData');
@@ -26,8 +27,9 @@ export default function VerArticulo({navigation, route}){
                 setColorBoton('#4D7084');
                 setBusy(false);
             }else{
+                const auxID = data.identificador
                 const auxCat = data.categoria;
-                const auxText = handleTextChange(auxCat);
+                const auxText = handleTextChange(auxCat, auxID);
                 const auxColor = handleColorChange(auxCat);
                 setuserData(data);
                 setTextoBoton(auxText);
@@ -36,45 +38,46 @@ export default function VerArticulo({navigation, route}){
             }
         },[reload])
 
-    //FALTA TOQUETEAR TODO ACÁ DE CUANDO ME LO HABILITARIA PARA SUBASTA TODO TODO TODO
+    //FALTA EL MANEJO DEL TIEMPO
 
     function handleColorChange(data){
         if(data != undefined || data != null){
-        switch(data){
-            case 'comun':
-                return '#4FAFE5'
-            case 'especial':
-                return '#4FAFE5'
-            case 'plata':
-                return '#4FAFE5'
-            case 'oro':
-                return '#4FAFE5'
-                
-            case 'platino':
-                return '#4FAFE5'
-                
-            default:
-                return '#4D7084'
-        }
+            if(data === "platino" || division === data){
+                return "#4FAFE5"
+            }else if(data === "oro" && (division==="comun" ||division ==="especial" ||division ==="plata")){
+                return "#4FAFE5"
+            }else if(data === "plata" && (division==="comun" ||division ==="especial")){
+                return "#4FAFE5"
+            }else if(data === "especial" && (division==="comun")){
+                return "#4FAFE5"
+            }
+            else{
+                return "#4D7084"
+            }
+        }else{
+            console.log("ERROR EN HANDLECOLORCHANGE");
         }
     }
-    
-    function handleTextChange(data){
+
+    function handleTextChange(data, auxCat){
         if(data != undefined){
-        switch(data){
-            case 'comun':
-                return 'Ofertar'
-            case 'especial':
-                    return 'Ofertar'
-            case 'plata':
-                    return 'Ofertar'
-            case 'oro':
-                    return 'Ofertar'
-            case 'platino':
-                    return 'Ofertar'
-            default:
-                return 'No cumples los requisitos minimos'
-        }
+            if(auxCat === duenio){
+                return "No puedes ofertar tu producto"
+            }
+            if(data === "platino" || division === data){
+                return "Ofertar"
+            }else if(data === "oro" && (division==="comun" ||division ==="especial" ||division ==="plata")){
+                return "Ofertar"
+            }else if(data === "plata" && (division==="comun" ||division ==="especial")){
+                return "Ofertar"
+            }else if(data === "especial" && (division==="comun")){
+                return "Ofertar"
+            }
+            else{
+                return "No cumples con la categoria mínima"
+            }
+        }else{
+            console.log("ERROR EN HANDLETEXTCHANGE");
         }
     }
 
@@ -83,7 +86,7 @@ export default function VerArticulo({navigation, route}){
             // navigation.navigate('InicioSesion');
             navigation.popToTop();
         }else{
-            if(textoBoton.localeCompare('Ofertar')){
+            if(textoBoton==='Ofertar'){
                 // navigation.navigate('Subasta');
             }
             //TODO, EL MANEJO DE MÁS COSAS

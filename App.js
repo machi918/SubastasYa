@@ -25,6 +25,7 @@ import Loading from './src/components/Loading/Loading';
 import Guest from './src/components/Guest/Guest';
 import verDetalle from './src/pages/verDetalleArticulo/verDetalle';
 import subastasCat from './src/pages/subastasCategoria/subastasCat';
+import agregarArticulo from './src/pages/agregarArticulo/agregarArticulo';
 
 
 
@@ -91,7 +92,8 @@ export default function App(){
 		<SafeAreaView style={styles.backgroundStyle}>
 			<Stack.Navigator>
 				<Stack.Screen name="InicioSesion" component={InicioSesion} options={{headerShown: false}}/>
-				<Stack.Screen name="Registro" component={Registro} options={{headerShown: false}}/>
+				<Stack.Screen name="Registro" component={Registro} options={{title: 'Registro',headerTitleAlign:'center', headerStyle:{borderBottomColor:'#4FAFE5', borderBottomWidth: 2}}}/>
+				{/* <Stack.Screen name="Registro" component={Registro} options={{headerShown: false}}/> */}
 				<Stack.Screen name="HomeMain" component={mainAct} options={{headerShown: false}}/>
 				<Stack.Screen name="subastaAct" component={subastaAct}/>
 				<Stack.Screen name="EditarPerfil" component={EditarPerfil} options={{ title: 'Editar Perfil', headerTitleAlign:'center', headerStyle:{borderBottomColor:'#4FAFE5',borderBottomWidth: 2} }}/>
@@ -107,6 +109,7 @@ export default function App(){
 				<Stack.Screen name="Guest" component={Guest} options={{headerShown: false}}/>
 				<Stack.Screen name="verDetalle" component={verDetalle} options={{title: 'Detalles',headerTitleAlign:'center', headerStyle:{borderBottomColor:'#4FAFE5', borderBottomWidth: 2}}}/>
 				<Stack.Screen name="verSubastasCat" component={subastasCat} options={{title: 'Subastas',headerTitleAlign:'center', headerStyle:{borderBottomColor:'#4FAFE5', borderBottomWidth: 2}}}/>
+				<Stack.Screen name="agregarArticulo" component={agregarArticulo} options={{title: 'Agregar Producto',headerTitleAlign:'center', headerStyle:{borderBottomColor:'#4FAFE5', borderBottomWidth: 2}}}/>
 			</Stack.Navigator>
 		</SafeAreaView>
 		</NavigationContainer>

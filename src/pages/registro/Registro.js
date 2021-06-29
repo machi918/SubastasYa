@@ -75,7 +75,6 @@ export default function Registro({navigation}){
                 <TextInput
                 style={styles.input}
                 keyboardType={'default'}
-                secureTextEntry={true}
                 placeholder={'Domicilio'}
                 onChangeText={(text)=>setDomicilio(text)}
                 ></TextInput>
