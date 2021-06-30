@@ -30,7 +30,17 @@ const styles = StyleSheet.create({
 		height:90,
 		borderRadius:100,
 		justifyContent:'center',
-		alignItems:'center'
+		alignItems:'center',
+		//Sombra----
+		shadowColor: "#000",
+		shadowOffset: {
+			width: 0,
+			height: 4,
+		},
+		shadowOpacity: 0.30,
+		shadowRadius: 4.65,
+		elevation: 8,
+		//----------
 	},
 	roundedButtonText:{
 		color: '#FFFFFF',

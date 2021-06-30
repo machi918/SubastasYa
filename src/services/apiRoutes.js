@@ -67,6 +67,78 @@ export const getItemsSubasta = async (data) =>{
     }
 }
 
+export const subastasCategorias = async (data) =>{
+    const options = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    }
+    try {
+        const response = await fetch(url+'Categorias/identificador/'+data,options);
+        return response
+    } 
+    catch (error) {
+        console.error(error)
+    }
+}
+
+//----------------------------------------------------------------------------------
+
+//Endpoints de Articulos
+
+//Crear articulo
+export const addProducto = async (data) =>{
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }
+    try {
+        const response = await fetch(url+'PublicarProducto/fecha/'+data.fecha+'/descripcionCatalogo/'+data.miniDesc+'/descripcionCompleta/'+data.allDesc+'/revisor/'+data.revisor+'/duenio/'+data.duenio+'/titulo/'+data.titulo,options);
+        return response
+    } 
+    catch (error) {
+        console.error(error)
+    }
+}
+
+export const addPhotoProducto = async (data) =>{
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }
+    try {
+        const response = await fetch(url+'Fotos/producto/'+data.idProducto+'/foto/'+data.url,options);
+        return response
+    } 
+    catch (error) {
+        console.error(error)
+    }
+}
+
+export const addIteamCatalogo = async (data) =>{
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }
+    try {
+        const response = await fetch(url+'ITCat/producto/'+data.idProducto,options);
+        return response
+    } 
+    catch (error) {
+        console.error(error)
+    }
+}
+
 //Endpoints de articulos segun una persona
 export const getArticulosSegunID = async (data) =>{
     const options = {
@@ -84,46 +156,6 @@ export const getArticulosSegunID = async (data) =>{
         console.error(error)
     }
 }
-
-export const subastasCategorias = async (data) =>{
-    const options = {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-    }
-    try {
-        const response = await fetch(url+'Categorias/identificador/'+data,options);
-        return response
-    } 
-    catch (error) {
-        console.error(error)
-    }
-}
-
-//Crear articulo
-export const addProducto = async (data) =>{
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    }
-    try {
-        const response = await fetch(url+'PublicarProducto/fecha/'+data.fecha+'/descripcionCatalogo/'+data.miniDesc+'/descripcionCompleta/'+data.allDesc+'/revisor/'+data.revisor+'/duenio/'+data.duenio+'/titulo/'+data.titulo+'',options);
-        return response
-    } 
-    catch (error) {
-        console.error(error)
-    }
-}
-
-
-//----------------------------------------------------------------------------------
-
-
-//Endpoints de 
 
 //----------------------------------------------------------------------------------
 

@@ -58,7 +58,6 @@ export default function Perfil({navigation}){
 
     const handleLogOut = async () =>{
         await removeValue();
-        // navigation.navigate('InicioSesion');
         navigation.popToTop();
     }
 

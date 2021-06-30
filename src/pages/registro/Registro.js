@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {SafeAreaView, Text, View, Image, TouchableOpacity, TextInput} from 'react-native';
+import {SafeAreaView, Text, View, Image, TouchableOpacity, TextInput,ScrollView} from 'react-native';
 import styles from './Styles';
 import {signup} from '../../controllers/UsersController'
 
@@ -31,7 +31,7 @@ export default function Registro({navigation}){
             <View style={styles.header}>
                 <Image source={require('../../assets/Images/Logo.png')} style={styles.logo}></Image>
             </View>
-            <View style={styles.main}>
+            <ScrollView style={styles.main}>
                 {/* TODO: REQUIERED FIELD */}
                 <TextInput
                 style={styles.input}
@@ -78,12 +78,12 @@ export default function Registro({navigation}){
                 placeholder={'Domicilio'}
                 onChangeText={(text)=>setDomicilio(text)}
                 ></TextInput>
-
+            </ScrollView>
                 <TouchableOpacity style={styles.buttonWrapper} onPress={() => postRegistro()}>
                     <Text style={styles.buttonText}>Registrarse</Text>
                 </TouchableOpacity>
 
-            </View>
+            {/* </View> */}
 		</SafeAreaView>
 	);
 };

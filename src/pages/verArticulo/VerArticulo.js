@@ -87,6 +87,7 @@ export default function VerArticulo({navigation, route}){
             navigation.popToTop();
         }else{
             if(textoBoton==='Ofertar'){
+                navigation.navigate('Subasta');
                 // navigation.navigate('Subasta');
             }
             //TODO, EL MANEJO DE MÁS COSAS

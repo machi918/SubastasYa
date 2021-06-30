@@ -110,6 +110,7 @@ export default function App(){
 				<Stack.Screen name="verDetalle" component={verDetalle} options={{title: 'Detalles',headerTitleAlign:'center', headerStyle:{borderBottomColor:'#4FAFE5', borderBottomWidth: 2}}}/>
 				<Stack.Screen name="verSubastasCat" component={subastasCat} options={{title: 'Subastas',headerTitleAlign:'center', headerStyle:{borderBottomColor:'#4FAFE5', borderBottomWidth: 2}}}/>
 				<Stack.Screen name="agregarArticulo" component={agregarArticulo} options={{title: 'Agregar Producto',headerTitleAlign:'center', headerStyle:{borderBottomColor:'#4FAFE5', borderBottomWidth: 2}}}/>
+				<Stack.Screen name="Subasta" component={Subasta} options={{headerShown: false}}/>
 			</Stack.Navigator>
 		</SafeAreaView>
 		</NavigationContainer>

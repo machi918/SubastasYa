@@ -39,7 +39,16 @@ export default function MisArticulos({navigation, route}){
     }
 
     const handleAgregarArticulo = () =>{
-        navigation.navigate('agregarArticulo',{});
+        navigation.navigate('agregarArticulo',{idDuenio: userData.identificador});
+    }
+
+    const handleDisponibilidad = (disp)=>{
+        console.log("Disponibilidad: "+disp);
+        if(disp == null){
+            return "En revisión"
+        }else{
+            return disp
+        }
     }
 
 	return (
@@ -56,7 +65,8 @@ export default function MisArticulos({navigation, route}){
                 {articulos === undefined ? null : articulos.map((key, data )=>{
                     return(
                         <TouchableOpacity key={data} onPress={()=>handleVerArticulo(data)}>
-                            <Articulo key={data} id={articulos[data].identificador} titulo={articulos[data].titulo} division={articulos[data].categoria} estado={articulos[data].disponible} fecha={articulos[data].fecha} descComp={articulos[data].descripcionCompleta} foto={articulos[data].foto}/>
+                            <Articulo key={data} id={articulos[data].identificador} titulo={articulos[data].titulo} division={articulos[data].categoria} estado={handleDisponibilidad(articulos[data].disponible)} fecha={articulos[data].fecha} descComp={articulos[data].descripcionCompleta} foto={articulos[data].foto}/>
+                            {/* estado={articulos[data].disponible} */}
                         </TouchableOpacity>
                     )})
                 } 

@@ -42,12 +42,25 @@ const styles = StyleSheet.create({
     fotos:{
         alignItems:'center',
         width:'100%',
-        backgroundColor:'green',
-        borderColor:'black',
-        borderBottomWidth:2,
+        marginTop:10,
+        height:50,
     },
     extra:{
-        fontSize:20
+        fontSize:20,
+        marginTop:10,
+        paddingLeft:15
+    },
+    addFoto:{
+        height:'100%',
+        width:'50%',
+        alignItems:'center',
+        justifyContent:'center',
+        borderRadius: 5,
+        borderColor: '#4FAFE5',
+        borderWidth: 2,
+    },
+    subTitleButton:{
+
     }
 });
 

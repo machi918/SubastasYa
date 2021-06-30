@@ -3,8 +3,13 @@ import {StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
 	container:{
 		height:'100%',
-        backgroundColor:'#FFFFFF'
+        backgroundColor:'#FFFFFF',
+        alignItems:'center',
 	},
+    // main:{
+    //     height:'100%',
+    //     width:'100%'
+    // },
 	header: {
         width:'100%',
         height:'30%',
@@ -18,17 +23,19 @@ const styles = StyleSheet.create({
 	},
 	main: {
         height:'70%',
-        alignItems:'center',
-        flexDirection:'column'
+        width:'100%',
+        flexDirection:'column',
 	},
 	buttonWrapper: {
         marginTop: 20,
-        height:'10%',
+        // height:'10%',
+        height:50,
 		width:'90%',
         backgroundColor:'#2F80ED',
         alignItems:'center',
         justifyContent:'center',
-        borderRadius:10
+        borderRadius:10,
+        marginBottom:12
 	},
     buttonText: {
 		fontSize: 18,
@@ -41,7 +48,8 @@ const styles = StyleSheet.create({
         borderColor:'grey',
         borderWidth:2,
         width:'90%',
-        color:'#000000'
+        color:'#000000',
+        alignSelf:'center'
     }
 });
 

@@ -2,11 +2,14 @@ import React,{useEffect, useState} from 'react';
 import {SafeAreaView, Text, View, Image, TouchableOpacity, TextInput, ScrollView, PermissionsAndroid} from 'react-native';
 import styles from './Styles';
 import Loading from '../../components/Loading/Loading'
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import verDetalle from '../../pages/verDetalleArticulo/verDetalle'
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import {addProduct, addFotoProducto, addItemCatalogo} from '../../controllers/ArticulosController'
 
 export default function agregarArticulo({navigation, route}){
+
+    //TODO, MANEJO DE LA LIBRERIA DE FOTOS. QUE TE DEJE SELECCIONAR LA FOTO
+
+    const {idDuenio} = route.params;
 
     const [busy,setBusy] = useState(true);
     const [reload,setReload] = useState(true);
@@ -16,7 +19,8 @@ export default function agregarArticulo({navigation, route}){
     const [allDesc, setAllDesc] = useState('');
     const [nombreAutor, setNombreAutor] = useState('');
     const [fechaArticulo, setFechaArticulo] = useState('');
-    const [imagenURI,setImagenURI] = useState('');
+    const [imagenURI,setImagenURI] = useState('https://www.parramattacameras.com.au/media/catalog/product/cache/aef55d64a8ced0a8bc0aa5d7aca8278a/c/a/canon_eos_m50_mirrorless_digital_camera_with_15-45mm_lens_black_4.jpg');
+    const [productoID,setProductID] = useState(0);
 
     useEffect(async() => {
 
@@ -41,7 +45,28 @@ export default function agregarArticulo({navigation, route}){
             })
     }
 
-    function handleOnPress(){
+    const handleOnPress= async ()=> {
+        let data={
+            fecha: null,
+            titulo:nombreArticulo,
+            miniDesc:miniDesc,
+            allDesc: allDesc,
+            revisor: 1,
+            duenio: idDuenio,
+            precio: precio,
+        }
+        // const response = await addProduct(data);
+        // setProductID(response.recordset.identificador)
+        // const response2 = await addPhotoProducto()
+        const response = await addProduct(data).then(res => res.json()).then(res2 => {
+            const fotoData = {
+                idProducto: res2.recordset.identificador,
+                url: imagenURI
+            };
+            const aux1 = addFotoProducto(fotoData);
+            setProductID(response.recordset.identificador);
+            const aux2 = addItemCatalogo(fotoData);
+        }).then(()=>navigation.goBack());
     }
     
     function clearText(){
@@ -53,6 +78,7 @@ export default function agregarArticulo({navigation, route}){
         setFechaArticulo('');
     }
 
+    //-------------------------MANEJO DE PERMISOS----------------------
     const requestCameraPermission = async () => {
         try {
             const granted = await PermissionsAndroid.request(
@@ -73,7 +99,9 @@ export default function agregarArticulo({navigation, route}){
         console.warn(err);
         }
     };
+    //-------------------------------------------------------------------------
 
+    //---------------------SACAR UNA FOTO DE LA CAMARA-------------------------
     const openCamara = () => {
         requestCameraPermission()
         const options = {
@@ -105,11 +133,15 @@ export default function agregarArticulo({navigation, route}){
             }
         });
     };
+    //----------------------------------------------------------------------
 
+    //----------------------------SACAR FOTO DE LIBRERIA--------------------
     function handleLibrary(){
 
     }
+    //----------------------------------------------------------------------
 
+    //-------------------------------RENDER---------------------------------
 	return (
 		<SafeAreaView style={styles.container}>
             {busy ? <Loading/> : null }
@@ -139,24 +171,6 @@ export default function agregarArticulo({navigation, route}){
                     onChangeText={(text)=>setPrecio(parseInt(text))}
                     ></TextInput>
 
-                    <Image style={{height:100, 
-                        width:100, 
-                        borderRadius:100, 
-                        borderWidth:2, 
-                        borderColor:'black',
-                        backgroundColor:'red',
-                        alignSelf:'center'}}
-                        source={{uri: imagenURI}}
-                        ></Image>
-
-
-                    <View style={styles.fotos}>
-                        <Text style={styles.subTitle}>Fotos: </Text>
-                        <TouchableOpacity onPress={()=>openCamara()}>
-                            <Text style={styles.subTitle}>Subir foto</Text>
-                        </TouchableOpacity>
-                    </View>
-
                     <Text style={styles.extra}>Extras: </Text>
 
                     <Text style={styles.subTitle}>Nombre del Autor: </Text>
@@ -183,6 +197,26 @@ export default function agregarArticulo({navigation, route}){
                     numberOfLines={8}
                     maxLength={180}
                     ></TextInput>
+
+                    <Text style={styles.subTitle}>Foto: </Text>
+                    <Image style={{marginTop:10,
+                        height:100, 
+                        width:100, 
+                        borderRadius:100, 
+                        borderWidth:2, 
+                        borderColor:'black',
+                        backgroundColor:'red',
+                        alignSelf:'center'}}
+                        source={{uri: imagenURI}}
+                        ></Image>
+
+
+                    <View style={styles.fotos}>
+                        <TouchableOpacity style={styles.addFoto} onPress={()=>openCamara()}>
+                            <Text style={styles.subTitleButton}>Subir foto</Text>
+                        </TouchableOpacity>
+                    </View>
+
                     <Text style={styles.subTitle}> </Text>
 
             </ScrollView>
