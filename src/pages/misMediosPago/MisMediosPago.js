@@ -31,7 +31,7 @@ export default function MisMediosPago({navigation}){
 								<Text>Tarjeta de Crédito</Text>
 							</View>
 							<View style={{flexDirection: 'column', alignItems: 'center'}}>
-								<TouchableOpacity><Image style={styles.icons} source={require('../../assets/Images/Bank.png')}></Image></TouchableOpacity>
+								<TouchableOpacity onPress={() => {navigation.navigate('AgregarCuentaBancaria'), setShowModal(false)}}><Image style={styles.icons} source={require('../../assets/Images/Bank.png')}></Image></TouchableOpacity>
 								<Text>Cuenta Bancaria</Text>
 							</View>
 						</View>
