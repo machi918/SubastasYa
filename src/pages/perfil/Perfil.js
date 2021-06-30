@@ -70,7 +70,7 @@ export default function Perfil({navigation}){
                 <Text style={styles.headerText}>Perfil</Text>
             </View>
             <View style={styles.subHeader}>
-                <Image source={{uri:userData.fotoRapida}} style={{resizeMode:'cover', height:170, width: 170,zIndex:100, borderColor: color, borderWidth:4, borderRadius:100}}></Image>
+                <Image source={{uri: "data:image/jpeg;base64," + userData.fotoRapida}} style={{resizeMode:'cover', height:170, width: 170,zIndex:100, borderColor: color, borderWidth:4, borderRadius:100}}></Image>
                 <Text style={styles.subHeaderName}>{userData.nombre}</Text>
                 <Text style={styles.subHeaderDivision}>Division {userData.categoria}</Text>
             </View>

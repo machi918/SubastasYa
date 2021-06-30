@@ -101,6 +101,25 @@ export const subastasCategorias = async (data) =>{
     }
 }
 
+//Crear articulo
+export const addProducto = async (data) =>{
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }
+    try {
+        const response = await fetch(url+'PublicarProducto/fecha/'+data.fecha+'/descripcionCatalogo/'+data.miniDesc+'/descripcionCompleta/'+data.allDesc+'/revisor/'+data.revisor+'/duenio/'+data.duenio+'/titulo/'+data.titulo+'',options);
+        return response
+    } 
+    catch (error) {
+        console.error(error)
+    }
+}
+
+
 //----------------------------------------------------------------------------------
 
 
