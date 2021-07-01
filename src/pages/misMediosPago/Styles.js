@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
 		backgroundColor: 'white',
 		alignItems: 'center',
 		padding: 25,
+		width: '90%'
 	},
 	icons: {
 		height: 75,
@@ -57,6 +58,52 @@ const styles = StyleSheet.create({
 		color: 'gray',
 		fontSize: 20
 	},
+    buttonWrapperLogOut:{
+        marginTop:25,
+        justifyContent:'center',
+        alignItems:'center',
+        paddingLeft:15,
+        height:'10%',
+        width:'90%',
+        borderBottomColor:'#EB5757',
+        borderBottomWidth:2,
+    },
+    buttonTextLogOut:{
+        color:'#EB5757'
+    },
+    wrapper:{
+        justifyContent:'center',
+        paddingLeft:15,
+        height:'10%',
+        width:'90%',
+        borderBottomColor:'rgba(33, 33, 33, 0.08)',
+        borderBottomWidth:2
+    },
+	buttonWrapper: {
+        marginBottom: 20,
+        height:'10%',
+		width:'90%',
+        backgroundColor:'#2F80ED',
+        alignItems:'center',
+        justifyContent:'center',
+        borderRadius:10
+	},
+    buttonText: {
+		fontSize: 18,
+		fontWeight: '400',
+        color:'#FFFFFF'
+	},
+	buttonModal: {
+		backgroundColor: '#2F80ED',
+		borderWidth: 0.5,
+		borderColor: 'gray',
+		width: '80%',
+		borderRadius: 10,
+        alignItems:'center',
+	},
+	modalHeaderText: {
+		fontSize: 24
+	}
 });
 
 export default styles;

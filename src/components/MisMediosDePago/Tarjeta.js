@@ -18,7 +18,7 @@ export default function Tarjeta(props){
     switch (nombre) {
         case 'AMERICAN EXPRESS':
             imagen = AmericanCard
-            texto = '**** - ****** - ' + numero.slice(-5)
+            texto = '****   ******   ' + numero.slice(-5)
             break
         case 'MAESTRO':
         case 'MASTERCARD':
