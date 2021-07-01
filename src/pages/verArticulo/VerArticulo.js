@@ -7,7 +7,7 @@ import verDetalle from '../../pages/verDetalleArticulo/verDetalle'
 
 export default function VerArticulo({navigation, route}){
 
-    const {titulo,descripcionMini, descComp, precio, division, estado,foto, fecha, ownProduct, duenio} = route.params;
+    const {titulo,descripcionMini, descComp, precio, division, estado,foto, fecha, ownProduct, duenio,id, idSubasta} = route.params;
 
     const [precioFinal, setPrecioFinal] = useState(precio);
     const [busy,setBusy] = useState(true);
@@ -41,6 +41,9 @@ export default function VerArticulo({navigation, route}){
     //FALTA EL MANEJO DEL TIEMPO
 
     function handleColorChange(data){
+        if(estado == "no"){
+            return "#256C0C"
+        }
         if(data != undefined || data != null){
             if(data === "platino" || division === data){
                 return "#4FAFE5"
@@ -60,6 +63,9 @@ export default function VerArticulo({navigation, route}){
     }
 
     function handleTextChange(data, auxCat){
+        if(estado== "no"){
+            return "Objeto vendido"
+        }
         if(data != undefined){
             if(auxCat === duenio){
                 return "No puedes ofertar tu producto"
@@ -87,8 +93,10 @@ export default function VerArticulo({navigation, route}){
             navigation.popToTop();
         }else{
             if(textoBoton==='Ofertar'){
-                navigation.navigate('Subasta');
-                // navigation.navigate('Subasta');
+                navigation.navigate('Subasta', {postor:userData.identificador, foto:foto, titulo:titulo,precio:precio, duenio:duenio, division:division, idProducto:id, idSubasta:idSubasta});
+            }
+            if(textoBoton==="Objeto vendido"){
+                navigation.goBack();
             }
             //TODO, EL MANEJO DE MÁS COSAS
         }
@@ -96,6 +104,12 @@ export default function VerArticulo({navigation, route}){
 
     function handleDetails(){
         navigation.navigate('verDetalle',{descripcion: descComp, titulo: titulo});
+    }
+
+    function handleEstado(){
+        if(estado == "no"){
+
+        }
     }
 
 	return (

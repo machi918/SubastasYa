@@ -1,4 +1,4 @@
-import {subastas,getItemsSubasta,getArticulosSegunID,subastasCategorias} from '../services/apiRoutes'
+import {subastas,getItemsSubasta,getArticulosSegunID,subastasCategorias,getPujasSubasta,createPuja} from '../services/apiRoutes'
 
 export const getSubasta = async ()=>
 {
@@ -43,6 +43,29 @@ export const getArticulosPersona = async (data)=>
 export const getSubastasCategoria = async (data)=>
 {
     const response = await subastasCategorias(data);
+    if(response.status === 200){
+        const json = await response.json();
+        return json;
+    }else{
+        console.log('ERROR EN EL GetSubastaCategoria');
+        console.log(response.status);
+    }
+}
+
+export const getPujas = async (data)=>
+{
+    const response = await getPujasSubasta(data);
+    if(response.status === 200){
+        const json = await response.json();
+        return json;
+    }else{
+        console.log('ERROR EN EL GetSubastaCategoria');
+        console.log(response.status);
+    }
+}
+export const createPujas = async (data)=>
+{
+    const response = await createPuja(data);
     if(response.status === 200){
         const json = await response.json();
         return json;

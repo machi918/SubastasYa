@@ -43,7 +43,6 @@ export default function MisArticulos({navigation, route}){
     }
 
     const handleDisponibilidad = (disp)=>{
-        console.log("Disponibilidad: "+disp);
         if(disp == null){
             return "En revisión"
         }else{

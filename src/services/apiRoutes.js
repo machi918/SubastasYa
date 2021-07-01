@@ -83,6 +83,41 @@ export const subastasCategorias = async (data) =>{
     }
 }
 
+//Me trae todas las pujas de una subasta
+export const getPujasSubasta = async (data) =>{
+    const options = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    }
+    try {
+        const response = await fetch(url+'ListaPujos/identificador/'+data,options);
+        return response
+    } 
+    catch (error) {
+        console.error(error)
+    }
+}
+
+//Crear una puja
+export const createPuja = async (data) =>{
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }
+    try {
+        const response = await fetch(url+'pujos/subasta/'+data.idSubasta+'/duenio/'+data.idDuenioProducto+'/producto/'+data.idProducto+'/cliente/'+data.idCliente+'/importe/'+data.importe+'/comision/'+data.comision+'/hora/'+"'"+data.hora+"'",options);
+        return response
+    } 
+    catch (error) {
+        console.error(error)
+    }
+}
+
 //----------------------------------------------------------------------------------
 
 //Endpoints de Articulos
@@ -160,7 +195,41 @@ export const getArticulosSegunID = async (data) =>{
 //----------------------------------------------------------------------------------
 
 
-//Endpoints de 
+//Endpoints de Medios de Pago
+
+export const getMedioPago = async (data) =>{
+    const options = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    }
+    let id = data;
+    try {
+        const response = await fetch(url+'Tarjetas/identificador/'+data,options);
+        return response
+    } 
+    catch (error) {
+        console.error(error)
+    }
+}
+
+export const addMedioPAgo = async (data) =>{
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }
+    try {
+        const response = await fetch(url+'CrearTarjetas/nombre/'+data.nombre+'/numero/'+data.numero+'/fechavto/'+data.fecha+'/cliente/'+data.cliente+'/titular/'+data.titular+'/dni/'+data.dni+'/validado/'+null,options);
+        return response
+    } 
+    catch (error) {
+        console.error(error)
+    }
+}
 
 //----------------------------------------------------------------------------------
 
