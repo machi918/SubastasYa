@@ -22,10 +22,11 @@ export default function MisEstadisticas({navigation, route}){
 	useEffect( async () => {
         console.log("PIDO ESTADISTICAS");
 		const response = await getEstadisticasUser(user);
+		console.log('response devolvio');
 		if(response == undefined){
 			console.log("Error al traer estadisticas");
 		}else{
-
+			console.log(response);
 			setStats(response[0]);
 			setPie(response[1])
 			setBusy(false);
@@ -168,11 +169,11 @@ export default function MisEstadisticas({navigation, route}){
 			<View style={styles.dataContainer}>
 				<View style={styles.data}>
 					<Text style={styles.infoText}>SUBASTAS PARTICIPADAS</Text>
-					<Text style={styles.dataText}>{stats === undefined ? '-' : stats.participadas}</Text>
+					<Text style={styles.dataText}>{stats === undefined ? '-' : stats.cantidad_subastas}</Text>
 				</View>
 				<View style={styles.data}>
 					<Text style={styles.infoText}>PUJES REALIZADOS</Text>
-					<Text style={styles.dataText}>{stats === undefined ? '-' : stats.pujas}</Text>
+					<Text style={styles.dataText}>{stats === undefined ? '-' : stats.cantidad_pujes}</Text>
 				</View>
 				<View style={styles.data}>
 					<Text style={styles.infoText}>SUBASTAS GANADAS</Text>

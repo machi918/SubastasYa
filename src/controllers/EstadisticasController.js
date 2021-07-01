@@ -8,6 +8,7 @@ export const getEstadisticasUser = async ( idUser )=>
 
     if(response.status === 200 && response2.status === 200){
         const json = await response.json();
+
         const json2 = await response2.json();
 
         return [json.recordset[0], json2.recordset];
