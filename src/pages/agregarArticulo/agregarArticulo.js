@@ -237,8 +237,6 @@ export default function agregarArticulo({navigation, route}){
                         alignSelf:'center'}}
                         source={{uri: imagenURI}}
                         ></Image>
-
-
                     <View style={styles.fotos}>
                         <TouchableOpacity style={styles.addFoto} onPress={()=>openCamara()}>
                             <Text style={styles.subTitleButton}>Subir foto</Text>

@@ -28,7 +28,7 @@ export default function Subasta({navigation,route}){
 	const [pujas, setPujas] = useState();
 	const [ownOffer, setOwnOffer] = useState(0);
 	//Mejor oferta
-	const [bestOffer, setBestOffer] = useState(0);
+	const [bestOffer, setBestOffer] = useState(parseInt(precio));
 	const [bestUserOffer, setBestUserOffer] = useState('-');
 	//Fechas y horarios
 	// const fechaObj = new Date(fecha);

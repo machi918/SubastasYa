@@ -256,7 +256,7 @@ export const addMedioPago = async (data) =>{
         body: JSON.stringify(data)
     }
     try {
-        const response = await fetch(url+'CrearTarjetas/nombre/'+data.nombre+'/numero/'+data.numero+'/fechavto/'+data.fecha+'/cliente/'+data.cliente+'/titular/'+data.titular+'/dni/'+data.dni+'/validado/'+null,options);
+        const response = await fetch(url+'CrearTarjetas/nombre/'+data.nombre+'/numero/'+data.numero+'/fechavto/'+data.fechavto+'/cliente/'+data.cliente+'/titular/'+data.titular+'/dni/'+data.dni,options);
         return response
     } 
     catch (error) {
@@ -267,7 +267,23 @@ export const addMedioPago = async (data) =>{
 //----------------------------------------------------------------------------------
 
 
-//Endpoints de 
+//Endpoints de FOTO
+export const addPhotoPersona = async (data) =>{
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    }
+    try {
+        const response = await fetch(url+'EditarFoto/identificador/'+data.user+'/foto/'+data.imagenURI,options);
+        return response
+    } 
+    catch (error) {
+        console.error(error)
+    }
+}
+
 
 //----------------------------------------------------------------------------------
 
