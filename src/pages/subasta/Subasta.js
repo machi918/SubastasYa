@@ -18,6 +18,7 @@ export default function Subasta({navigation,route}){
 	//Modals
 	const [showModalPago, setShowModalPago] = useState(true);
 	const [showModalExit, setShowModalExit] = useState(false);
+	const [showFinalModel, setShowFinalModel] = useState(false);
 	//Medios de Pago
     const [mediosPago, setMediosPagos] = useState();
 	const [medioActualPago,setMedioActualPago] = useState('');
@@ -114,6 +115,29 @@ export default function Subasta({navigation,route}){
 		</Modal>
 	)
     //-----------------------
+
+	//Model de FIn de subasta
+	const modalFinal = (
+		<Modal
+		animationType='fade' //Es la animación al abrirse
+		transparent //Hace al Modal transparente
+		visible={showFinalModel} //Si se muestra en la pantalla o no
+		onRequestClose={() => setShowModal(false)} //El botón Back de Android hace algo, en este caso lo cierro
+		>
+			<View style={styles.modalGeneric} onPress={()=>console.log('a')}>
+				<View style={styles.modalView}>
+					<TouchableOpacity style={styles.modalButton} onPress={() => setShowModalExit(false)}>
+						<Text style={styles.modalButtonText}>X</Text>
+					</TouchableOpacity>
+					<Text style={styles.titleText}>¿Desea retirarse de la subasta?</Text>
+					<TouchableOpacity style={styles.buttonExit} onPress={()=>handleGoOut()}>
+						<Text style={styles.buttonExitText}>Retirarse</Text>
+					</TouchableOpacity>
+				</View>
+			</View>
+		</Modal>
+	)
+	//-----------------------
 
     //Salir de la subasta----
     const handleGoOut = ()=>{
@@ -214,6 +238,7 @@ export default function Subasta({navigation,route}){
 
             {modalExit}
             {modalElegirMedioPago}
+			{modalFinal}
             {busy ? <Loading/> : null }
 
         </SafeAreaView>

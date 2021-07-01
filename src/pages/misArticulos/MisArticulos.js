@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import {SafeAreaView, Text, View, Image, TouchableOpacity, TextInput, ScrollView} from 'react-native';
+import {SafeAreaView, Text, View, Image, TouchableOpacity, TextInput, ScrollView,RefreshControl} from 'react-native';
 import styles from './Styles';
 import Articulo from '../../components/Articulo/Articulo';
 import {getArticulosPersona} from '../../controllers/SubastasController'
@@ -9,6 +9,7 @@ import Guest from '../../components/Guest/Guest';
 
 export default function MisArticulos({navigation, route}){
 
+    const [refreshing, setRefreshing] = useState(false)
     const [busy,setBusy] = useState(true);
     const [articulos, setArticulos] = useState();
     const [userData, setUserData] = useState();
@@ -16,6 +17,7 @@ export default function MisArticulos({navigation, route}){
     const [guest, setGuest] = useState(false);
 
     useEffect(async() => {
+        console.log("ME ACTUALIZO");
         const jsonValue = await AsyncStorage.getItem('userData');
         const data = JSON.parse(jsonValue);
         if(data != undefined || data != null){
@@ -33,6 +35,20 @@ export default function MisArticulos({navigation, route}){
         }
         
     }, [reload])
+
+    // const onRefresh = async() => {
+    //     setRefreshing(true);
+    //     // setReload(false);
+    //     const response = await getArticulosPersona(userData.identificador);
+    //     setArticulos(response.recordset);
+    //     setTimeout(()=> setRefreshing(false), 3000);
+    // };
+
+    const onRefresh =() => {
+        setReload(false);
+        setRefreshing(true);
+        setTimeout(()=> setRefreshing(false), 3000);
+    };
 
     const handleVerArticulo = (data) =>{
         navigation.navigate('VerArticulo', {descripcionMini: articulos[data].descripcionCatalogo, descComp:articulos[data].descripcionCompleta, precio: articulos[data].precioBase, titulo: articulos[data].titulo, foto:articulos[data].foto, duenio: userData.identificador});
@@ -60,7 +76,15 @@ export default function MisArticulos({navigation, route}){
             <View style={styles.main} pointerEvents={guest ? 'none' : 'auto'}>
             <ScrollView
             showsHorizontalScrollIndicator={false}
-            showsVerticalScrollIndicator={false}>
+            showsVerticalScrollIndicator={false}
+            refreshControl={
+            <RefreshControl
+                refreshing = {refreshing}
+                onRefresh = {onRefresh}
+            />
+            }
+            >
+            
                 {articulos === undefined ? null : articulos.map((key, data )=>{
                     return(
                         <TouchableOpacity key={data} onPress={()=>handleVerArticulo(data)}>

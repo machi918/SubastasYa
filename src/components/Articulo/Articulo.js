@@ -29,7 +29,8 @@ export default function Articulo({fecha, estado,division, titulo, id,foto}){
                 borderBottomLeftRadius:20,
                 borderBottomRightRadius:20
             }}>
-                <Text style={styles.bottomText}>Disponibilidad: {estado}  Fecha: {fecha.slice(0,10)}</Text>
+                <Text style={styles.bottomText}>Disponibilidad: {estado}  Fecha: 1111111</Text>
+                {/* AGREGA OTRA VEZ: Fecha: {fecha.slice(0,10)}< */}
             </View>
 
 		</View>

@@ -13,12 +13,12 @@ export default function agregarArticulo({navigation, route}){
 
     const [busy,setBusy] = useState(true);
     const [reload,setReload] = useState(true);
-    const [nombreArticulo, setNombreArticulo] = useState('');
+    const [nombreArticulo, setNombreArticulo] = useState(' ');
     const [precio, setPrecio] = useState(0);
-    const [miniDesc, setMiniDesc] = useState('');
-    const [allDesc, setAllDesc] = useState('');
-    const [nombreAutor, setNombreAutor] = useState('');
-    const [fechaArticulo, setFechaArticulo] = useState('');
+    const [miniDesc, setMiniDesc] = useState(' ');
+    const [allDesc, setAllDesc] = useState(' ');
+    const [nombreAutor, setNombreAutor] = useState(' ');
+    const [fechaArticulo, setFechaArticulo] = useState(' ');
     const [imagenURI,setImagenURI] = useState('https://www.parramattacameras.com.au/media/catalog/product/cache/aef55d64a8ced0a8bc0aa5d7aca8278a/c/a/canon_eos_m50_mirrorless_digital_camera_with_15-45mm_lens_black_4.jpg');
     const [productoID,setProductID] = useState(0);
 
@@ -55,18 +55,28 @@ export default function agregarArticulo({navigation, route}){
             duenio: idDuenio,
             precio: precio,
         }
-        // const response = await addProduct(data);
-        // setProductID(response.recordset.identificador)
-        // const response2 = await addPhotoProducto()
-        const response = await addProduct(data).then(res => res.json()).then(res2 => {
+        const response = await addProduct(data);
+        if(response != undefined){
+            let aux = (response.recordset[0].producto)
+            let auxURL = imagenURI.slice(7,imagenURI.length);
+            setProductID(response.recordset[0].producto)
             const fotoData = {
-                idProducto: res2.recordset.identificador,
-                url: imagenURI
+                    idProducto: aux,
+                    url: auxURL
             };
-            const aux1 = addFotoProducto(fotoData);
-            setProductID(response.recordset.identificador);
-            const aux2 = addItemCatalogo(fotoData);
-        }).then(()=>navigation.goBack());
+            const response2 = await addFotoProducto(fotoData);
+        }
+
+
+        // const response = await addProduct(data).then(res => res.json()).then(res2 => {
+        //     const fotoData = {
+        //         idProducto: res2.recordset.identificador,
+        //         url: imagenURI
+        //     };
+        //     const aux1 = addFotoProducto(fotoData);
+        //     setProductID(response.recordset.identificador);
+        //     const aux2 = addItemCatalogo(fotoData);
+        // }).then(()=>navigation.goBack());
     }
     
     function clearText(){
