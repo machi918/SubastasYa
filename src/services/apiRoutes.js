@@ -269,7 +269,42 @@ export const addMedioPAgo = async (data) =>{
 //----------------------------------------------------------------------------------
 
 
-//Endpoints de 
+//Endpoints de Estadisticas
+
+export const getEstadisticas = async (idUser) => {
+    const options = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    }
+
+    try {
+        const response = await fetch(url + 'Subasta/Metricas/identificador/' + idUser, options)
+        return response
+    } catch (e) {
+        console.error(e)
+    }
+
+}
+
+export const getEstadisticasTorta = async (idUser) => {
+    const options = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    }
+
+    try {
+        const response = await fetch(url + 'Subasta/Metricas2/identificador/' + idUser, options)
+        return response
+    } catch (e) {
+        console.error(e)
+    }
+
+}
+
 
 //----------------------------------------------------------------------------------
 
