@@ -4,8 +4,23 @@ import styles from './Styles';
 
 export default function Catalogo({id,titulo,division,foto, fecha, hora, categoria}){
 
+    //Fecha de la subasta
+    const fechaaux = new Date(fecha);
+    const dia = fechaaux.getDate();
+    const mes = fechaaux.getMonth();
+    const year = fechaaux.getFullYear();
+    
+    //Horario de la subasta
+    const horaaux = new Date(hora);
+    const hour = horaaux.getHours();
+    const min = horaaux.getMinutes();
+    const seg = horaaux.getSeconds();
+
+    //UseState
+    //UseState funcionamiento
     const [busy,setBusy] = useState(true);
     const [reload,setReload] = useState(true);
+    //UseState logicos
     const [color,setColor] = useState('');
 
     useEffect(async() => {
@@ -60,7 +75,7 @@ export default function Catalogo({id,titulo,division,foto, fecha, hora, categori
                 <Image source={{uri: foto}} style={styles.image}></Image>
             </View>
             <View style={styles.footer}>
-                <Text style={styles.bottomText}>Fecha: {fecha.slice(0,10)} | Hora: {hora.slice(11,16)}</Text>
+                <Text style={styles.bottomText}>Fecha: {dia}-{mes+1}-{year} | Hora: {horaaux.toString().slice(16,21)}</Text>
             </View>
 		</View>
 	);

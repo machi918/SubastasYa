@@ -7,15 +7,36 @@ import verDetalle from '../../pages/verDetalleArticulo/verDetalle'
 
 export default function VerArticulo({navigation, route}){
 
+    //Route Params
     const {titulo,descripcionMini, descComp, precio, division, estado,foto, fecha, ownProduct, duenio,id, idSubasta} = route.params;
 
-    const [precioFinal, setPrecioFinal] = useState(precio);
+    //Fecha de la subasta
+    const fechaaux = new Date(fecha);
+    const diaSub = fechaaux.getDate();
+    const mesSub = fechaaux.getMonth();
+    const yearSub = fechaaux.getFullYear();
+    const hourSub = fechaaux.getHours();
+    const minSub = fechaaux.getMinutes();
+    const segSub = fechaaux.getSeconds();
+    
+    //Fecha de hoy
+    const fechaHoy = new Date();
+    const dia = fechaHoy.getDate();
+    const mes = fechaHoy.getMonth();
+    const year = fechaHoy.getFullYear();
+    const hour = fechaHoy.getHours();
+    const min = fechaHoy.getMinutes();
+    const seg = fechaHoy.getSeconds();
+
+    //UseState
+    //UseState funcionamiento
     const [busy,setBusy] = useState(true);
     const [reload,setReload] = useState(true);
+    //UseState logicos
     const [textoBoton,setTextoBoton] = useState('');
     const [colorBoton,setColorBoton] = useState('');
     const [userData, setuserData] = useState({});
-
+    const [precioFinal, setPrecioFinal] = useState(precio);
 
     useEffect(async() => {
             const jsonValue = await AsyncStorage.getItem('userData');
@@ -44,46 +65,65 @@ export default function VerArticulo({navigation, route}){
         if(estado == "no"){
             return "#256C0C"
         }
-        if(data != undefined || data != null){
-            if(data === "platino" || division === data){
-                return "#4FAFE5"
-            }else if(data === "oro" && (division==="comun" ||division ==="especial" ||division ==="plata")){
-                return "#4FAFE5"
-            }else if(data === "plata" && (division==="comun" ||division ==="especial")){
-                return "#4FAFE5"
-            }else if(data === "especial" && (division==="comun")){
-                return "#4FAFE5"
-            }
-            else{
+        if((diaSub == dia) && (mesSub == mes) && (yearSub==year)){
+            console.log("DESDE VERARTICULO, LA SUBASTA ES HOY");
+            if((hour>hourSub) || ((hour==hourSub) && (min>minSub+10))){
                 return "#4D7084"
             }
-        }else{
-            console.log("ERROR EN HANDLECOLORCHANGE");
+            if(data != undefined || data != null){
+                if(data === "platino" || division === data){
+                    return "#4FAFE5"
+                }else if(data === "oro" && (division==="comun" ||division ==="especial" ||division ==="plata")){
+                    return "#4FAFE5"
+                }else if(data === "plata" && (division==="comun" ||division ==="especial")){
+                    return "#4FAFE5"
+                }else if(data === "especial" && (division==="comun")){
+                    return "#4FAFE5"
+                }
+                else{
+                    return "#4D7084"
+                }
+            }else{
+                console.log("ERROR EN HANDLECOLORCHANGE");
+            }
+        }
+        if(fechaaux > fechaHoy){
+            return "#4D7084"
         }
     }
 
     function handleTextChange(data, auxCat){
+        return "Ofertar"
         if(estado== "no"){
             return "Objeto vendido"
         }
-        if(data != undefined){
-            if(auxCat === duenio){
-                return "No puedes ofertar tu producto"
+        if(auxCat === duenio){
+            return "No puedes ofertar tu producto"
+        }if((diaSub == dia) && (mesSub == mes) && (yearSub==year)){
+            if((hour>hourSub) || ((hour==hourSub) && (min>minSub+10))){
+                return "Subasta finalizada"
             }
-            if(data === "platino" || division === data){
-                return "Ofertar"
-            }else if(data === "oro" && (division==="comun" ||division ==="especial" ||division ==="plata")){
-                return "Ofertar"
-            }else if(data === "plata" && (division==="comun" ||division ==="especial")){
-                return "Ofertar"
-            }else if(data === "especial" && (division==="comun")){
-                return "Ofertar"
+            if(data != undefined){
+                if(data === "platino" || division === data){
+                    return "Ofertar"
+                }else if(data === "oro" && (division==="comun" ||division ==="especial" ||division ==="plata")){
+                    return "Ofertar"
+                }else if(data === "plata" && (division==="comun" ||division ==="especial")){
+                    return "Ofertar"
+                }else if(data === "especial" && (division==="comun")){
+                    return "Ofertar"
+                }
+                else{
+                    return "No cumples con la categoria mínima"
+                }
+            }else{
+                console.log("ERROR EN HANDLETEXTCHANGE");
             }
-            else{
-                return "No cumples con la categoria mínima"
-            }
-        }else{
-            console.log("ERROR EN HANDLETEXTCHANGE");
+        }
+        if(fechaaux > fechaHoy){
+            return "Subasta no iniciada"
+        }else if(fechaaux < fechaHoy){
+            return "Subasta finalizada"
         }
     }
 
@@ -96,6 +136,12 @@ export default function VerArticulo({navigation, route}){
                 navigation.navigate('Subasta', {postor:userData.identificador, foto:foto, titulo:titulo,precio:precio, duenio:duenio, division:division, idProducto:id, idSubasta:idSubasta});
             }
             if(textoBoton==="Objeto vendido"){
+                navigation.goBack();
+            }
+            if(textoBoton==="Subasta no iniciada"){
+                navigation.goBack();
+            }
+            if(textoBoton==="Subasta finalizada"){
                 navigation.goBack();
             }
             //TODO, EL MANEJO DE MÁS COSAS

@@ -4,6 +4,21 @@ import styles from './Styles';
 
 export default function Articulo({fecha, estado,division, titulo, id,foto}){
 
+        //Fecha de la subasta
+        const fechaaux = new Date(fecha);
+        const dia = fechaaux.getDate();
+        const mes = fechaaux.getMonth();
+        const year = fechaaux.getFullYear();
+
+    function handleEstado(){
+        console.log("FECHA DEL PRODUCTP DIFIERE" + fechaaux.toString());
+        if(estado == "si"){
+            return "Si"
+        }else{
+            return "Vendido"
+        }
+    }
+
     function handleColorChange(){
         if(estado === "no"){
             return "#256C0C"
@@ -29,8 +44,7 @@ export default function Articulo({fecha, estado,division, titulo, id,foto}){
                 borderBottomLeftRadius:20,
                 borderBottomRightRadius:20
             }}>
-                <Text style={styles.bottomText}>Disponibilidad: {estado}  Fecha: 1111111</Text>
-                {/* AGREGA OTRA VEZ: Fecha: {fecha.slice(0,10)}< */}
+                <Text style={styles.bottomText}>Disponibilidad: {handleEstado()}  Fecha: {fecha==null ? "null": fechaaux.toString().slice(16,21)}</Text>
             </View>
 
 		</View>

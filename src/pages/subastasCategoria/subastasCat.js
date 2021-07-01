@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react';
-import {SafeAreaView, Text, View, Image, TouchableOpacity, TextInput, ScrollView} from 'react-native';
+import {SafeAreaView, Text, View, Image, TouchableOpacity, TextInput, ScrollView,RefreshControl} from 'react-native';
 import styles from './Styles';
 import {getSubastasCategoria} from '../../controllers/SubastasController'
 import Catalogo from '../../components/Catalogo/Catalogo'
@@ -8,12 +8,15 @@ import Loading from '../../components/Loading/Loading'
 export default function subastasCat({navigation, route}){
 
     const {categoria} = route.params;
-
+    
+    const [refreshing, setRefreshing] = useState(false)
     const [busy,setBusy] = useState(true);
     const [subastas, setSubastas] = useState();
     const [reload,setReload] = useState(true);
 
     useEffect(async() => {
+        console.log("ME ACTUALIZO EN Subastas categori");
+
         const response = await getSubastasCategoria(categoria);
         if(response === undefined){
             console.log('Error, no hay subastas o error inesperado.');
@@ -21,7 +24,13 @@ export default function subastasCat({navigation, route}){
             setSubastas(response.recordset);
             setBusy(false);
         }
-    }, [reload])
+    }, [reload]);
+
+    const onRefresh =() => {
+        setReload(!reload);
+        setRefreshing(true);
+        setTimeout(()=> setRefreshing(false), 3000);
+    };
 
     const handleVerSubasta = (data) =>{
         navigation.navigate('VerSubasta',{identificador: subastas[data].identificador, fecha: subastas[data].fecha, hora: subastas[data].hora, estado: subastas[data].estado, subastador: subastas[data].subastador, ubicacion: subastas[data].ubicacion, capacidadAsistentes: subastas[data].capacidadAsistentes, tieneDeposito: subastas[data].tieneDeposito, seguridadPropia: subastas[data].seguridadPropia, categoria: subastas[data].categoria, titulo: subastas[data].titulo});
@@ -36,7 +45,14 @@ export default function subastasCat({navigation, route}){
             <View style={styles.main}>
             <ScrollView
             showsHorizontalScrollIndicator={false}
-            showsVerticalScrollIndicator={false}>
+            showsVerticalScrollIndicator={false}
+            refreshControl={
+                <RefreshControl
+                    refreshing = {refreshing}
+                    onRefresh = {onRefresh}
+                />
+                }
+            >
                 {subastas === undefined ? null : subastas.map((key, data ) =>{
                     return(
                         <TouchableOpacity key={data} style={styles.buttonWrapper} onPress={() => handleVerSubasta(data)}>

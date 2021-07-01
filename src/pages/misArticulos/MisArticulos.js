@@ -9,15 +9,18 @@ import Guest from '../../components/Guest/Guest';
 
 export default function MisArticulos({navigation, route}){
 
+    //UseState
+    //UseState funcionamiento
     const [refreshing, setRefreshing] = useState(false)
     const [busy,setBusy] = useState(true);
+    const [reload,setReload] = useState(true);
+	//UseState logicos
     const [articulos, setArticulos] = useState();
     const [userData, setUserData] = useState();
-    const [reload,setReload] = useState(true);
     const [guest, setGuest] = useState(false);
 
     useEffect(async() => {
-        console.log("ME ACTUALIZO");
+        console.log("ME ACTUALIZO EN MIS ARTICULOS");
         const jsonValue = await AsyncStorage.getItem('userData');
         const data = JSON.parse(jsonValue);
         if(data != undefined || data != null){

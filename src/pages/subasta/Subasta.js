@@ -6,6 +6,7 @@ import Loading from '../../components/Loading/Loading';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {getMediosPago} from '../../controllers/PagosController';
 import {getPujas,createPujas} from '../../controllers/SubastasController';
+import { set } from 'react-native-reanimated';
 
 export default function Subasta({navigation,route}){
 
@@ -14,7 +15,7 @@ export default function Subasta({navigation,route}){
 	//USE STATES----------------------------------
     const [busy,setBusy] = useState(true);
 	const [reload,setReload] = useState(true);
-	const [consultando,setConsultando] = useState(true);
+	const [working,setWorking] = useState(true);
 	//Modals
 	const [showModalPago, setShowModalPago] = useState(true);
 	const [showModalExit, setShowModalExit] = useState(false);
@@ -34,6 +35,7 @@ export default function Subasta({navigation,route}){
 	//---------------------------------------------
 
 	useEffect(async () => {
+		let render = true;
 		const response = await getMediosPago(postor);
 		const responsePujas = await getPujas(idProducto);
         if(response === undefined){
@@ -44,12 +46,18 @@ export default function Subasta({navigation,route}){
 			if(pujas != undefined){
 				setBestUserOffer(pujas[0].cliente);
 				setBestOffer(pujas[0].importe);
+				if(!working){
+					render = false;
+				}
 			}
             setBusy(false);
         }
-		setBusy(false);
-		setInterval(()=> {setReload(!reload)}, 7000)
-		return() => (modalExit = true);
+		const interval=setInterval(()=>{setReload(!reload)},10000)
+		// if(working){
+		// 	setInterval(()=> {setReload(!reload)}, 6500)
+		// }
+		return()=>clearInterval(interval)
+
 	}, [reload])
 
     //Modal salir de subasta-
@@ -92,14 +100,12 @@ export default function Subasta({navigation,route}){
 						let matches = str.match(/\b(\w)/g);
 						let acronym = matches.join('');
 						//-----------------------------
-
 						//Numeros de la tarjeta--------
 						let numTarjeta = mediosPago[data].numero;
 						let auxTarjet = numTarjeta.slice(numTarjeta.length-4,numTarjeta.length);
 						let auxHidden = "*".repeat(numTarjeta.length-4);
 						let finalCard = auxHidden+'-'+auxTarjet
 						//-----------------------------
-
 						if(mediosPago[data].validado == "si"){
 							return(
 								<TouchableOpacity key={data} style={styles.pago} onPress={()=>handleElegirMedioPago(numTarjeta)}>
@@ -146,6 +152,7 @@ export default function Subasta({navigation,route}){
 
     //Salir de la subasta----
     const handleGoOut = ()=>{
+		setWorking(false);
         navigation.goBack();
     }
     //-----------------------

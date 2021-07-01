@@ -1,5 +1,5 @@
 import React, { useState, useEffect }  from 'react';
-import {SafeAreaView, Text, View, Image, TouchableOpacity, TextInput, ScrollView, Modal, RefreshControl} from 'react-native';
+import {SafeAreaView, Text, View, Image, TouchableOpacity, ScrollView, Modal, RefreshControl} from 'react-native';
 import styles from './Styles';
 import Tarjeta from '../../components/MisMediosDePago/Tarjeta';
 import Cuenta from '../../components/MisMediosDePago/CuentaBancaria';
@@ -7,18 +7,22 @@ import Loading from '../../components/Loading/Loading';
 import {getMediosPago} from '../../controllers/PagosController';
 
 export default function MisMediosPago({navigation, route}){
-
+    
+	//Route Params
 	const {user} = route.params;
 
+	//UseState
+    //UseState funcionamiento
 	const [busy,setBusy] = useState(true);
 	const [refreshing, setRefreshing] = useState(false);
-    const [mediosPago, setMediosPago] = useState();
     const [reload,setReload] = useState(true);
-
+	//UseState logicos
+    const [mediosPago, setMediosPago] = useState();
 	const [showModal, setShowModal] = useState(false)
 
 
 	useEffect( async () => {
+        console.log("ME ACTUALIZO EN MIS MEDIOS DE PAGO");
 		const response = await getMediosPago(user);
 		if(response == undefined){
 			console.log("Error al traer los medios de pago");
@@ -64,52 +68,6 @@ export default function MisMediosPago({navigation, route}){
 				</View>
 		</Modal>
 	)
-
-	const jsonTest = [
-	{
-		identificador: 0,
-		nombre: 'MASTERCARD',
-		numero: '1234567890123456',
-		fechavto: '2027-10-01',
-		cliente: 0,
-		titular: 'Benito Camelas'
-	},{
-		identificador: 1,
-		nombre: 'MAESTRO',
-		numero: '1234567890123456',
-		fechavto: '2027-10-01',
-		cliente: 0,
-		titular: 'Benito Camelas'
-	},{
-		identificador: 2,
-		nombre: 'AMERICAN EXPRESS',
-		numero: '123456789012345',
-		fechavto: '2020-10-01',
-		cliente: 0,
-		titular: 'Benito Camelas'
-	},{
-		identificador: 3,
-		nombre: 'VISA DEBITO',
-		numero: '1234567890123456',
-		fechavto: '2021-10-01',
-		cliente: 0,
-		titular: 'Benito Camelas'
-	},{
-		identificador: 4,
-		nombre: 'VISA CREDITO',
-		numero: '1234567890123456',
-		fechavto: '2027-10-01',
-		cliente: 0,
-		titular: 'Benito Camelas'
-	},{
-		identificador: 5,
-		nombre: 'BANCO',
-		numero: '1234567890123456789012',
-		fechavto: '2025-10-01',
-		cliente: 0,
-		titular: 'Benito Camelas'
-	},
-	]
 
 	return (
 		<SafeAreaView style={styles.container}>
