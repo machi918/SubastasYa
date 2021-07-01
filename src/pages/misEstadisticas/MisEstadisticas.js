@@ -22,11 +22,9 @@ export default function MisEstadisticas({navigation, route}){
 	useEffect( async () => {
         console.log("PIDO ESTADISTICAS");
 		const response = await getEstadisticasUser(user);
-		console.log('response devolvio');
 		if(response == undefined){
 			console.log("Error al traer estadisticas");
 		}else{
-			console.log(response);
 			setStats(response[0]);
 			setPie(response[1])
 			setBusy(false);
