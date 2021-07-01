@@ -1,7 +1,7 @@
 import React, { useState }  from 'react';
 import {SafeAreaView, View, TouchableOpacity, TextInput, Text, Modal, ScrollView, Alert} from 'react-native';
 import styles from './Styles';
-
+import {addMedio} from '../../../controllers/PagosController;'
 import Tarjeta from '../../../components/MisMediosDePago/Tarjeta'
 
 

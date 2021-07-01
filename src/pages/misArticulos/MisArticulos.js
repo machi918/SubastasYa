@@ -85,14 +85,12 @@ export default function MisArticulos({navigation, route}){
                 refreshing = {refreshing}
                 onRefresh = {onRefresh}
             />
-            }
-            >
+            }>
             
                 {articulos === undefined ? null : articulos.map((key, data )=>{
                     return(
                         <TouchableOpacity key={data} onPress={()=>handleVerArticulo(data)}>
-                            <Articulo key={data} id={articulos[data].identificador} titulo={articulos[data].titulo} division={articulos[data].categoria} estado={handleDisponibilidad(articulos[data].disponible)} fecha={articulos[data].fecha} descComp={articulos[data].descripcionCompleta} foto={articulos[data].foto}/>
-                            {/* estado={articulos[data].disponible} */}
+                            <Articulo key={data} id={articulos[data].identificador} titulo={articulos[data].titulo} division={articulos[data].categoria} estado={handleDisponibilidad(articulos[data].disponible)} fecha={articulos[data].fecha} descComp={articulos[data].descripcionCompleta} hora={'-'} minuto={'-'} foto={articulos[data].foto}/>
                         </TouchableOpacity>
                     )})
                 } 

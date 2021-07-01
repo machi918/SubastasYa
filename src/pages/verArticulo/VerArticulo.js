@@ -9,16 +9,13 @@ import verDetalle from '../../pages/verDetalleArticulo/verDetalle'
 export default function VerArticulo({navigation, route}){
 
     //Route Params
-    const {titulo,descripcionMini, descComp, precio, division, estado,foto, fecha, ownProduct, duenio,id, idSubasta} = route.params;
+    const {titulo,descripcionMini, descComp, precio, division, estado,foto, fecha, ownProduct, duenio,id, idSubasta,horaSubasta,minSubasta} = route.params;
 
     //Fecha de la subasta
     const fechaaux = new Date(fecha);
     const diaSub = fechaaux.getDate();
     const mesSub = fechaaux.getMonth();
     const yearSub = fechaaux.getFullYear();
-    const hourSub = fechaaux.getHours();
-    const minSub = fechaaux.getMinutes();
-    const segSub = fechaaux.getSeconds();
     
     //Fecha de hoy
     const fechaHoy = new Date();
@@ -28,6 +25,10 @@ export default function VerArticulo({navigation, route}){
     const hour = fechaHoy.getHours();
     const min = fechaHoy.getMinutes();
     const seg = fechaHoy.getSeconds();
+
+    //Horario de la subasta
+    const hourAUX = horaSubasta;
+    const minAUX = minSubasta;
 
     //UseState
     //UseState funcionamiento
@@ -40,6 +41,13 @@ export default function VerArticulo({navigation, route}){
     const [precioFinal, setPrecioFinal] = useState(precio);
 
     useEffect(async() => {
+        console.log("FECHA DE SUBASTA: "+fechaaux);
+        console.log("HORA SUBASTA: "+ hourAUX);
+        console.log("MIN SUBASTA: "+ minAUX);
+        console.log("FECHA ACTUAL: "+fechaHoy);
+        console.log("HORA ACTUAL: "+ hour);
+        console.log("MIN ACTUAL: "+ min);
+        console.log(hourAUX == parseInt(hour));
         const jsonValue = await AsyncStorage.getItem('userData');
         const data = await JSON.parse(jsonValue);
         if(data === undefined || data === null){
@@ -100,7 +108,7 @@ export default function VerArticulo({navigation, route}){
         }
         if((diaSub == dia) && (mesSub == mes) && (yearSub==year)){
             console.log("DESDE VERARTICULO, LA SUBASTA ES HOY");
-            if((hour>hourSub) || ((hour==hourSub) && (min>minSub+10))){
+            if((hour>hourAUX) || ((hour==hourAUX) && (min>minAUX+10))){
                 return "#4D7084"
             }
             if(data != undefined || data != null){
@@ -133,7 +141,7 @@ export default function VerArticulo({navigation, route}){
         if(auxCat === duenio){
             return "No puedes ofertar tu producto"
         }if((diaSub == dia) && (mesSub == mes) && (yearSub==year)){
-            if((hour>hourSub) || ((hour==hourSub) && (min>minSub+10))){
+            if((hour>hourAUX) || ((hour==hourAUX) && (min>minAUX+10))){
                 return "Subasta finalizada"
             }
             if(data != undefined){
@@ -166,7 +174,7 @@ export default function VerArticulo({navigation, route}){
             navigation.popToTop();
         }else{
             if(textoBoton==='Ofertar'){
-                navigation.navigate('Subasta', {postor:userData.identificador, foto:foto, titulo:titulo,precio:precio, duenio:duenio, division:division, idProducto:id, idSubasta:idSubasta, fecha:fecha});
+                navigation.navigate('Subasta', {postor:userData.identificador, foto:foto, titulo:titulo,precio:precio, duenio:duenio, division:division, idProducto:id, idSubasta:idSubasta, fecha:fecha, horaSubasta: hourAUX, minSubasta: minAUX});
             }
             if(textoBoton==="Objeto vendido"){
                 navigation.goBack();

@@ -10,6 +10,11 @@ export default function VerSubasta({navigation, route}){
     //Route Params
     const{identificador, fecha, hora, estado, subastador, ubicacion, capacidadAsistentes, tieneDeposito, seguridadPropia, categoria, titulo} = route.params;
 
+    var hourAUX = parseInt(hora.slice(11,13))-3;
+    var minAUX = parseInt(hora.slice(14,16));
+    var auxiliarHORA = hourAUX;
+    var auxiliarMIN = minAUX;
+
     //UseState
     //UseState funcionamiento
     const [busy,setBusy] = useState(true);
@@ -48,8 +53,10 @@ export default function VerSubasta({navigation, route}){
     };
 
     const handleVerArticulo = (data) =>{
-        navigation.navigate('VerArticulo', {titulo: articulos[data].titulo, descComp:articulos[data].descripcionCompleta, precio: articulos[data].precioBase, descripcionMini:articulos[data].descripcionCatalogo, foto:articulos[data].foto, division:categoria, fecha: articulos[data].fecha, duenio: articulos[data].duenio, id:articulos[data].identificador, estado: articulos[data].disponible, idSubasta:identificador});
+        navigation.navigate('VerArticulo', {titulo: articulos[data].titulo, descComp:articulos[data].descripcionCompleta, precio: articulos[data].precioBase, descripcionMini:articulos[data].descripcionCatalogo, foto:articulos[data].foto, division:categoria, fecha: fecha, duenio: articulos[data].duenio, id:articulos[data].identificador, estado: articulos[data].disponible, idSubasta:identificador, horaSubasta: articulos[data].horaSubasta, minSubasta: articulos[data].minSubasta});
     };
+
+    
 
 	return (
 		<SafeAreaView style={styles.container}>
@@ -73,9 +80,20 @@ export default function VerSubasta({navigation, route}){
                 />
             }>
                 {articulos === undefined ? null : articulos.map((key, data ) =>{
+                    auxiliarHORA = hourAUX;
+                    auxiliarMIN = minAUX;
+
+                    articulos[data]["horaSubasta"] = auxiliarHORA;
+                    articulos[data]["minSubasta"] = auxiliarMIN;
+                    if((minAUX+10)>=60){
+                        hourAUX += 1;
+                        minAUX = 0;
+                    }else{
+                        minAUX += 10;
+                    }
                     return(
                         <TouchableOpacity key={data} onPress={() => handleVerArticulo(data)}>
-                            <Articulo key={articulos[data].identificador} titulo={articulos[data].titulo} division={articulos[data].categoria} estado={articulos[data].disponible} fecha={articulos[data].fecha} descComp={articulos[data].descripcionCompleta} foto={articulos[data].foto}/>
+                            <Articulo key={articulos[data].identificador} titulo={articulos[data].titulo} division={articulos[data].categoria} estado={articulos[data].disponible} hora={auxiliarHORA} minuto={auxiliarMIN} descComp={articulos[data].descripcionCompleta} foto={articulos[data].foto}/>
                         </TouchableOpacity>
                     )})
                 } 
