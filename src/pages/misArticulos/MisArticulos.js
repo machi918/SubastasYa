@@ -45,7 +45,7 @@ export default function MisArticulos({navigation, route}){
     // };
 
     const onRefresh =() => {
-        setReload(false);
+        setReload(!reload);
         setRefreshing(true);
         setTimeout(()=> setRefreshing(false), 3000);
     };

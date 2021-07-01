@@ -1,5 +1,4 @@
 import {getMedioPago} from '../services/apiRoutes'
-//MODIFICAR ESTO
 
 export const getMediosPago = async (data)=>
 {

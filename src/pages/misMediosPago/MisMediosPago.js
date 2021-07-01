@@ -1,13 +1,38 @@
-import React, { useState }  from 'react';
-import {SafeAreaView, Text, View, Image, TouchableOpacity, TextInput, ScrollView, Modal} from 'react-native';
+import React, { useState, useEffect }  from 'react';
+import {SafeAreaView, Text, View, Image, TouchableOpacity, TextInput, ScrollView, Modal, RefreshControl} from 'react-native';
 import styles from './Styles';
+import Tarjeta from '../../components/MisMediosDePago/Tarjeta';
+import Cuenta from '../../components/MisMediosDePago/CuentaBancaria';
+import Loading from '../../components/Loading/Loading';
+import {getMediosPago} from '../../controllers/PagosController';
 
-import Tarjeta from '../../components/MisMediosDePago/Tarjeta'
-import Cuenta from '../../components/MisMediosDePago/CuentaBancaria'
+export default function MisMediosPago({navigation, route}){
 
-export default function MisMediosPago({navigation}){
-	
+	const {user} = route.params;
+
+	const [busy,setBusy] = useState(true);
+	const [refreshing, setRefreshing] = useState(false);
+    const [mediosPago, setMediosPago] = useState();
+    const [reload,setReload] = useState(true);
+
 	const [showModal, setShowModal] = useState(false)
+
+
+	useEffect( async () => {
+		const response = await getMediosPago(user);
+		if(response == undefined){
+			console.log("Error al traer los medios de pago");
+		}else{
+			setMediosPago(response.recordset);
+			setBusy(false);
+		}
+	}, [reload])
+	
+    const onRefresh =() => {
+        setReload(!reload);
+        setRefreshing(true);
+        setTimeout(()=> setRefreshing(false), 3000);
+    };
 
 	const modalAdd = (
 		<Modal
@@ -88,14 +113,20 @@ export default function MisMediosPago({navigation}){
 
 	return (
 		<SafeAreaView style={styles.container}>
-
+			{busy ? <Loading/> : null }
             {/* TODO -> LINEA QUE DIVIDE AL HEADER EDITARPERFIl */}
 			<View styles={styles.main}>
 
 				<ScrollView
 					showsHorizontalScrollIndicator={false}
-					showsVerticalScrollIndicator={false}>
-					{jsonTest.map( (data) => {
+					showsVerticalScrollIndicator={false}
+					refreshControl={
+						<RefreshControl
+							refreshing = {refreshing}
+							onRefresh = {onRefresh}
+						/>
+					}>
+					{mediosPago === undefined ? null : mediosPago.map((data) => {
 						if (data.nombre === 'BANCO'){
 							return(
 								<TouchableOpacity key={data.identificador} onPress={() => navigation.navigate('VerMedioDePago', data)}>
@@ -112,8 +143,6 @@ export default function MisMediosPago({navigation}){
 					})}
 				</ScrollView>
 			</View>
-
-
 
 			<TouchableOpacity style={styles.roundedButton} onPress={() => setShowModal(true)}>
 				<Text style={styles.roundedButtonText}>+</Text>
