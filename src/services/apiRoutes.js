@@ -267,23 +267,15 @@ export const addMedioPago = async (data) =>{
 //----------------------------------------------------------------------------------
 
 
-<<<<<<< HEAD
 //Endpoints de Estadisticas
 
 export const getEstadisticas = async (idUser) => {
     const options = {
         method: 'GET',
-=======
-//Endpoints de FOTO
-export const addPhotoPersona = async (data) =>{
-    const options = {
-        method: 'POST',
->>>>>>> mati
         headers: {
             'Content-Type': 'application/json'
         },
     }
-<<<<<<< HEAD
 
     try {
         const response = await fetch(url + 'Subasta/Metricas/identificador/' + idUser, options)
@@ -309,7 +301,16 @@ export const getEstadisticasTorta = async (idUser) => {
         console.error(e)
     }
 
-=======
+}
+
+//Endpoints de FOTO
+export const addPhotoPersona = async (data) =>{
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    }
     try {
         const response = await fetch(url+'EditarFoto/identificador/'+data.user+'/foto/'+data.imagenURI,options);
         return response
@@ -317,7 +318,6 @@ export const getEstadisticasTorta = async (idUser) => {
     catch (error) {
         console.error(error)
     }
->>>>>>> mati
 }
 
 
