@@ -1,12 +1,14 @@
 import React, { useState }  from 'react';
 import {SafeAreaView, Modal, View, TouchableOpacity, TextInput, Text, ScrollView, Alert} from 'react-native';
 import styles from './Styles';
-
+import {addMedio} from '../../../controllers/PagosController'
 import Cuenta from '../../../components/MisMediosDePago/CuentaBancaria'
 
 
-export default function MisMediosPago({navigation}){
+export default function MisMediosPago({navigation, route}){
     
+    const {user} = route.params;
+
     const [titular, setTitular] = useState('')
     const [dni, setDni] = useState('')
     const [numeroCuenta, setNumeroCuenta] = useState('')
@@ -37,17 +39,30 @@ export default function MisMediosPago({navigation}){
             Alert.alert("Datos erróneos", "Revise que los datos ingresados sean correctos", [{text: 'Cerrar'}])
         } else {
             setshowModal(true)
-
+            addBanco();
             const cuentaCargarBack = {
                 numero: numero,
                 nombre: 'BANCO',
                 fechavto: null,
                 titular: titular,
-                dni: dni
+                dni: dni,
+                cliente:user
             }
 
             console.log(cuentaCargarBack);
         }
+    }
+    const addBanco = async(fecha)=>{
+        let data={
+            nombre:"BANCO",
+            titular:titular,
+            dni:dni,
+            numero:numeroCuenta,
+            fechavto:null,
+            cliente: user,
+        }
+        const response = await addMedio(data);
+        console.log("Tarjeta cargada");
     }
 
     const modalAdd = (

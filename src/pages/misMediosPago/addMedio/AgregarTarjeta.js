@@ -1,12 +1,13 @@
 import React, { useState }  from 'react';
 import {SafeAreaView, View, TouchableOpacity, TextInput, Text, Modal, ScrollView, Alert} from 'react-native';
 import styles from './Styles';
-import {addMedio} from '../../../controllers/PagosController;'
+import {addMedio} from '../../../controllers/PagosController'
 import Tarjeta from '../../../components/MisMediosDePago/Tarjeta'
 
 
-export default function MisMediosPago({navigation}){
+export default function MisMediosPago({navigation, route}){
     
+    const {user} = route.params;
     const fakeCard = {
 		identificador: -1,
 		nombre: 'BANCO',
@@ -31,28 +32,33 @@ export default function MisMediosPago({navigation}){
         numero = numero.replace(/-/g, '')
         //console.log("FINAL -: " + numero);
         numero = numero.replace(/,/g, '')
-        //console.log("FINAL ,: " + numero);
-        //numero = numero.replace(/./g, '') //NO FUNCIONA CON PUNTO
-        //console.log("FINAL ,: " + numero);
 
         if (numero.length < 15 || numero.length > 16 || dni.length === 0 || titular.length === 0 || mes.length < 1 || mes.length > 2 || año.length != 4 || codigo.length != 3) {
             console.log('error');
             Alert.alert("Datos erróneos", "Revise que los datos ingresados sean correctos", [{text: 'Cerrar'}])
-        } else {
-            setshowModal(true)
+        }else {
+            let aux = (mes.length === 1) ? año + "-0" + mes: año + '-' + mes;
+            console.log(aux+"-01");
+            addTarjeta(aux+"-01");
+            setshowModal(true) 
 
-            let fechaStr = (mes.length === 1) ? año + "-0" + mes: año + '-' + mes 
-
-            const tarjetaCargarBack = {
-                numero: numero,
-                fechavto: fechaStr,
-                titular: titular,
-                dni: dni,
-                codigo: codigo
-            }
-
-            console.log(tarjetaCargarBack);
+            // console.log(tarjetaCargarBack);
         }
+    }
+
+    const addTarjeta = async(auxFecha)=>{
+        const auxi = auxFecha;
+        let data={
+            nombre:"VISA DEBITO",
+            titular:titular,
+            dni:dni,
+            numero:numeroTarj,
+            codigo:codigo,
+            fechavto:auxi,
+            cliente:user,
+        }
+        const response = await addMedio(data);
+        console.log("Tarjeta cargada");
     }
 
     const modalAdd = (

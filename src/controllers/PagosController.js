@@ -19,7 +19,7 @@ export const addMedio = async (data)=>
         const json = await response.json();
         return json;
     }else{
-        console.log('ERROR en addProduct');
+        console.log('ERROR en AddMedio');
         console.log(response.status);
     }
 }

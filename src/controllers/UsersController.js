@@ -1,4 +1,4 @@
-import {login, registro, prueba} from '../services/apiRoutes'
+import {login, registro, prueba, addPhotoPersona} from '../services/apiRoutes'
 
 export const Login = async (data)=>
 {
@@ -24,3 +24,14 @@ export const signup = async (data)=>
     }
 }
 
+export const addFotoPersona = async (data)=>
+{
+    const response = await addPhotoPersona(data);
+    if(response.status === 200){
+        const json = await response.json();
+        return json;
+    }else{
+        console.log('ERROR');
+        console.log(response.status);
+    }
+}

@@ -56,11 +56,11 @@ export default function MisMediosPago({navigation, route}){
 						<Text></Text>
 						<View style={{flexDirection: 'row'}}>
 							<View style={{flexDirection: 'column', alignItems: 'center'}}>
-								<TouchableOpacity onPress={() => {navigation.navigate('AgregarTarjeta'), setShowModal(false)}}><Image style={styles.icons} source={require('../../assets/Images/CreditCard.png')}></Image></TouchableOpacity>
+								<TouchableOpacity onPress={() => {navigation.navigate('AgregarTarjeta',{user:user}), setShowModal(false)}}><Image style={styles.icons} source={require('../../assets/Images/CreditCard.png')}></Image></TouchableOpacity>
 								<Text>Tarjeta</Text>
 							</View>
 							<View style={{flexDirection: 'column', alignItems: 'center'}}>
-								<TouchableOpacity onPress={() => {navigation.navigate('AgregarCuentaBancaria'), setShowModal(false)}}><Image style={styles.icons} source={require('../../assets/Images/Bank.png')}></Image></TouchableOpacity>
+								<TouchableOpacity onPress={() => {navigation.navigate('AgregarCuentaBancaria',{user:user}), setShowModal(false)}}><Image style={styles.icons} source={require('../../assets/Images/Bank.png')}></Image></TouchableOpacity>
 								<Text>Cuenta Bancaria</Text>
 							</View>
 						</View>
