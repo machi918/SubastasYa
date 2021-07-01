@@ -27,6 +27,7 @@ import verDetalle from './src/pages/verDetalleArticulo/verDetalle';
 import subastasCat from './src/pages/subastasCategoria/subastasCat';
 import agregarTarjeta from './src/pages/misMediosPago/addMedio/AgregarTarjeta'
 import agregarCuentaBancaria from './src/pages/misMediosPago/addMedio/AgregarCuentaBancaria'
+import verMedioPago from './src/pages/misMediosPago/VerMedio'
 
 
 
@@ -100,7 +101,8 @@ export default function App(){
 				<Stack.Screen name="EditarPerfil" component={EditarPerfil} options={{ title: 'Editar Perfil', headerTitleAlign:'center', headerStyle:{borderBottomColor:'#4FAFE5',borderBottomWidth: 2} }}/>
 				<Stack.Screen name="MisMediosPago" component={MisMediosPago} options={{ title: 'Mis Medios de Pago', headerTitleAlign:'center', headerStyle:{borderBottomColor:'#4FAFE5', borderBottomWidth: 2} }}/>
 				<Stack.Screen name="AgregarTarjeta" component={ agregarTarjeta } options={{ title: 'Agregar Tarjeta', headerTitleAlign:'center', headerStyle:{borderBottomColor:'#4FAFE5', borderBottomWidth: 2} }}/>
-				<Stack.Screen name="AgregarCuentaBancaria" component={ agregarCuentaBancaria } options={{ title: 'Agregar Cuenta Bancaria', headerTitleAlign:'center', headerStyle:{borderBottomColor:'#4FAFE5', borderBottomWidth: 2} }}/>
+				<Stack.Screen name="AgregarCuentaBancaria" component={ agregarCuentaBancaria } options={{ title: 'Medio de Pago', headerTitleAlign:'center', headerStyle:{borderBottomColor:'#4FAFE5', borderBottomWidth: 2} }}/>
+				<Stack.Screen name="VerMedioDePago" component={ verMedioPago } options={{ title: 'Medio de Pago', headerTitleAlign:'center', headerStyle:{borderBottomColor:'#4FAFE5', borderBottomWidth: 2} }}/>
 				<Stack.Screen name="MisEstadisticas" component={MisEstadisticas} options={{ title: 'Mis Estadisticas', headerTitleAlign:'center', headerStyle:{borderBottomColor:'#4FAFE5', borderBottomWidth: 2} }}/>
 				<Stack.Screen name="InformativaRegistro" component={Informativa} initialParams={{ text:props.register }} options={{headerShown: false}}/>
 				<Stack.Screen name="InformativaBadLogin" component={Informativa} initialParams={{ text:props.badlogin }} options={{headerShown: false}}/>
