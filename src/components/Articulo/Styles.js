@@ -43,15 +43,6 @@ const styles = StyleSheet.create({
     subHeaderDivision:{
         fontSize: 16,
     },
-    footer: {
-        // backgroundColor:'#C4C4C4',
-        backgroundColor:'#4FAFE5',
-        width:'100%',
-        height:'10%',
-        alignItems:'center',
-        borderBottomLeftRadius:20,
-        borderBottomRightRadius:20
-	},
     bottomText:{
         fontSize:16,
         color:'#FFFFFF'
