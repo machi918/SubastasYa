@@ -19,6 +19,7 @@ export default function Subasta({navigation,route}){
 	const [showModalPago, setShowModalPago] = useState(true);
 	const [showModalExit, setShowModalExit] = useState(false);
 	const [showFinalModel, setShowFinalModel] = useState(false);
+	const [finalState, setfinalState] = useState(false)
 	//Medios de Pago
     const [mediosPago, setMediosPagos] = useState();
 	const [medioActualPago,setMedioActualPago] = useState('');
@@ -57,7 +58,7 @@ export default function Subasta({navigation,route}){
 		animationType='fade' //Es la animación al abrirse
 		transparent //Hace al Modal transparente
 		visible={showModalExit} //Si se muestra en la pantalla o no
-		onRequestClose={() => setShowModal(false)} //El botón Back de Android hace algo, en este caso lo cierro
+		onRequestClose={() => setShowModalExit(false)} //El botón Back de Android hace algo, en este caso lo cierro
 		>
 			<View style={styles.modalGeneric} onPress={()=>console.log('a')}>
 				<View style={styles.modalView}>
@@ -80,7 +81,7 @@ export default function Subasta({navigation,route}){
 		animationType='fade' //Es la animación al abrirse
 		transparent //Hace al Modal transparente
 		visible={showModalPago} //Si se muestra en la pantalla o no
-		onRequestClose={() => setShowModal(false)} //El botón Back de Android hace algo, en este caso lo cierro
+		onRequestClose={() => setShowModalPago(false)} //El botón Back de Android hace algo, en este caso lo cierro
 		>
 			<View style={styles.modalGeneric} onPress={()=>console.log('a')}>
 				<View style={styles.modalView}>
@@ -119,19 +120,23 @@ export default function Subasta({navigation,route}){
 	//Model de FIn de subasta
 	const modalFinal = (
 		<Modal
-		animationType='fade' //Es la animación al abrirse
-		transparent //Hace al Modal transparente
-		visible={showFinalModel} //Si se muestra en la pantalla o no
-		onRequestClose={() => setShowModal(false)} //El botón Back de Android hace algo, en este caso lo cierro
+			animationType='fade' //Es la animación al abrirse
+			transparent //Hace al Modal transparente
+			visible={showFinalModel} //Si se muestra en la pantalla o no
+			onRequestClose={() => setShowFinalModel(false)} //El botón Back de Android hace algo, en este caso lo cierro
 		>
-			<View style={styles.modalGeneric} onPress={()=>console.log('a')}>
+			<View style={styles.modalGeneric}>
 				<View style={styles.modalView}>
-					<TouchableOpacity style={styles.modalButton} onPress={() => setShowModalExit(false)}>
-						<Text style={styles.modalButtonText}>X</Text>
-					</TouchableOpacity>
-					<Text style={styles.titleText}>¿Desea retirarse de la subasta?</Text>
-					<TouchableOpacity style={styles.buttonExit} onPress={()=>handleGoOut()}>
-						<Text style={styles.buttonExitText}>Retirarse</Text>
+
+					<Text style={styles.fontModalTitle}>{handleFinalState()}</Text>
+					<Text></Text>
+
+					<Text>La subasta de [Producto.nombre] a un precio de $ NN.NNN,NN.</Text>
+					<Text></Text>
+					<Text>Siga conectado a SubastasYA, podría aparecer una subasta que le podría interesar.</Text>
+
+					<TouchableOpacity style={styles.pago} onPress={()=>handleGoOut()}>
+						<Text style={styles.buttonExitText}>Aceptar</Text>
 					</TouchableOpacity>
 				</View>
 			</View>
@@ -186,6 +191,14 @@ export default function Subasta({navigation,route}){
         setShowModalPago(false)
     }
 	//----------------------
+	//
+	function handleFinalState() {
+		if (!finalState) {
+			return "Subasta finalizada"
+		} else {
+			return "¡Ganaste!"
+		}
+	}
 
     return(
         <SafeAreaView style={styles.container}>

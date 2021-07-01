@@ -169,6 +169,9 @@ const styles = StyleSheet.create({
 		marginTop:10,
 		height:40,
 		alignItems:'center'
+	},
+	fontModalTitle: {
+		fontSize: 36
 	}
 });
 
