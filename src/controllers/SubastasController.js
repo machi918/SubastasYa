@@ -1,4 +1,4 @@
-import {subastas,getItemsSubasta,getArticulosSegunID,subastasCategorias,getPujasSubasta,createPuja} from '../services/apiRoutes'
+import {subastas,getItemsSubasta,getArticulosSegunID,subastasCategorias,getPujasSubasta,updPuja,createPuja,updArticulo,} from '../services/apiRoutes'
 
 export const getSubasta = async ()=>
 {
@@ -71,6 +71,34 @@ export const createPujas = async (data)=>
         return json;
     }else{
         console.log('ERROR EN EL GetSubastaCategoria');
+        console.log(response.status);
+    }
+}
+
+//Update de puja como ganadora
+export const finPuja = async (data)=>
+{
+    const response = await updPuja(data);
+    if(response.status === 200){
+        const json = await response.json();
+        return json;
+    }else{
+        console.log("DATO DEL ERROR FINPUJA: "+ data);
+        console.log('ERROR EN EL FINPUJA');
+        console.log(response.status);
+    }
+}
+
+//Update de articulo como no disponible
+export const endSubasta = async (data)=>
+{
+    const response = await updArticulo(data);
+    if(response.status === 200){
+        const json = await response.json();
+        return json;
+    }else{
+        console.log("DATO DEL ERROR: "+ data);
+        console.log('ERROR EN EL ENDSUBASTA');
         console.log(response.status);
     }
 }

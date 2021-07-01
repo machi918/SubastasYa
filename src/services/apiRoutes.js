@@ -110,7 +110,25 @@ export const createPuja = async (data) =>{
         body: JSON.stringify(data)
     }
     try {
+        console.log("DATA: "+data);
         const response = await fetch(url+'pujos/subasta/'+data.idSubasta+'/duenio/'+data.idDuenioProducto+'/producto/'+data.idProducto+'/cliente/'+data.idCliente+'/importe/'+data.importe+'/comision/'+data.comision+'/hora/'+"'"+data.hora+"'",options);
+        return response
+    } 
+    catch (error) {
+        console.error(error)
+    }
+}
+
+//Update de puja como ganadora
+export const updPuja = async (idArticulo) =>{
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    }
+    try {
+        const response = await fetch(url+'FinPujos/identificador/'+idArticulo,options);
         return response
     } 
     catch (error) {
@@ -185,6 +203,23 @@ export const getArticulosSegunID = async (data) =>{
     let id = data;
     try {
         const response = await fetch(url+'MisProductos/identificador/'+id,options);
+        return response
+    } 
+    catch (error) {
+        console.error(error)
+    }
+}
+
+//Update de articulo como no disponible
+export const updArticulo = async (idArticulo) =>{
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    }
+    try {
+        const response = await fetch(url+'FinProducto/identificador/'+idArticulo,options);
         return response
     } 
     catch (error) {

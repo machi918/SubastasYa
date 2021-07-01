@@ -6,7 +6,7 @@ import Oferta from '../../components/Oferta/Oferta';
 import Loading from '../../components/Loading/Loading';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {getMediosPago} from '../../controllers/PagosController';
-import {getPujas,createPujas} from '../../controllers/SubastasController';
+import {getPujas,createPujas,endSubasta,finPuja,getSubastasCategoria} from '../../controllers/SubastasController';
 
 export default function Subasta({navigation,route}){
 
@@ -32,7 +32,7 @@ export default function Subasta({navigation,route}){
 	const [bestUserOffer, setBestUserOffer] = useState('-');
 	//Fechas y horarios
 	// const fechaObj = new Date(fecha);
-	const fechaObj = new Date('2021-07-01T14:28:00.000Z');
+	const fechaObj = new Date('2021-07-01T15:06:00.000Z');
 	const horaObj = fechaObj.getHours();
 	const minObj = fechaObj.getMinutes();
 	const segObj = fechaObj.getSeconds();
@@ -80,6 +80,7 @@ export default function Subasta({navigation,route}){
 
 		if(((minObj-(fechaHoyAUX.getMinutes())+1)==0) && ((segObj-(fechaHoyAUX.getSeconds())+59)==0)){
 			console.log(("FINALIZO LA SUBASTA"));
+			handleEndSubasta();
 			setShowFinalModel(true);
 			if(postor==bestUserOffer){
 				setfinalState(true);
@@ -98,6 +99,12 @@ export default function Subasta({navigation,route}){
 		}
 	}
 	//--------------------------------------------
+
+	const handleEndSubasta= async()=>{
+		const resp3 = await endSubasta(idProducto);
+		const resp2 = await finPuja(idProducto);
+		console.log("FIN DE PUJAS OK.");
+	}
 
     //Modal salir de subasta-
 	const modalExit = (
