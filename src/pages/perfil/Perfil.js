@@ -78,11 +78,11 @@ export default function Perfil({navigation}){
                     <Text style={styles.buttonText}>Editar Perfil</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.buttonWrapper} onPress={()=>navigation.navigate('MisMediosPago')}>
+                <TouchableOpacity style={styles.buttonWrapper} onPress={()=>navigation.navigate('MisMediosPago',{user: userData.identificador})}>
                     <Text style={styles.buttonText}>Mis Medios de Pago</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.buttonWrapper} onPress={()=>navigation.navigate('MisEstadisticas')}>
+                <TouchableOpacity style={styles.buttonWrapper} onPress={()=>navigation.navigate('MisEstadisticas',{user: userData.identificador})}>
                     <Text style={styles.buttonText}>Mis Estadísticas</Text>
                 </TouchableOpacity>
 

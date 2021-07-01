@@ -47,9 +47,9 @@ export default function VerMedio({navigation, route}){
                 <Text style={{alignSelf: 'center'}}>{numeros}</Text>
             </View>
         
-            <View style={styles.wrapper}>
-                <Text style={{alignSelf: 'center'}}>{data.fechavto.slice(5, 7)} / {data.fechavto.slice(0, 4)}</Text>
-            </View>
+            {data.fechavto == null ? null : <View style={styles.wrapper}>
+                <Text style={{alignSelf: 'center'}}> {data.fechavto.slice(5, 7) +" / "+data.fechavto.slice(0, 4)}</Text>
+            </View>}
 
             <TouchableOpacity style={styles.buttonWrapperLogOut} onPress={() => handleEliminar()}>
                 <Text style={styles.buttonTextLogOut}>Eliminar Tarjeta</Text>

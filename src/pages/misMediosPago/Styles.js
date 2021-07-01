@@ -21,6 +21,15 @@ const styles = StyleSheet.create({
 		justifyContent:'center',
 		alignItems:'center',
 		zIndex: 100,
+		//Sombra----
+		shadowColor: "#000",
+		shadowOffset: {
+			width: 0,
+			height: 4,
+		},
+		shadowOpacity: 0.30,
+		shadowRadius: 4.65,
+		elevation: 8,
 	},
 	roundedButtonText:{
 		color: '#FFFFFF',
@@ -86,7 +95,7 @@ const styles = StyleSheet.create({
         backgroundColor:'#2F80ED',
         alignItems:'center',
         justifyContent:'center',
-        borderRadius:10
+        borderRadius:10,
 	},
     buttonText: {
 		fontSize: 18,

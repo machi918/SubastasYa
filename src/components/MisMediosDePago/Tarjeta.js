@@ -11,6 +11,7 @@ export default function Tarjeta(props){
     const nombre = props.data.nombre
     const numero = props.data.numero
     const fechavto = props.data.fechavto
+    const validez = props.data.validado
 
     let imagen
     let texto = '**** - **** - **** - ' + numero.slice(-4)
@@ -34,8 +35,23 @@ export default function Tarjeta(props){
             imagen = BankCard
     }
 
+    const handleColor = ()=>{
+        if(validez == "si"){
+            return "#26E023"
+        }else if(validez == "no"){
+            return "red"
+        }
+        return "yellow"
+    }
+
 	return (
-        <View style={styles.container}>
+        <View style={{backgroundColor: "#09004d",
+        borderRadius: 10,
+        marginTop: 10,
+        padding: 10,
+        borderColor: handleColor(),
+        borderWidth:6,
+        }}>
             <Image source={imagen} style={styles.cardIco}/>
             <Text style={styles.cardText}>{texto}</Text>
             <Text style={styles.cardText}>
