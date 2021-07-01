@@ -32,12 +32,12 @@ export default function Subasta({navigation,route}){
 	const [bestUserOffer, setBestUserOffer] = useState('-');
 	//Fechas y horarios
 	// const fechaObj = new Date(fecha);
-	const fechaObj = new Date('2021-07-01T15:06:00.000Z'); //Cambiar por fecha
+	const fechaObj = new Date(fecha); //Cambiar por fecha
 	// const horaObj = fechaObj.getHours();
 	// const minObj = fechaObj.getMinutes();
 	// const segObj = fechaObj.getSeconds();
 	const horaObj = horaSubasta;
-	const minObj = 54-1;//cambiar a minSubasta
+	const minObj = minSubasta;//cambiar a minSubasta
 	const segObj = 0;
 	//hoy
 	const [hora,setHora] = useState(0);

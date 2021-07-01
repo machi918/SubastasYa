@@ -106,7 +106,7 @@ export default function VerArticulo({navigation, route}){
         if(estado == "no"){
             return "#256C0C"
         }
-        if((diaSub == dia) && (mesSub == mes) && (yearSub==year)){
+        if((diaSub == dia) && (mesSub == mes) && (yearSub==year) && (minAUX<=min)){
             console.log("DESDE VERARTICULO, LA SUBASTA ES HOY");
             if((hour>hourAUX) || ((hour==hourAUX) && (min>minAUX+10))){
                 return "#4D7084"
@@ -134,13 +134,13 @@ export default function VerArticulo({navigation, route}){
     }
 
     function handleTextChange(data, auxCat){
-        return "Ofertar"
+        // return "Ofertar"
         if(estado== "no"){
             return "Objeto vendido"
         }
         if(auxCat === duenio){
             return "No puedes ofertar tu producto"
-        }if((diaSub == dia) && (mesSub == mes) && (yearSub==year)){
+        }if((diaSub == dia) && (mesSub == mes) && (yearSub==year) && (minAUX<=min)){
             if((hour>hourAUX) || ((hour==hourAUX) && (min>minAUX+10))){
                 return "Subasta finalizada"
             }
