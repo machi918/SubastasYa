@@ -3,6 +3,7 @@ import {SafeAreaView, Text, View, Image, TouchableOpacity, TextInput, ScrollView
 import styles from './Styles';
 import Loading from '../../components/Loading/Loading'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useFocusEffect } from '@react-navigation/native';
 import verDetalle from '../../pages/verDetalleArticulo/verDetalle'
 
 export default function VerArticulo({navigation, route}){
@@ -39,25 +40,57 @@ export default function VerArticulo({navigation, route}){
     const [precioFinal, setPrecioFinal] = useState(precio);
 
     useEffect(async() => {
-            const jsonValue = await AsyncStorage.getItem('userData');
-            const data = await JSON.parse(jsonValue);
-            if(data === undefined || data === null){
-                setPrecioFinal('XXXXX');
-                console.log('Error en traer datos del usuario');
-                setTextoBoton('Iniciar Sesion');
-                setColorBoton('#4D7084');
-                setBusy(false);
-            }else{
-                const auxID = data.identificador
-                const auxCat = data.categoria;
-                const auxText = handleTextChange(auxCat, auxID);
-                const auxColor = handleColorChange(auxCat);
-                setuserData(data);
-                setTextoBoton(auxText);
-                setColorBoton(auxColor);
-                setBusy(false);
-            }
-        },[reload])
+        const jsonValue = await AsyncStorage.getItem('userData');
+        const data = await JSON.parse(jsonValue);
+        if(data === undefined || data === null){
+            setPrecioFinal('XXXXX');
+            console.log('Error en traer datos del usuario');
+            setTextoBoton('Iniciar Sesion');
+            setColorBoton('#4D7084');
+            setBusy(false);
+        }else{
+            const auxID = data.identificador
+            const auxCat = data.categoria;
+            const auxText = handleTextChange(auxCat, auxID);
+            const auxColor = handleColorChange(auxCat);
+            setuserData(data);
+            setTextoBoton(auxText);
+            setColorBoton(auxColor);
+            setBusy(false);
+        }
+    },[reload])
+
+    // useFocusEffect(
+	// 	React.useCallback(() => {
+    //         let isActive = true;
+    //         // alert("WINDOW FOCUSED");
+    //         const resp = getDatosUsuario();
+    //         return () => {
+    //             isActive = false;
+    //             // alert("WINDOW UNFOCUSED");
+
+    //         };
+    // }, []));
+
+    // const getDatosUsuario = async ()=>{
+    //     const jsonValue = await AsyncStorage.getItem('userData');
+    //     const data = await JSON.parse(jsonValue);
+    //     if(data === undefined || data === null){
+    //         setPrecioFinal('XXXXX');
+    //         console.log('Error en traer datos del usuario');
+    //         setTextoBoton('Iniciar Sesion');
+    //         setColorBoton('#4D7084');
+    //         setBusy(false);
+    //     }else{
+    //         const auxID = data.identificador
+    //         const auxCat = data.categoria;
+    //         const auxText = handleTextChange(auxCat, auxID);
+    //         const auxColor = handleColorChange(auxCat);
+    //         setuserData(data);
+    //         setTextoBoton(auxText);
+    //         setColorBoton(auxColor);
+    //         setBusy(false);
+    // }};
 
     //FALTA EL MANEJO DEL TIEMPO
 
@@ -133,7 +166,7 @@ export default function VerArticulo({navigation, route}){
             navigation.popToTop();
         }else{
             if(textoBoton==='Ofertar'){
-                navigation.navigate('Subasta', {postor:userData.identificador, foto:foto, titulo:titulo,precio:precio, duenio:duenio, division:division, idProducto:id, idSubasta:idSubasta});
+                navigation.navigate('Subasta', {postor:userData.identificador, foto:foto, titulo:titulo,precio:precio, duenio:duenio, division:division, idProducto:id, idSubasta:idSubasta, fecha:fecha});
             }
             if(textoBoton==="Objeto vendido"){
                 navigation.goBack();

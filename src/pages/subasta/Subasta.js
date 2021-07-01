@@ -1,21 +1,20 @@
 import React,{useEffect, useState} from 'react';
 import {SafeAreaView, Text, View, Image, TouchableOpacity, TextInput, ScrollView,Modal} from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import styles from './Styles';
 import Oferta from '../../components/Oferta/Oferta';
 import Loading from '../../components/Loading/Loading';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {getMediosPago} from '../../controllers/PagosController';
 import {getPujas,createPujas} from '../../controllers/SubastasController';
-import { set } from 'react-native-reanimated';
 
 export default function Subasta({navigation,route}){
 
-	const {postor,foto,titulo,precio, division,idProducto,duenio, idSubasta} = route.params;
+	const {postor,foto,titulo,precio, division,idProducto,duenio, idSubasta,fecha} = route.params;
 
 	//USE STATES----------------------------------
     const [busy,setBusy] = useState(true);
 	const [reload,setReload] = useState(true);
-	const [working,setWorking] = useState(true);
 	//Modals
 	const [showModalPago, setShowModalPago] = useState(true);
 	const [showModalExit, setShowModalExit] = useState(false);
@@ -31,34 +30,74 @@ export default function Subasta({navigation,route}){
 	//Mejor oferta
 	const [bestOffer, setBestOffer] = useState(0);
 	const [bestUserOffer, setBestUserOffer] = useState('-');
-	
+	//Fechas y horarios
+	// const fechaObj = new Date(fecha);
+	const fechaObj = new Date('2021-07-01T14:28:00.000Z');
+	const horaObj = fechaObj.getHours();
+	const minObj = fechaObj.getMinutes();
+	const segObj = fechaObj.getSeconds();
+	//hoy
+	const [hora,setHora] = useState(0);
+	const [min,setMin] = useState(0);
+	const [seg,setSeg] = useState(0);
 	//---------------------------------------------
 
-	useEffect(async () => {
-		let render = true;
-		const response = await getMediosPago(postor);
-		const responsePujas = await getPujas(idProducto);
-        if(response === undefined){
-            console.log('Error, no hay medios de pago');
-        }else{
-            setMediosPagos(response.recordset);
-			setPujas(responsePujas.recordset);
-			if(pujas != undefined){
-				setBestUserOffer(pujas[0].cliente);
-				setBestOffer(pujas[0].importe);
-				if(!working){
-					render = false;
-				}
-			}
-            setBusy(false);
-        }
-		const interval=setInterval(()=>{setReload(!reload)},10000)
-		// if(working){
-		// 	setInterval(()=> {setReload(!reload)}, 6500)
-		// }
-		return()=>clearInterval(interval)
+	useFocusEffect(
+		React.useCallback(() => {
+				// Do something when the screen is focused
+				const response = getMediosPagoJob();
+				const auxResp = getPujasJob();
+				let fechaHoy = new Date();
+				setHora(fechaHoy.getHours());
+				setMin(fechaHoy.getMinutes());
+				setSeg(fechaHoy.getSeconds());
+				const interval = setInterval(()=>{getPujasJob()},1000)
+				return () => {
+					// Do something when the screen is unfocused
+					// Useful for cleanup functions
+					clearInterval(interval);
+				};
+		}, [reload]));
 
-	}, [reload])
+	//Get de Medios de pago, se llama en el useFocusEffect
+	const getMediosPagoJob = async()=>{
+		const response = await getMediosPago(postor);
+		if(response === undefined){
+			console.log('Error, no hay medios de pago');
+		}else{
+			setMediosPagos(response.recordset);
+			setBusy(false);
+		}
+	}
+	//----------------------------------------------------
+
+	//Get de pujas, se llama en el useFocusEffect
+	const getPujasJob = async()=>{
+		let fechaHoyAUX = new Date();
+		setHora(fechaHoyAUX.getHours());
+		setMin(fechaHoyAUX.getMinutes());
+		setSeg(fechaHoyAUX.getSeconds());
+
+		if(((minObj-(fechaHoyAUX.getMinutes())+1)==0) && ((segObj-(fechaHoyAUX.getSeconds())+59)==0)){
+			console.log(("FINALIZO LA SUBASTA"));
+			setShowFinalModel(true);
+			if(postor==bestUserOffer){
+				setfinalState(true);
+			}
+		}
+		try {
+			const responsePujas = await getPujas(idProducto);
+			if(responsePujas != undefined){
+				setPujas(responsePujas.recordset);
+				setBestUserOffer(responsePujas.recordset[0].cliente);
+				setBestOffer(responsePujas.recordset[0].importe);
+				setReload(false);
+			}
+		} catch (error) {
+			console.log("ERROR EN PUJASJOB");
+		}
+	}
+	//--------------------------------------------
 
     //Modal salir de subasta-
 	const modalExit = (
@@ -137,7 +176,7 @@ export default function Subasta({navigation,route}){
 					<Text style={styles.fontModalTitle}>{handleFinalState()}</Text>
 					<Text></Text>
 
-					<Text>La subasta de [Producto.nombre] a un precio de $ NN.NNN,NN.</Text>
+					<Text>La subasta de {titulo} a un precio de ${bestOffer}.</Text>
 					<Text></Text>
 					<Text>Siga conectado a SubastasYA, podría aparecer una subasta que le podría interesar.</Text>
 
@@ -152,7 +191,6 @@ export default function Subasta({navigation,route}){
 
     //Salir de la subasta----
     const handleGoOut = ()=>{
-		setWorking(false);
         navigation.goBack();
     }
     //-----------------------
@@ -229,7 +267,7 @@ export default function Subasta({navigation,route}){
 					</View>				
 					<View style={styles.submainText}>				
 						<Text style={styles.subastaSubTitle}>Tiempo restante: </Text>
-						<Text style={styles.subastaSubTitle}>00:05:21</Text>
+						<Text style={styles.subastaSubTitle}>00:0{minObj-min+1}:{segObj-seg+59}</Text>
 					</View>
 				</View>
 			</View>
