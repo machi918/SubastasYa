@@ -10,7 +10,7 @@ import {getPujas,createPujas,endSubasta,finPuja,getSubastasCategoria} from '../.
 
 export default function Subasta({navigation,route}){
 
-	const {postor,foto,titulo,precio, division,idProducto,duenio, idSubasta,fecha} = route.params;
+	const {postor,foto,titulo,precio, division,idProducto,duenio, idSubasta,fecha,horaSubasta,minSubasta} = route.params;
 
 	//USE STATES----------------------------------
     const [busy,setBusy] = useState(true);
@@ -32,10 +32,13 @@ export default function Subasta({navigation,route}){
 	const [bestUserOffer, setBestUserOffer] = useState('-');
 	//Fechas y horarios
 	// const fechaObj = new Date(fecha);
-	const fechaObj = new Date('2021-07-01T15:06:00.000Z');
-	const horaObj = fechaObj.getHours();
-	const minObj = fechaObj.getMinutes();
-	const segObj = fechaObj.getSeconds();
+	const fechaObj = new Date(fecha); //Cambiar por fecha
+	// const horaObj = fechaObj.getHours();
+	// const minObj = fechaObj.getMinutes();
+	// const segObj = fechaObj.getSeconds();
+	const horaObj = horaSubasta;
+	const minObj = minSubasta;//cambiar a minSubasta
+	const segObj = 0;
 	//hoy
 	const [hora,setHora] = useState(0);
 	const [min,setMin] = useState(0);
@@ -78,7 +81,7 @@ export default function Subasta({navigation,route}){
 		setMin(fechaHoyAUX.getMinutes());
 		setSeg(fechaHoyAUX.getSeconds());
 
-		if(((minObj-(fechaHoyAUX.getMinutes())+1)==0) && ((segObj-(fechaHoyAUX.getSeconds())+59)==0)){
+		if(((minObj-(fechaHoyAUX.getMinutes())+10)==0) && ((segObj-(fechaHoyAUX.getSeconds())+59)==0)){
 			console.log(("FINALIZO LA SUBASTA"));
 			handleEndSubasta();
 			setShowFinalModel(true);
@@ -217,8 +220,6 @@ export default function Subasta({navigation,route}){
 			let fechaTotal = new Date();
 			let str1 = fechaTotal.toString()
 			let hora = str1.slice(str1.length - 46, str1.length-38);
-			console.log("HORA: " + hora);
-			//SOLUCIONAR HORA MALA
 
 			const oferData={
 				idSubasta:idSubasta,
@@ -274,7 +275,7 @@ export default function Subasta({navigation,route}){
 					</View>				
 					<View style={styles.submainText}>				
 						<Text style={styles.subastaSubTitle}>Tiempo restante: </Text>
-						<Text style={styles.subastaSubTitle}>00:0{minObj-min+1}:{segObj-seg+59}</Text>
+						<Text style={styles.subastaSubTitle}>00:0{minObj-min+10}:{segObj-seg+59}</Text>
 					</View>
 				</View>
 			</View>

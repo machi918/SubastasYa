@@ -58,25 +58,16 @@ export default function agregarArticulo({navigation, route}){
         const response = await addProduct(data);
         if(response != undefined){
             let aux = (response.recordset[0].producto)
-            let auxURL = imagenURI.slice(7,imagenURI.length);
+            let auxURL = imagenURI.slice(84,imagenURI.length-4);
             setProductID(response.recordset[0].producto)
             const fotoData = {
                     idProducto: aux,
                     url: auxURL
             };
             const response2 = await addFotoProducto(fotoData);
+            const response3 = await addItemCatalogo(aux);
+            navigation.goBack();
         }
-
-
-        // const response = await addProduct(data).then(res => res.json()).then(res2 => {
-        //     const fotoData = {
-        //         idProducto: res2.recordset.identificador,
-        //         url: imagenURI
-        //     };
-        //     const aux1 = addFotoProducto(fotoData);
-        //     setProductID(response.recordset.identificador);
-        //     const aux2 = addItemCatalogo(fotoData);
-        // }).then(()=>navigation.goBack());
     }
     
     function clearText(){
@@ -146,8 +137,35 @@ export default function agregarArticulo({navigation, route}){
     //----------------------------------------------------------------------
 
     //----------------------------SACAR FOTO DE LIBRERIA--------------------
-    function handleLibrary(){
-
+    const openGallery = () => {
+        const options = {
+            storageOptions: {
+                path: 'images',
+                mediaType: 'photo',
+                quality:0,
+                maxWidth: 500,
+                maxHeight: 900,
+            },
+            includeBase64: true,
+        };
+        
+        launchImageLibrary(options, response => {
+            if (response.didCancel) {
+            console.log("User cancelled image picker");
+            } else if (response.error) {
+            console.log("ImagePicker Error: ", response.error);
+            } else {
+            const uri = response.assets[0].uri;
+            const type = response.assets[0].type;
+            const name = response.assets[0].fileName;
+            const source = {
+                uri,
+                type,
+                name,
+            }
+            cloudinaryUpload(source)
+            }
+        });
     }
     //----------------------------------------------------------------------
 
@@ -224,6 +242,11 @@ export default function agregarArticulo({navigation, route}){
                     <View style={styles.fotos}>
                         <TouchableOpacity style={styles.addFoto} onPress={()=>openCamara()}>
                             <Text style={styles.subTitleButton}>Subir foto</Text>
+                        </TouchableOpacity>
+                    </View>                    
+                    <View style={styles.fotos}>
+                        <TouchableOpacity style={styles.addFoto} onPress={()=>openGallery()}>
+                            <Text style={styles.subTitleButton}>Elegir foto</Text>
                         </TouchableOpacity>
                     </View>
 

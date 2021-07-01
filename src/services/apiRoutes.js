@@ -150,7 +150,7 @@ export const addProducto = async (data) =>{
         body: JSON.stringify(data)
     }
     try {
-        const response = await fetch(url+'PublicarProducto/fecha/'+data.fecha+'/descripcionCatalogo/'+data.miniDesc+'/descripcionCompleta/'+data.allDesc+'/revisor/'+data.revisor+'/duenio/'+data.duenio+'/titulo/'+data.titulo,options);
+        const response = await fetch(url+'PublicarProducto/descripcionCatalogo/'+data.miniDesc+'/descripcionCompleta/'+data.allDesc+'/revisor/'+data.revisor+'/duenio/'+data.duenio+'/titulo/'+data.titulo,options);
         return response
     } 
     catch (error) {
@@ -163,8 +163,7 @@ export const addPhotoProducto = async (data) =>{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
+        }
     }
     try {
         const response = await fetch(url+'Fotos/producto/'+data.idProducto+'/foto/'+data.url,options);
@@ -180,11 +179,10 @@ export const addIteamCatalogo = async (data) =>{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
+        }
     }
     try {
-        const response = await fetch(url+'ITCat/producto/'+data.idProducto,options);
+        const response = await fetch(url+'ITCat/producto/'+data,options);
         return response
     } 
     catch (error) {
@@ -249,7 +247,7 @@ export const getMedioPago = async (data) =>{
     }
 }
 
-export const addMedioPAgo = async (data) =>{
+export const addMedioPago = async (data) =>{
     const options = {
         method: 'POST',
         headers: {

@@ -11,11 +11,13 @@ const styles = StyleSheet.create({
         margin: 12,
         borderColor:'gray',
         borderWidth:2,
+		borderRadius:7,
         width:'90%',
         color:'#000000',
     },
     inputCorto: {
         paddingLeft:10,
+		borderRadius:7,
         margin:12,
         borderColor:'gray',
         borderWidth:2,
