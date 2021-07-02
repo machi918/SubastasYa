@@ -4,6 +4,7 @@ import styles from './Styles';
 
 export default function verDetalle({navigation, route}){
 
+    //Params
     const {descripcion, titulo} = route.params;
 
 	return (

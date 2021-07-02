@@ -8,6 +8,7 @@ import Loading from '../../components/Loading/Loading'
 
 export default function InicioSesion({navigation}){
 
+    //UseState
     const [mail, setMail] = useState('');
     const [password, setPassword] = useState('');
     const [busy,setBusy] = useState(true);
@@ -15,7 +16,6 @@ export default function InicioSesion({navigation}){
     useEffect(async () => {
         const data = await handleGetStorage();
         if(data != undefined || data != null){
-            console.log('Data del inicio de sesion: '+ data.identificador);
             setBusy(false)
             navigation.navigate('HomeMain');
         }else{

@@ -1,13 +1,13 @@
 import React,{useState} from 'react';
 import {SafeAreaView, Text, View, Image, TouchableOpacity, TextInput} from 'react-native';
 import styles from './Styles';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {addFotoPersona} from '../../controllers/UsersController'
 
 
 export default function EditarPerfil({navigation, route}){
 
+    //Params y useState
     const {user} = route.params;
     const [imagenURI,setImagenURI] = useState('https://www.parramattacameras.com.au/media/catalog/product/cache/aef55d64a8ced0a8bc0aa5d7aca8278a/c/a/canon_eos_m50_mirrorless_digital_camera_with_15-45mm_lens_black_4.jpg');
 
@@ -27,14 +27,6 @@ export default function EditarPerfil({navigation, route}){
                 console.log(err);
             })
     }
-
-    const handleOnPress= async ()=> {
-        const fotoData = {
-            idProducto: aux,
-            url: auxURL
-        };
-    }
-
 
     //-------------------------MANEJO DE PERMISOS----------------------
     const requestCameraPermission = async () => {
@@ -127,9 +119,10 @@ export default function EditarPerfil({navigation, route}){
     //----------------------------------------------------------------------
 
     const handleFetch =async ()=>{
-        let data={
+        let auxURL = imagenURI.slice(84,imagenURI.length-4);
+        const data = {
             user: user,
-            imagenURI: imagenURI,
+            imagenURI: auxURL
         }
         const response = await addFotoPersona(data);
         navigation.navigate('HomeMain');
@@ -137,9 +130,6 @@ export default function EditarPerfil({navigation, route}){
 
 	return (
 		<SafeAreaView style={styles.container}>
-
-            {/* TODO -> LINEA QUE DIVIDE AL HEADER EDITARPERFIl */}
-
             <View style={styles.subHeader}>
                 <TouchableOpacity style={styles.buttonWrapper1} onPress={()=>openGallery()}>
                     <Text style={styles.buttonText}>Actualizar foto de perfil desde galeria</Text>

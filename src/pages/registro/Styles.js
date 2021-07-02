@@ -6,10 +6,6 @@ const styles = StyleSheet.create({
         backgroundColor:'#FFFFFF',
         alignItems:'center',
 	},
-    // main:{
-    //     height:'100%',
-    //     width:'100%'
-    // },
 	header: {
         width:'100%',
         height:'30%',
@@ -28,7 +24,6 @@ const styles = StyleSheet.create({
 	},
 	buttonWrapper: {
         marginTop: 20,
-        // height:'10%',
         height:50,
 		width:'90%',
         backgroundColor:'#2F80ED',

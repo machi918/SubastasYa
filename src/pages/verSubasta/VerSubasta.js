@@ -7,6 +7,8 @@ import Articulo from '../../components/Articulo/Articulo'
 
 export default function VerSubasta({navigation, route}){
 
+    //El refresh control hace el famoso "Scroll to update"
+
     //Route Params
     const{identificador, fecha, hora, estado, subastador, ubicacion, capacidadAsistentes, tieneDeposito, seguridadPropia, categoria, titulo} = route.params;
 
@@ -36,7 +38,6 @@ export default function VerSubasta({navigation, route}){
     const seg = horaaux.getSeconds();
 
     useEffect(async() => {
-        console.log("ME ACTUALIZO EN VER SUBASTA");
         const response = await getArticulosSubasta(identificador);
         if(response === undefined){
             console.log('Error, no hay subastas');
@@ -55,8 +56,6 @@ export default function VerSubasta({navigation, route}){
     const handleVerArticulo = (data) =>{
         navigation.navigate('VerArticulo', {titulo: articulos[data].titulo, descComp:articulos[data].descripcionCompleta, precio: articulos[data].precioBase, descripcionMini:articulos[data].descripcionCatalogo, foto:articulos[data].foto, division:categoria, fecha: fecha, duenio: articulos[data].duenio, id:articulos[data].identificador, estado: articulos[data].disponible, idSubasta:identificador, horaSubasta: articulos[data].horaSubasta, minSubasta: articulos[data].minSubasta});
     };
-
-    
 
 	return (
 		<SafeAreaView style={styles.container}>
@@ -79,7 +78,7 @@ export default function VerSubasta({navigation, route}){
                     onRefresh = {onRefresh}
                 />
             }>
-                {articulos === undefined ? null : articulos.map((key, data ) =>{
+                {articulos === undefined ? null : articulos.map((key, data) =>{
                     auxiliarHORA = hourAUX;
                     auxiliarMIN = minAUX;
 

@@ -7,7 +7,18 @@ import Tarjeta from '../../../components/MisMediosDePago/Tarjeta'
 
 export default function MisMediosPago({navigation, route}){
     
+    //Params
     const {user} = route.params;
+
+    //UseState logicos
+    const [titular, setTitular] = useState('')
+    const [dni, setDni] = useState('')
+    const [numeroTarj, setNumeroTarj] = useState('')
+    const [mes, setMes] = useState('')
+    const [año, setAño] = useState('')
+    const [codigo, setCodigo] = useState('')
+    const [showModal, setshowModal] = useState(false) 
+
     const fakeCard = {
 		identificador: -1,
 		nombre: 'BANCO',
@@ -16,33 +27,17 @@ export default function MisMediosPago({navigation, route}){
 		cliente: -1
 	}
 
-    const [titular, setTitular] = useState('')
-    const [dni, setDni] = useState('')
-    const [numeroTarj, setNumeroTarj] = useState('')
-    const [mes, setMes] = useState('')
-    const [año, setAño] = useState('')
-    const [codigo, setCodigo] = useState('')
-
-    const [showModal, setshowModal] = useState(false) 
-
     const handleAgregar = () => {
-        //console.log("ENTRANTE: " + numeroTarj);
         let numero = numeroTarj.replace(/ /g, '')
-        //console.log("FINAL : " + numero);
         numero = numero.replace(/-/g, '')
-        //console.log("FINAL -: " + numero);
         numero = numero.replace(/,/g, '')
 
         if (numero.length < 15 || numero.length > 16 || dni.length === 0 || titular.length === 0 || mes.length < 1 || mes.length > 2 || año.length != 4 || codigo.length != 3) {
-            console.log('error');
             Alert.alert("Datos erróneos", "Revise que los datos ingresados sean correctos", [{text: 'Cerrar'}])
         }else {
             let aux = (mes.length === 1) ? año + "-0" + mes: año + '-' + mes;
-            console.log(aux+"-01");
             addTarjeta(aux+"-01");
             setshowModal(true) 
-
-            // console.log(tarjetaCargarBack);
         }
     }
 
@@ -85,14 +80,9 @@ export default function MisMediosPago({navigation, route}){
 
 	return (
 		<SafeAreaView style={styles.container}>
-
             {modalAdd}
-
             <Tarjeta data={fakeCard} />
-
             <ScrollView >
-
-
             <TextInput
                 style={styles.input}
                 secureTextEntry={false}
@@ -145,16 +135,11 @@ export default function MisMediosPago({navigation, route}){
                     onChangeText={(t) => setCodigo(t)}
                 />
             </View>
-            
             </ScrollView>
-
 
             <TouchableOpacity style={styles.buttonWrapper} onPress={()=> handleAgregar()}>
                 <Text style={styles.buttonText}>Cargar Tarjeta</Text>
             </TouchableOpacity>
-
-            
-
 		</SafeAreaView>
 	);
 };

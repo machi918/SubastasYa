@@ -6,7 +6,7 @@ import Oferta from '../../components/Oferta/Oferta';
 import Loading from '../../components/Loading/Loading';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {getMediosPago} from '../../controllers/PagosController';
-import {getPujas,createPujas,endSubasta,finPuja,getSubastasCategoria} from '../../controllers/SubastasController';
+import {getPujas,createPujas,endSubasta,finPuja} from '../../controllers/SubastasController';
 
 export default function Subasta({navigation,route}){
 
@@ -31,15 +31,12 @@ export default function Subasta({navigation,route}){
 	const [bestOffer, setBestOffer] = useState(parseInt(precio));
 	const [bestUserOffer, setBestUserOffer] = useState('-');
 	//Fechas y horarios
-	// const fechaObj = new Date(fecha);
-	const fechaObj = new Date(fecha); //Cambiar por fecha
-	// const horaObj = fechaObj.getHours();
-	// const minObj = fechaObj.getMinutes();
-	// const segObj = fechaObj.getSeconds();
+	//FechaObjetivo
+	const fechaObj = new Date(fecha);
 	const horaObj = horaSubasta;
-	const minObj = minSubasta;//cambiar a minSubasta
+	const minObj = minSubasta;
 	const segObj = 0;
-	//hoy
+	//HOY
 	const [hora,setHora] = useState(0);
 	const [min,setMin] = useState(0);
 	const [seg,setSeg] = useState(0);
@@ -47,7 +44,6 @@ export default function Subasta({navigation,route}){
 
 	useFocusEffect(
 		React.useCallback(() => {
-				// Do something when the screen is focused
 				const response = getMediosPagoJob();
 				const auxResp = getPujasJob();
 				let fechaHoy = new Date();
@@ -56,8 +52,6 @@ export default function Subasta({navigation,route}){
 				setSeg(fechaHoy.getSeconds());
 				const interval = setInterval(()=>{getPujasJob()},1000)
 				return () => {
-					// Do something when the screen is unfocused
-					// Useful for cleanup functions
 					clearInterval(interval);
 				};
 		}, [reload]));
@@ -82,7 +76,6 @@ export default function Subasta({navigation,route}){
 		setSeg(fechaHoyAUX.getSeconds());
 
 		if(((minObj-(fechaHoyAUX.getMinutes())+10)==0) && ((segObj-(fechaHoyAUX.getSeconds())+59)==0)){
-			console.log(("FINALIZO LA SUBASTA"));
 			handleEndSubasta();
 			setShowFinalModel(true);
 			if(postor==bestUserOffer){
@@ -98,7 +91,7 @@ export default function Subasta({navigation,route}){
 				setReload(false);
 			}
 		} catch (error) {
-			console.log("ERROR EN PUJASJOB");
+			
 		}
 	}
 	//--------------------------------------------
@@ -106,7 +99,6 @@ export default function Subasta({navigation,route}){
 	const handleEndSubasta= async()=>{
 		const resp3 = await endSubasta(idProducto);
 		const resp2 = await finPuja(idProducto);
-		console.log("FIN DE PUJAS OK.");
 	}
 
     //Modal salir de subasta-
@@ -230,10 +222,7 @@ export default function Subasta({navigation,route}){
 				comision:precioOferta*0.1,
 				hora: hora
 			}
-
 			const resp = await createPujas(oferData);
-			console.log("PUJA CREADA");
-
 		}
 	}
 	//----------------------
@@ -301,7 +290,6 @@ export default function Subasta({navigation,route}){
 					<Text style={styles.roundedButtonText}>+</Text>
 				</TouchableOpacity>
 			</View>
-
             {modalExit}
             {modalElegirMedioPago}
 			{modalFinal}

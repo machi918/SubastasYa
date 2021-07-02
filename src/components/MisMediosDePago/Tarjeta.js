@@ -8,11 +8,13 @@ import BankCard from '../../assets/Images/BankCardLogo.png'
 
 export default function Tarjeta(props){
 
+    //Props
     const nombre = props.data.nombre
     const numero = props.data.numero
     const fechavto = props.data.fechavto
     const validez = props.data.validado
 
+    //Extras
     let imagen
     let texto = '**** - **** - **** - ' + numero.slice(-4)
 

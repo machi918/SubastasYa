@@ -7,16 +7,18 @@ import Loading from '../../components/Loading/Loading'
 
 export default function subastasCat({navigation, route}){
 
+    //Params
     const {categoria} = route.params;
     
+    //UseState
+    //UseState funcioneales
     const [refreshing, setRefreshing] = useState(false)
     const [busy,setBusy] = useState(true);
-    const [subastas, setSubastas] = useState();
     const [reload,setReload] = useState(true);
+    //useState logicos
+    const [subastas, setSubastas] = useState();
 
     useEffect(async() => {
-        console.log("ME ACTUALIZO EN Subastas categori");
-
         const response = await getSubastasCategoria(categoria);
         if(response === undefined){
             console.log('Error, no hay subastas o error inesperado.');
@@ -39,9 +41,6 @@ export default function subastasCat({navigation, route}){
 	return (
 		<SafeAreaView style={styles.container}>
             {busy ? <Loading/> : null }
-            {/* <View style={styles.header}>
-                <Text style={styles.headerText}>Subastas</Text>
-            </View> */}
             <View style={styles.main}>
             <ScrollView
             showsHorizontalScrollIndicator={false}

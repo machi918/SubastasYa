@@ -6,6 +6,8 @@ import {signup} from '../../controllers/UsersController'
 
 export default function Registro({navigation}){
 
+    //useState
+    //UseState logicos
     const [mail, setMail] = useState('');
     const [telefono, setTelefono] = useState('');
     const [nombre, setName] = useState('');
@@ -32,7 +34,6 @@ export default function Registro({navigation}){
                 <Image source={require('../../assets/Images/Logo.png')} style={styles.logo}></Image>
             </View>
             <ScrollView style={styles.main}>
-                {/* TODO: REQUIERED FIELD */}
                 <TextInput
                 style={styles.input}
                 keyboardType={'default'}
@@ -79,11 +80,9 @@ export default function Registro({navigation}){
                 onChangeText={(text)=>setDomicilio(text)}
                 ></TextInput>
             </ScrollView>
-                <TouchableOpacity style={styles.buttonWrapper} onPress={() => postRegistro()}>
-                    <Text style={styles.buttonText}>Registrarse</Text>
-                </TouchableOpacity>
-
-            {/* </View> */}
+            <TouchableOpacity style={styles.buttonWrapper} onPress={() => postRegistro()}>
+                <Text style={styles.buttonText}>Registrarse</Text>
+            </TouchableOpacity>
 		</SafeAreaView>
 	);
 };

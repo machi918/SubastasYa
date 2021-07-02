@@ -7,13 +7,14 @@ import Loading from '../../components/Loading/Loading'
 
 export default function Home({navigation}){
 
+    //UseState de funcionamiento
     const [refreshing,setRefreshing] = useState(false);
     const [busy,setBusy] = useState(true);
-    const [subastas, setSubastas] = useState();
     const [reload,setReload] = useState(true);
+    //UseState logicos
+    const [subastas, setSubastas] = useState();
 
     useEffect(async() => {
-        console.log("ME ACTUALIZO EN HOME");
         const response = await getSubasta();
         if(response === undefined){
             console.log('Error, no hay subastas');

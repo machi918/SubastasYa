@@ -1,26 +1,22 @@
 import React, { useState }  from 'react';
 import {SafeAreaView, View, TouchableOpacity, TextInput, Text, Modal} from 'react-native';
 import styles from './Styles';
-
-import Tarjeta from '../../components/MisMediosDePago/Tarjeta'
-import Cuenta from '../../components/MisMediosDePago/CuentaBancaria'
-
+import Tarjeta from '../../components/MisMediosDePago/Tarjeta';
+import Cuenta from '../../components/MisMediosDePago/CuentaBancaria';
 
 export default function VerMedio({navigation, route}){
     
+    //Params
     const data = route.params
 
+    //Extras
     let numeros
     let showCard = <Tarjeta data={data}/>
 
-    
-    
     const handleEliminar = () => {
         console.log('eliminar')
         navigation.goBack()
     }
-
-    
 
     switch (data.nombre) {
         case 'BANCO':
@@ -36,8 +32,6 @@ export default function VerMedio({navigation, route}){
 
 	return (
 		<SafeAreaView style={styles.container}>
-
-            
             {showCard}
             <View style={styles.wrapper}>
                 <Text style={{alignSelf: 'center'}}>{data.titular}</Text>
@@ -48,13 +42,12 @@ export default function VerMedio({navigation, route}){
             </View>
         
             {data.fechavto == null ? null : <View style={styles.wrapper}>
-                <Text style={{alignSelf: 'center'}}> {data.fechavto.slice(5, 7) +" / "+data.fechavto.slice(0, 4)}</Text>
+                <Text style={{alignSelf: 'center'}}> {data.fechavto.slice(5, 7) +" / "+data.fechavto.slice(0,4)}</Text>
             </View>}
 
             <TouchableOpacity style={styles.buttonWrapperLogOut} onPress={() => handleEliminar()}>
                 <Text style={styles.buttonTextLogOut}>Eliminar Tarjeta</Text>
             </TouchableOpacity>
-
 		</SafeAreaView>
 	);
 };

@@ -4,7 +4,7 @@ import styles from './Styles';
 
 export default function Informativa({route, navigation}){
 
-    //serían las props
+    //Props
     const {text} = route.params;
     
 	return (

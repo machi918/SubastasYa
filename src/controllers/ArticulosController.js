@@ -7,7 +7,6 @@ export const addProduct = async (data)=>
         const json = await response.json();
         return json;
     }else{
-        console.log('ERROR en addProduct');
         console.log(response.status);
     }
 }
@@ -20,7 +19,6 @@ export const addFotoProducto = async (data)=>
             const json = await response.json();
             return json;
         }else{
-            console.log('ERROR en addPhotoProducto');
             console.log(response.status);
         }
     }catch (err){
@@ -36,7 +34,6 @@ export const addItemCatalogo = async (data)=>
             const json = await response.json();
             return json;
         }else{
-            console.log('ERROR en addItemProducto');
             console.log(response.status);
         }
     }catch (err){

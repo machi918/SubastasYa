@@ -20,9 +20,7 @@ export default function MisMediosPago({navigation, route}){
     const [mediosPago, setMediosPago] = useState();
 	const [showModal, setShowModal] = useState(false)
 
-
 	useEffect( async () => {
-        console.log("ME ACTUALIZO EN MIS MEDIOS DE PAGO");
 		const response = await getMediosPago(user);
 		if(response == undefined){
 			console.log("Error al traer los medios de pago");
@@ -72,9 +70,7 @@ export default function MisMediosPago({navigation, route}){
 	return (
 		<SafeAreaView style={styles.container}>
 			{busy ? <Loading/> : null }
-            {/* TODO -> LINEA QUE DIVIDE AL HEADER EDITARPERFIl */}
 			<View styles={styles.main}>
-
 				<ScrollView
 					showsHorizontalScrollIndicator={false}
 					showsVerticalScrollIndicator={false}
@@ -105,9 +101,7 @@ export default function MisMediosPago({navigation, route}){
 			<TouchableOpacity style={styles.roundedButton} onPress={() => setShowModal(true)}>
 				<Text style={styles.roundedButtonText}>+</Text>
 			</TouchableOpacity>
-
 			{modalAdd}	
-
 		</SafeAreaView>
 	);
 };

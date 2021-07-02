@@ -3,8 +3,6 @@ import {SafeAreaView, Text, View, Image, TouchableOpacity, TextInput, ScrollView
 import styles from './Styles';
 import Loading from '../../components/Loading/Loading'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useFocusEffect } from '@react-navigation/native';
-import verDetalle from '../../pages/verDetalleArticulo/verDetalle'
 
 export default function VerArticulo({navigation, route}){
 
@@ -41,13 +39,6 @@ export default function VerArticulo({navigation, route}){
     const [precioFinal, setPrecioFinal] = useState(precio);
 
     useEffect(async() => {
-        console.log("FECHA DE SUBASTA: "+fechaaux);
-        console.log("HORA SUBASTA: "+ hourAUX);
-        console.log("MIN SUBASTA: "+ minAUX);
-        console.log("FECHA ACTUAL: "+fechaHoy);
-        console.log("HORA ACTUAL: "+ hour);
-        console.log("MIN ACTUAL: "+ min);
-        console.log(hourAUX == parseInt(hour));
         const jsonValue = await AsyncStorage.getItem('userData');
         const data = await JSON.parse(jsonValue);
         if(data === undefined || data === null){
@@ -68,46 +59,11 @@ export default function VerArticulo({navigation, route}){
         }
     },[reload])
 
-    // useFocusEffect(
-	// 	React.useCallback(() => {
-    //         let isActive = true;
-    //         // alert("WINDOW FOCUSED");
-    //         const resp = getDatosUsuario();
-    //         return () => {
-    //             isActive = false;
-    //             // alert("WINDOW UNFOCUSED");
-
-    //         };
-    // }, []));
-
-    // const getDatosUsuario = async ()=>{
-    //     const jsonValue = await AsyncStorage.getItem('userData');
-    //     const data = await JSON.parse(jsonValue);
-    //     if(data === undefined || data === null){
-    //         setPrecioFinal('XXXXX');
-    //         console.log('Error en traer datos del usuario');
-    //         setTextoBoton('Iniciar Sesion');
-    //         setColorBoton('#4D7084');
-    //         setBusy(false);
-    //     }else{
-    //         const auxID = data.identificador
-    //         const auxCat = data.categoria;
-    //         const auxText = handleTextChange(auxCat, auxID);
-    //         const auxColor = handleColorChange(auxCat);
-    //         setuserData(data);
-    //         setTextoBoton(auxText);
-    //         setColorBoton(auxColor);
-    //         setBusy(false);
-    // }};
-
-    //FALTA EL MANEJO DEL TIEMPO
-
     function handleColorChange(data){
         if(estado == "no"){
             return "#256C0C"
         }
         if((diaSub == dia) && (mesSub == mes) && (yearSub==year) && (minAUX<=min)){
-            console.log("DESDE VERARTICULO, LA SUBASTA ES HOY");
             if((hour>hourAUX) || ((hour==hourAUX) && (min>minAUX+10))){
                 return "#4D7084"
             }
@@ -134,7 +90,6 @@ export default function VerArticulo({navigation, route}){
     }
 
     function handleTextChange(data, auxCat){
-        // return "Ofertar"
         if(estado== "no"){
             return "Objeto vendido"
         }
@@ -170,7 +125,6 @@ export default function VerArticulo({navigation, route}){
 
     function handleOnPress(){
         if(Object.entries(userData).length === 0){
-            // navigation.navigate('InicioSesion');
             navigation.popToTop();
         }else{
             if(textoBoton==='Ofertar'){
@@ -185,18 +139,11 @@ export default function VerArticulo({navigation, route}){
             if(textoBoton==="Subasta finalizada"){
                 navigation.goBack();
             }
-            //TODO, EL MANEJO DE MÁS COSAS
         }
     }
 
     function handleDetails(){
         navigation.navigate('verDetalle',{descripcion: descComp, titulo: titulo});
-    }
-
-    function handleEstado(){
-        if(estado == "no"){
-
-        }
     }
 
 	return (

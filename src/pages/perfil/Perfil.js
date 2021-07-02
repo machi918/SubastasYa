@@ -6,10 +6,14 @@ import Loading from '../../components/Loading/Loading';
 import Guest from '../../components/Guest/Guest';
 
 export default function Perfil({navigation}){
-    const [userData, setuserData] = useState({});
-    const [color, setColor] = useState('#81421F');
+
+    //useState
+    //useState funcionamiento
     const [busy,setBusy] = useState(true);
     const [reload,setReload] = useState(true);
+    //useState logicos
+    const [userData, setuserData] = useState({});
+    const [color, setColor] = useState('#81421F');
     const [guest, setGuest] = useState(false);
 
     useEffect(async() => {
@@ -36,7 +40,7 @@ export default function Perfil({navigation}){
             await AsyncStorage.removeItem('userData')
         } catch(e) {
           // remove error
-            console.log('ERROR PERRITO MALVADO: '+e);
+            console.log(e);
         }
         console.log('Usuario removido del Async Storage.')
     }

@@ -7,11 +7,14 @@ import Cuenta from '../../../components/MisMediosDePago/CuentaBancaria'
 
 export default function MisMediosPago({navigation, route}){
     
+    //Params
     const {user} = route.params;
 
+    //Use State logicos
     const [titular, setTitular] = useState('')
     const [dni, setDni] = useState('')
     const [numeroCuenta, setNumeroCuenta] = useState('')
+    const [showModal, setshowModal] = useState(false)
 
     const fakeCount = {
 		identificador: -1,
@@ -21,35 +24,16 @@ export default function MisMediosPago({navigation, route}){
 		cliente: -1
 	}
 
-    const [showModal, setshowModal] = useState(false)
-
     const handleAgregar = () => {
-        //console.log("ENTRANTE: " + numeroTarj);
         let numero = numeroCuenta.replace(/ /g, '')
-        //console.log("FINAL : " + numero);
         numero = numero.replace(/-/g, '')
-        //console.log("FINAL -: " + numero);
         numero = numero.replace(/,/g, '')
-        //console.log("FINAL ,: " + numero);
-        //numero = numero.replace(/./g, '') //NO FUNCIONA CON PUNTO
-        //console.log("FINAL ,: " + numero);
 
         if (numero.length != 22 || dni.length === 0 || titular.length === 0) {
-            console.log('error');
             Alert.alert("Datos erróneos", "Revise que los datos ingresados sean correctos", [{text: 'Cerrar'}])
         } else {
             setshowModal(true)
             addBanco();
-            const cuentaCargarBack = {
-                numero: numero,
-                nombre: 'BANCO',
-                fechavto: null,
-                titular: titular,
-                dni: dni,
-                cliente:user
-            }
-
-            console.log(cuentaCargarBack);
         }
     }
     const addBanco = async(fecha)=>{
@@ -83,15 +67,12 @@ export default function MisMediosPago({navigation, route}){
                     </TouchableOpacity>
                 </View>
             </View>
-
         </Modal>
     )
 
 	return (
 		<SafeAreaView style={styles.container}>
-
             {modalAdd}
-
             <Cuenta data={fakeCount}/>
             <ScrollView style={{width: '90%'}}>
                 <TextInput
@@ -120,7 +101,6 @@ export default function MisMediosPago({navigation, route}){
                     onChangeText={(text) => setNumeroCuenta(text)}
                     />
             </ScrollView>
-
 
             <TouchableOpacity style={styles.buttonWrapper} onPress={()=> handleAgregar()}>
                 <Text style={styles.buttonText}>Cargar Cuenta</Text>

@@ -7,12 +7,13 @@ import {addProduct, addFotoProducto, addItemCatalogo} from '../../controllers/Ar
 
 export default function agregarArticulo({navigation, route}){
 
-    //TODO, MANEJO DE LA LIBRERIA DE FOTOS. QUE TE DEJE SELECCIONAR LA FOTO
-
+    //Params
     const {idDuenio} = route.params;
 
+    //UseState
     const [busy,setBusy] = useState(true);
     const [reload,setReload] = useState(true);
+    //UseState logicos
     const [nombreArticulo, setNombreArticulo] = useState(' ');
     const [precio, setPrecio] = useState(0);
     const [miniDesc, setMiniDesc] = useState(' ');
@@ -68,15 +69,6 @@ export default function agregarArticulo({navigation, route}){
             const response3 = await addItemCatalogo(aux);
             navigation.goBack();
         }
-    }
-    
-    function clearText(){
-        setNombreArticulo('');
-        setPrecio(0);
-        setMiniDesc('');
-        setAllDesc('');
-        setNombreAutor('');
-        setFechaArticulo('');
     }
 
     //-------------------------MANEJO DE PERMISOS----------------------

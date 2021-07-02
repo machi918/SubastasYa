@@ -5,6 +5,7 @@ import BankCard from '../../assets/Images/BankCardLogo.png'
 
 export default function CuentaBancaria(props){
 
+    //Props
     const numero = props.data.numero
     const validez = props.data.validado
 

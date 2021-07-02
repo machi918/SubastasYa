@@ -59,7 +59,6 @@ export const getPujas = async (data)=>
         const json = await response.json();
         return json;
     }else{
-        console.log('ERROR EN EL GetSubastaCategoria');
         console.log(response.status);
     }
 }
@@ -70,7 +69,6 @@ export const createPujas = async (data)=>
         const json = await response.json();
         return json;
     }else{
-        console.log('ERROR EN EL GetSubastaCategoria');
         console.log(response.status);
     }
 }
@@ -83,8 +81,6 @@ export const finPuja = async (data)=>
         const json = await response.json();
         return json;
     }else{
-        console.log("DATO DEL ERROR FINPUJA: "+ data);
-        console.log('ERROR EN EL FINPUJA');
         console.log(response.status);
     }
 }
@@ -97,8 +93,6 @@ export const endSubasta = async (data)=>
         const json = await response.json();
         return json;
     }else{
-        console.log("DATO DEL ERROR: "+ data);
-        console.log('ERROR EN EL ENDSUBASTA');
         console.log(response.status);
     }
 }

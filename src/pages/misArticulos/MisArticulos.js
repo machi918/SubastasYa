@@ -20,7 +20,6 @@ export default function MisArticulos({navigation, route}){
     const [guest, setGuest] = useState(false);
 
     useEffect(async() => {
-        console.log("ME ACTUALIZO EN MIS ARTICULOS");
         const jsonValue = await AsyncStorage.getItem('userData');
         const data = JSON.parse(jsonValue);
         if(data != undefined || data != null){
@@ -38,14 +37,6 @@ export default function MisArticulos({navigation, route}){
         }
         
     }, [reload])
-
-    // const onRefresh = async() => {
-    //     setRefreshing(true);
-    //     // setReload(false);
-    //     const response = await getArticulosPersona(userData.identificador);
-    //     setArticulos(response.recordset);
-    //     setTimeout(()=> setRefreshing(false), 3000);
-    // };
 
     const onRefresh =() => {
         setReload(!reload);
@@ -86,7 +77,6 @@ export default function MisArticulos({navigation, route}){
                 onRefresh = {onRefresh}
             />
             }>
-            
                 {articulos === undefined ? null : articulos.map((key, data )=>{
                     return(
                         <TouchableOpacity key={data} onPress={()=>handleVerArticulo(data)}>

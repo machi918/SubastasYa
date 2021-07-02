@@ -20,17 +20,14 @@ export default function MisEstadisticas({navigation, route}){
 	const [pie, setPie] = useState()
 
 	useEffect( async () => {
-        console.log("PIDO ESTADISTICAS");
 		const response = await getEstadisticasUser(user);
 		if(response == undefined){
 			console.log("Error al traer estadisticas");
 		}else{
-
 			setStats(response[0]);
 			setPie(response[1])
 			setBusy(false);
 		}
-
 	}, [])
 
 	const screenWidth = Dimensions.get("window").width -10;
@@ -41,7 +38,6 @@ export default function MisEstadisticas({navigation, route}){
 		backgroundGradientTo: "#08130D",
 		backgroundGradientToOpacity: 0,
 		color: (opacity = 1) => `rgba(79, 175, 229, ${opacity})`,
-		// color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
 		strokeWidth: 2, // optional, default 3
 		barPercentage: 0.5,
 		useShadowColorFromDataset: false // optional
@@ -66,79 +62,6 @@ export default function MisEstadisticas({navigation, route}){
 		return arrayFinal
 	}
 
-	const pieData = [
-		{
-			name: 'Arte',
-			categoria: 20,
-			color: 'blue',
-			legendFontColor: '#7F7F7F',
-			legendFontSize: 15,
-		},
-		{
-			name: 'Automovilismo',
-			categoria: 9,
-			color: 'red',
-			legendFontColor: '#7F7F7F',
-			legendFontSize: 15,
-		},
-		{
-			name: 'Cocina',
-			categoria: 1,
-			color: 'rgb(232, 195, 158)',
-			legendFontColor: '#7F7F7F',
-			legendFontSize: 15,
-		},
-		{
-			name: 'Coleccionables',
-			categoria: 18,
-			color: 'black',
-			legendFontColor: '#7F7F7F',
-			legendFontSize: 15,
-		},
-		{
-			name: 'Deportes',
-			categoria: 5,
-			color: 'green',
-			legendFontColor: '#7F7F7F',
-			legendFontSize: 15,
-		},
-		{
-			name: 'Electro',
-			categoria: 2,
-			color: 'grey',
-			legendFontColor: '#7F7F7F',
-			legendFontSize: 15,
-		},
-		{
-			name: 'Libros',
-			categoria: 5,
-			color: 'orange',
-			legendFontColor: '#7F7F7F',
-			legendFontSize: 15,
-		},
-		{
-			name: 'Muebles',
-			categoria: 0,
-			color: 'brown',
-			legendFontColor: '#7F7F7F',
-			legendFontSize: 15,
-		},
-		{
-			name: 'TV y Cine',
-			categoria: 8,
-			color: '#008081',
-			legendFontColor: '#7F7F7F',
-			legendFontSize: 15,
-		},
-		{
-			name: 'Misceláneo',
-			categoria: 3,
-			color: 'violet',
-			legendFontColor: '#7F7F7F',
-			legendFontSize: 15,
-		},
-	];
-
 	const barData = {
 		labels: ["En", "Feb", "Mar", "Abr", "May", "Jun","Jul","Ago","Sep","Oct","Nov", "Dic"],
 		datasets: [
@@ -159,8 +82,6 @@ export default function MisEstadisticas({navigation, route}){
 		}
 		]
 	};
-
-
 	
 	return (
 		<SafeAreaView style={styles.container}>
